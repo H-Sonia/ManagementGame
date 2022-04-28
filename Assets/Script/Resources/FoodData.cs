@@ -6,6 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "FoodData", menuName = "Resources/Food Data")]
 public class FoodData : ScriptableObject
 {
+    public int id;
     public string foodName;
  
 }
