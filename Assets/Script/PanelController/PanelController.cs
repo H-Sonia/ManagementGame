@@ -7,7 +7,6 @@ using TMPro;
 public class PanelController : MonoBehaviour
 {
     public GameObject ResourcesPanel;
-    public Inventory inventory;
     public TMP_Text ResourceDescription;
     public List<CharactersData> Characters;
     public int currentCharacter;
@@ -25,20 +24,20 @@ public class PanelController : MonoBehaviour
 
     public void UpdatePanelUI()
     {
-        ResourceDescription.text = inventory.content[inventory.currentResource].name;
+        ResourceDescription.text = Inventory.instance.content[Inventory.instance.currentResource].name;
     }
 
     public void GetNextResources()
     {
-        if(inventory.content.Count == 0)
+        if(Inventory.instance.content.Count == 0)
         {
             return;
         }
 
-        inventory.currentResource++;
-        if(inventory.currentResource > inventory.content.Count - 1)
+        Inventory.instance.currentResource++;
+        if(Inventory.instance.currentResource > Inventory.instance.content.Count - 1)
         {
-            inventory.currentResource = 0;
+            Inventory.instance.currentResource = 0;
         }
 
         UpdatePanelUI();
@@ -46,15 +45,15 @@ public class PanelController : MonoBehaviour
 
     public void GetPreviousResources()
     {
-        if (inventory.content.Count == 0)
+        if (Inventory.instance.content.Count == 0)
         {
             return;
         }
 
-        inventory.currentResource--;
-        if (inventory.currentResource < 0)
+        Inventory.instance.currentResource--;
+        if (Inventory.instance.currentResource < 0)
         {
-            inventory.currentResource = inventory.content.Count - 1;
+            Inventory.instance.currentResource = Inventory.instance.content.Count - 1;
         }
 
         UpdatePanelUI();
@@ -62,9 +61,9 @@ public class PanelController : MonoBehaviour
 
     public void GiveResources()
     {
-        FoodData currentResource = inventory.content[inventory.currentResource];
+        FoodData currentResource = Inventory.instance.content[Inventory.instance.currentResource];
         Characters[currentCharacter].resourcesAttribuated.Add(currentResource);
-        inventory.content.Remove(currentResource);
+        Inventory.instance.content.Remove(currentResource);
     }
 
 

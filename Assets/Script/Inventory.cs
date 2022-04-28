@@ -18,5 +18,10 @@ public class Inventory : MonoBehaviour
         instance = this;
     }
 
+    public void ClearInventory()
+    {
+        content.Clear();
+    }
+
    
 }

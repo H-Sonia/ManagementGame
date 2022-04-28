@@ -15,4 +15,6 @@ MonoBehaviour:
   id: 0
   firstname: John
   surname: Doe
-  resourcesAttribuated: []
+  resourcesAttribuated:
+  - {fileID: 11400000, guid: e85027c35f8649f4383976c7da6d7ac1, type: 2}
+  - {fileID: 11400000, guid: d7a8b1161a22a454f8fc48e808e86602, type: 2}
