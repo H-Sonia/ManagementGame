@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
+    public List<FoodData> content = new List<FoodData>();
     public static Inventory instance;
 
     private void Awake()
