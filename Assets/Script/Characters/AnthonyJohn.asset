@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0edaea27c90b5144ac723dbe62733ca, type: 3}
-  m_Name: JohnDoe
+  m_Name: AnthonyJohn
   m_EditorClassIdentifier: 
-  id: 0
-  firstname: John
-  surname: Doe
+  id: 2
+  firstname: Anthony
+  surname: John
   resourcesAttribuated: []

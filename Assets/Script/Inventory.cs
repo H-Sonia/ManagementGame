@@ -6,6 +6,8 @@ public class Inventory : MonoBehaviour
 {
     public List<FoodData> content = new List<FoodData>();
     public int currentResource = 0;
+    public List<CharactersData> Characters;
+    public int currentCharacter;
     public static Inventory instance;
 
     private void Awake()

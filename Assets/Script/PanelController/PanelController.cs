@@ -10,8 +10,7 @@ public class PanelController : MonoBehaviour
     public TMP_Text ResourceDescription;
     public Image RessourceImage;
     public Sprite emptyImage;
-    public List<CharactersData> Characters;
-    public int currentCharacter;
+    
 
     public void Start()
     {
@@ -73,8 +72,10 @@ public class PanelController : MonoBehaviour
     public void GiveResources()
     {
         FoodData currentResource = Inventory.instance.content[Inventory.instance.currentResource];
-        Characters[currentCharacter].resourcesAttribuated.Add(currentResource);
+        Inventory.instance.Characters[Inventory.instance.currentCharacter].resourcesAttribuated.Add(currentResource);
         Inventory.instance.content.Remove(currentResource);
+        GetNextResources();
+        UpdatePanelUI();
     }
 
 

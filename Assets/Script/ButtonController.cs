@@ -6,8 +6,9 @@ public class ButtonController : MonoBehaviour
 {
     public GameObject ResourcesManagementPanel;
 
-    public void openResourcesPanel()
+    public void openResourcesPanel(int characterId)
     {
         ResourcesManagementPanel.SetActive(true);
+        Inventory.instance.currentCharacter = characterId;
     }
 }
