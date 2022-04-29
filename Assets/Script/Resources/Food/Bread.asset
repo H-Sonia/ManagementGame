@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e4112a62433da34aa9b0f306d486103, type: 3}
   m_Name: Bread
   m_EditorClassIdentifier: 
+  id: 0
   foodName: Bread
+  foodImage: {fileID: 21300000, guid: 791617815e46443428c2d5307762979b, type: 3}

@@ -1914,8 +1914,6 @@ GameObject:
   - component: {fileID: 433318620}
   - component: {fileID: 433318624}
   - component: {fileID: 433318623}
-  - component: {fileID: 433318625}
-  - component: {fileID: 433318626}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -2004,35 +2002,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ResourcesManagementPanel: {fileID: 1538176449}
---- !u!114 &433318625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 433318619}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79db7200704c2cc4d80c4e8a8afe30de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  allResources:
-  - {fileID: 11400000, guid: e85027c35f8649f4383976c7da6d7ac1, type: 2}
-  - {fileID: 11400000, guid: 822946a570fd66143bf3941920ba143a, type: 2}
-  - {fileID: 11400000, guid: d7a8b1161a22a454f8fc48e808e86602, type: 2}
---- !u!114 &433318626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 433318619}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7daa9e0d073a62b4a8b47b18f5ec3fb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ui: {fileID: 1981554899}
 --- !u!1 &448174761
 GameObject:
   m_ObjectHideFlags: 0
@@ -4368,19 +4337,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1116666289}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 433318626}
-        m_TargetAssemblyTypeName: LoadAndSave, Assembly-CSharp
-        m_MethodName: SaveData
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1116666289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6656,7 +6613,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1538176450
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8421,56 +8378,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1979328669}
   m_CullTransparentMesh: 1
---- !u!1 &1981554898
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1981554900}
-  - component: {fileID: 1981554899}
-  m_Layer: 0
-  m_Name: Panel Controller
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1981554899
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1981554898}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4bf1aeb228e2d64390e37ac423d7e41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ResourcesPanel: {fileID: 0}
-  ResourceDescription: {fileID: 0}
-  RessourceImage: {fileID: 0}
-  emptyImage: {fileID: 0}
-  Characters: []
-  currentCharacter: 0
---- !u!4 &1981554900
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1981554898}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1989738205
 GameObject:
   m_ObjectHideFlags: 0

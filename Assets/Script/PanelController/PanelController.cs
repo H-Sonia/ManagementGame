@@ -8,6 +8,8 @@ public class PanelController : MonoBehaviour
 {
     public GameObject ResourcesPanel;
     public TMP_Text ResourceDescription;
+    public Image RessourceImage;
+    public Sprite emptyImage;
     public List<CharactersData> Characters;
     public int currentCharacter;
 
@@ -24,7 +26,16 @@ public class PanelController : MonoBehaviour
 
     public void UpdatePanelUI()
     {
-        ResourceDescription.text = Inventory.instance.content[Inventory.instance.currentResource].name;
+        if (Inventory.instance.content.Count > 0)
+        {
+            ResourceDescription.text = Inventory.instance.content[Inventory.instance.currentResource].foodName;
+            RessourceImage.sprite = Inventory.instance.content[Inventory.instance.currentResource].foodImage;
+        }
+        else 
+        {
+            ResourceDescription.text = "";
+            RessourceImage.sprite = emptyImage;
+        }
     }
 
     public void GetNextResources()
