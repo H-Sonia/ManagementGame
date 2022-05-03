@@ -78,7 +78,4 @@ public class PanelController : MonoBehaviour
         UpdatePanelUI();
     }
 
-
-
-
 }
