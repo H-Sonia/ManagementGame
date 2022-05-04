@@ -4,7 +4,6 @@ using UnityEngine;
 using TMPro;
 using System;
 
-
 public class UIDisplay : MonoBehaviour
 {
     public TMP_Text[] names;
