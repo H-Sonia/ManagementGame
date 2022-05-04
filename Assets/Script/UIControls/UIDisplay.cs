@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using System;
 
+
 public class UIDisplay : MonoBehaviour
 {
     public TMP_Text[] names;
@@ -14,9 +15,14 @@ public class UIDisplay : MonoBehaviour
 
     void Start()
     {
+        UpdateCheck();
+    }
+
+    public void UpdateCheck()
+    {
         System.Random random = new System.Random();
         int probability = random.Next(100);
-        if(probability > 70)
+        if (probability > 70)
         {
             SomeoneDisappears();
         }
@@ -26,8 +32,9 @@ public class UIDisplay : MonoBehaviour
         {
             SomeoneAppears();
         }
-        UpdateMainUi();  
+        UpdateMainUi();
     }
+
     public void UpdateMainUi()
     {
         for (int i = 0; i < names.Length; i++)
