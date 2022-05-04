@@ -3248,7 +3248,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7daa9e0d073a62b4a8b47b18f5ec3fb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ui: {fileID: 1981554899}
+  PanelUi: {fileID: 433318623}
+  MainUi: {fileID: 433318628}
 --- !u!114 &433318627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3276,6 +3277,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 659f36ee4bb2b4040a24c5cf0671c1b0, type: 2}
   - {fileID: 11400000, guid: 9bda60baa0daa8c4fb302c42a7a81983, type: 2}
   - {fileID: 11400000, guid: 8961baffacfe5844bbf84901d74c7b4b, type: 2}
+  - {fileID: 11400000, guid: 38b577bfc59bd3a4fa8fde0eff2c3256, type: 2}
 --- !u!114 &433318628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3340,6 +3342,7 @@ MonoBehaviour:
   - {fileID: 1770014699}
   - {fileID: 506687986}
   - {fileID: 2123245851}
+  empty: {fileID: 11400000, guid: 3d982980e53a95a47a5d7f5ca5c2736e, type: 2}
 --- !u!114 &433318629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10222,9 +10225,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 735f64c0a9d2d414aab1bee33eb7c399, type: 2}
   - {fileID: 11400000, guid: fa1a29a479feabe4089d53af02448c74, type: 2}
   - {fileID: 11400000, guid: 518671d427e82774abe445a5e22bd409, type: 2}
-  - {fileID: 11400000, guid: 4edc1faafd182f74ab04bd2fd3abe426, type: 2}
+  - {fileID: 11400000, guid: 518671d427e82774abe445a5e22bd409, type: 2}
   - {fileID: 11400000, guid: 659f36ee4bb2b4040a24c5cf0671c1b0, type: 2}
   - {fileID: 11400000, guid: 9bda60baa0daa8c4fb302c42a7a81983, type: 2}
+  DeceasedCharacters: []
+  Newcomers:
+  - {fileID: 11400000, guid: 8961baffacfe5844bbf84901d74c7b4b, type: 2}
+  - {fileID: 11400000, guid: 38b577bfc59bd3a4fa8fde0eff2c3256, type: 2}
   currentCharacter: 0
 --- !u!4 &1439603718
 Transform:
