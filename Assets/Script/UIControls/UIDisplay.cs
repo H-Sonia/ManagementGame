@@ -15,14 +15,14 @@ public class UIDisplay : MonoBehaviour
 
     void Start()
     {
-        UpdateCheck();
+                UpdateCheck();
     }
 
     public void UpdateCheck()
     {
         System.Random random = new System.Random();
         int probability = random.Next(100);
-        if (probability > 70)
+        if(probability > 70)
         {
             SomeoneDisappears();
         }
@@ -32,11 +32,13 @@ public class UIDisplay : MonoBehaviour
         {
             SomeoneAppears();
         }
-        UpdateMainUi();
+        UpdateMainUi();  
     }
-
+    
     public void UpdateMainUi()
     {
+
+        // Random number for the length of the list and then random numbers for the characters used
         for (int i = 0; i < names.Length; i++)
         {
             CharactersData character = Inventory.instance.Characters[i];

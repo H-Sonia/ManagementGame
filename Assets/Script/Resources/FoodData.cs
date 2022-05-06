@@ -9,5 +9,6 @@ public class FoodData : ScriptableObject
     public int id;
     public string foodName;
     public Sprite foodImage;
+    public int amount;
  
 }

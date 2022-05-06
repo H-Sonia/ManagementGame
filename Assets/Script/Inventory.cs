@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Inventory : MonoBehaviour
 {
@@ -26,6 +27,28 @@ public class Inventory : MonoBehaviour
     {
         content.Clear();
     }
+
+    // public void FillNewcomers()
+    // {
+    //     for(int i=0; i < CharacterDatabase.instance.allCharacters.Length;i++)
+    //     {
+            
+    //     }
+    // }
+
+    // public void RandomAssignement()
+    // {
+    //     System.Random random = new System.Random();
+    //     int listCount = random.Next(Characters.Length);
+    //     for(i=0; i< listCount; i++)
+    //     {
+    //         System.Random random2 = new System.Random();
+    //         int character = random2.Next(CharacterDatabase.instance.allCharacters.Length);
+    //         Characters[i] = CharacterDatabase.instance.allCharacters[i];
+
+    //     }
+
+    // }
 
    
 }
