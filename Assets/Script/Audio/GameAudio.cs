@@ -6,6 +6,7 @@ public class GameAudio : MonoBehaviour
 {
     public AudioClip MapMusic;
     public AudioClip DormMusic;
+    public AudioClip KitchenMusic;
     public AudioSource audioSource;
     void Start()
     {
@@ -32,6 +33,12 @@ public class GameAudio : MonoBehaviour
     public void PlayMapMusic()
     {
         audioSource.clip = MapMusic;
+        audioSource.Play();
+    }
+
+    public void PlayKitchenMusic()
+    {
+        audioSource.clip = KitchenMusic;
         audioSource.Play();
     }
 }
