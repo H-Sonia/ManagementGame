@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MapManagerScript : MonoBehaviour
 {
@@ -21,5 +22,10 @@ public class MapManagerScript : MonoBehaviour
     public void ChangeRoomState(GameObject gin)
     {
         gin.SetActive(!gin.active);
+    }
+
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }
