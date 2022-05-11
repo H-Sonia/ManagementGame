@@ -10,6 +10,8 @@ public class CharactersData : ScriptableObject
     public string surname;
     public Sprite picture;
     public string infos;
+    public int nbOfUseOfLastItem;
     public List<FoodData> resourcesAttribuated;
+    public int nbOfDaysWithoutFood;
     
 }

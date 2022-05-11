@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using System;
 
@@ -27,16 +28,25 @@ public class Inventory : MonoBehaviour
     }
     public void Start()
     {
+        ClearInventory();
+        ClearAllCharactersResources();
         FillCharacters();
         ui.UpdateMainUi();
     }
+
     public void ClearInventory()
     {
         content.Clear();
     }
 
-
-
+    public void ClearAllCharactersResources()
+    {
+        for(int i=0; i< CharacterDatabase.instance.allCharacters.Length; i++)
+        {
+            CharacterDatabase.instance.allCharacters[i].resourcesAttribuated.Clear();
+            CharacterDatabase.instance.allCharacters[i].nbOfDaysWithoutFood = 0;
+        }
+    }
     public void FillNewcomers()
     {
         for (int i = 1; i < CharacterDatabase.instance.allCharacters.Length; i++)
@@ -57,7 +67,7 @@ public class Inventory : MonoBehaviour
 
 
         System.Random random = new System.Random();
-        int charactersNb = random.Next(12);
+        int charactersNb = random.Next(9) + 3;
         for (int i = 0; i < charactersNb; i++)
         {
             int index = random.Next(Newcomers.Count);
@@ -67,14 +77,12 @@ public class Inventory : MonoBehaviour
     }
 
 
-    void SomeoneDisappears()
+    void CharacterDisappears(int characterIndex)
     {
-        System.Random random = new System.Random();
-        int index = random.Next(12);
-        if (Characters[index].id != 0)
+        if (Characters[characterIndex].id != 0)
         {
-           DeceasedCharacters.Add(Characters[index]);
-           Characters[index] = empty;
+           DeceasedCharacters.Add(Characters[characterIndex]);
+           Characters[characterIndex] = empty;
         }
     }
 
@@ -108,19 +116,74 @@ public class Inventory : MonoBehaviour
 
     public void UpdateCharactersLists()
     {
-        System.Random random = new System.Random();
-        int probability = random.Next(100);
-        if(probability > 70)
+        
+        // System.Random random = new System.Random();
+        // int probability = random.Next(100);
+        // if(probability > 70)
+        // {
+        //     SomeoneDisappears();
+        // }
+        // System.Random random2 = new System.Random();
+        // int probability2 = random2.Next(100);
+        // if (probability2 > 70)
+        // {
+        //     SomeoneAppears();
+        // }
+
+        for(int i=0; i < Characters.Length; i++)
         {
-            SomeoneDisappears();
-        }
-        System.Random random2 = new System.Random();
-        int probability2 = random2.Next(100);
-        if (probability2 > 70)
-        {
-            SomeoneAppears();
+            if(Characters[i].id != 0)
+            {
+                if(Characters[i].resourcesAttribuated.Any())
+                {
+                    Characters[i].nbOfDaysWithoutFood = 0;
+                    Characters[i].nbOfUseOfLastItem++;
+                    if(Characters[i].resourcesAttribuated[0].amount < Characters[i].nbOfUseOfLastItem)
+                    {
+                        Characters[i].resourcesAttribuated.Remove(Characters[i].resourcesAttribuated[0]);
+                        Characters[i].nbOfUseOfLastItem = 0;
+                    } 
+                }
+                else
+                {
+                    Characters[i].nbOfDaysWithoutFood++;
+                    MayDisappear(i);
+                }
+            }
         }
         ui.UpdateMainUi();
+    }
+    void MayDisappear(int index)
+    {
+        int chanceOfDisappearing;
+        System.Random random = new System.Random();
+        int probability = random.Next(101);
+        switch(Characters[index].nbOfDaysWithoutFood)
+        {
+            case 1:
+            chanceOfDisappearing = 50;
+            break;
+            case 2:
+            chanceOfDisappearing = 60;
+            break;
+            case 3:
+            chanceOfDisappearing = 70; 
+            break;
+            case 4:
+            chanceOfDisappearing = 80;
+            break;
+            case 5:
+            chanceOfDisappearing = 90;
+            break;
+            default:
+            chanceOfDisappearing = 100;
+            break;
+        }
+        if(probability < chanceOfDisappearing)
+        {
+            CharacterDisappears(index);
+        }
+
     }
 
 }

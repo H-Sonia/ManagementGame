@@ -33,8 +33,7 @@ public class SettingScript : MonoBehaviour
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
-       
-        Screen.fullScreen = true;
+    
     }
 
     public void quit()
