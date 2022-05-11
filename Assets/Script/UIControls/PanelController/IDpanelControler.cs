@@ -15,9 +15,6 @@ public class IDpanelControler : MonoBehaviour
 
     public void DisplayID()
     {
-        Debug.LogWarning("in display");
-        int idnumber = Inventory.instance.Characters[Inventory.instance.currentCharacter].id;
-        IDnumber.text = idnumber.ToString();
         firstname.text = Inventory.instance.Characters[Inventory.instance.currentCharacter].firstname;
         surname.text = Inventory.instance.Characters[Inventory.instance.currentCharacter].surname;
         backstory.text = Inventory.instance.Characters[Inventory.instance.currentCharacter].infos;

@@ -59,7 +59,7 @@ public class Inventory : MonoBehaviour
     {
         FillNewcomers();
         List<CharactersData> emptyList = new List<CharactersData>();
-        for (int i=0; i < 12; i++)
+        for (int i=0; i < 18; i++)
         {
             emptyList.Add(empty);
         }
@@ -67,8 +67,7 @@ public class Inventory : MonoBehaviour
 
 
         System.Random random = new System.Random();
-        int charactersNb = random.Next(9) + 3;
-        for (int i = 0; i < charactersNb; i++)
+        for (int i = 0; i < 18; i++)
         {
             int index = random.Next(Newcomers.Count);
             Characters[i] = Newcomers[index];
@@ -130,7 +129,7 @@ public class Inventory : MonoBehaviour
         //     SomeoneAppears();
         // }
 
-        for(int i=0; i < Characters.Length; i++)
+        /*for(int i=0; i < Characters.Length; i++)
         {
             if(Characters[i].id != 0)
             {
@@ -150,7 +149,7 @@ public class Inventory : MonoBehaviour
                     MayDisappear(i);
                 }
             }
-        }
+        }*/
         ui.UpdateMainUi();
     }
     void MayDisappear(int index)

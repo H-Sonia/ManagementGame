@@ -9,7 +9,6 @@ public class UIDisplay : MonoBehaviour
 {
     public TMP_Text[] names;
     public GameObject[] giveButtons;
-    public GameObject[] seeButtons;
     public GameObject[] idButtons;
     public CharactersData empty;
 
@@ -26,14 +25,12 @@ public class UIDisplay : MonoBehaviour
 
                 names[i].text = "";
                 giveButtons[i].SetActive(false);
-                seeButtons[i].SetActive(false);
                 idButtons[i].SetActive(false);
             }
             else
             {
                 names[i].text = character.firstname + " " + character.surname;
                 giveButtons[i].SetActive(true);
-                seeButtons[i].SetActive(true);
                 idButtons[i].SetActive(true);
             }
         }
