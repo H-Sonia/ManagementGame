@@ -25,8 +25,8 @@ public class SeeResourcesPanelControler : MonoBehaviour
         Debug.LogWarning(index);
         if (Inventory.instance.Characters[Inventory.instance.currentCharacter].resourcesAttribuated.Count > 0)
         {
-            ResourceDescription.text = Inventory.instance.Characters[Inventory.instance.currentCharacter].resourcesAttribuated[index].foodName;
-            RessourceImage.sprite = Inventory.instance.Characters[Inventory.instance.currentCharacter].resourcesAttribuated[index].foodImage;
+            ResourceDescription.text = Inventory.instance.Characters[Inventory.instance.currentCharacter].resourcesAttribuated[index].itemName;
+            RessourceImage.sprite = Inventory.instance.Characters[Inventory.instance.currentCharacter].resourcesAttribuated[index].itemImage;
          
         }
         else
@@ -70,7 +70,7 @@ public class SeeResourcesPanelControler : MonoBehaviour
 
     public void TakeResources()
     {
-        FoodData currentResource = Inventory.instance.Characters[Inventory.instance.currentCharacter].resourcesAttribuated[index];
+        ItemData currentResource = Inventory.instance.Characters[Inventory.instance.currentCharacter].resourcesAttribuated[index];
         Inventory.instance.content.Add(currentResource);
         Inventory.instance.Characters[Inventory.instance.currentCharacter].resourcesAttribuated.Remove(currentResource);
         GetNextResources();

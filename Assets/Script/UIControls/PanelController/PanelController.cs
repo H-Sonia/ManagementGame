@@ -27,8 +27,8 @@ public class PanelController : MonoBehaviour
     {
         if (Inventory.instance.content.Count > 0)
         {
-            ResourceDescription.text = Inventory.instance.content[Inventory.instance.currentResource].foodName;
-            RessourceImage.sprite = Inventory.instance.content[Inventory.instance.currentResource].foodImage;
+            ResourceDescription.text = Inventory.instance.content[Inventory.instance.currentResource].itemName;
+            RessourceImage.sprite = Inventory.instance.content[Inventory.instance.currentResource].itemImage;
         }
         else 
         {
@@ -71,8 +71,9 @@ public class PanelController : MonoBehaviour
 
     public void GiveResources()
     {
-        FoodData currentResource = Inventory.instance.content[Inventory.instance.currentResource];
+        ItemData currentResource = Inventory.instance.content[Inventory.instance.currentResource];
         Inventory.instance.Characters[Inventory.instance.currentCharacter].resourcesAttribuated.Add(currentResource);
+        Inventory.instance.Characters[Inventory.instance.currentCharacter].daysBeforeExpiration.Add(currentResource.daysBeforeExpiration);
         Inventory.instance.content.Remove(currentResource);
         GetNextResources();
         UpdatePanelUI();

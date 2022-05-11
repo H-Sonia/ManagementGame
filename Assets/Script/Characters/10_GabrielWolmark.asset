@@ -23,3 +23,9 @@ MonoBehaviour:
     eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
     in culpa qui officia deserunt mollit anim id est laborum.
   resourcesAttribuated: []
+  daysBeforeExpiration: 
+  hunger: 10
+  cold: 10
+  isSick: 0
+  health: 100
+  efficiencyAtWork: 50

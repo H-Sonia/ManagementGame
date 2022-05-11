@@ -6,7 +6,7 @@ using System;
 
 public class Inventory : MonoBehaviour
 {
-    public List<FoodData> content = new List<FoodData>();
+    public List<ItemData> content = new List<ItemData>();
     public int currentResource = 0;
     public CharactersData empty;
     public CharactersData[] Characters;
@@ -44,7 +44,12 @@ public class Inventory : MonoBehaviour
         for(int i=0; i< CharacterDatabase.instance.allCharacters.Length; i++)
         {
             CharacterDatabase.instance.allCharacters[i].resourcesAttribuated.Clear();
-            CharacterDatabase.instance.allCharacters[i].nbOfDaysWithoutFood = 0;
+            CharacterDatabase.instance.allCharacters[i].daysBeforeExpiration.Clear();
+            CharacterDatabase.instance.allCharacters[i].cold = 0;
+            CharacterDatabase.instance.allCharacters[i].hunger = 0;
+            CharacterDatabase.instance.allCharacters[i].isSick = false;
+            CharacterDatabase.instance.allCharacters[i].health = 100;
+            CharacterDatabase.instance.allCharacters[i].efficiencyAtWork = 50;
         }
     }
     public void FillNewcomers()
@@ -75,114 +80,141 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    public void UpdateCharactersResources()
+    {
+        for (int i = 0; i < Characters.Length; i++)
+        {
+            for (int j = 0; j < Characters[i].resourcesAttribuated.Count; j++)
+            {
+                ConsumeItem(i, j);
+                Characters[i].daysBeforeExpiration[j]--;
+                if(Characters[i].daysBeforeExpiration[j] <= 0)
+                {
+                    Characters[i].resourcesAttribuated.RemoveAt(j);
+                    Characters[i].daysBeforeExpiration.RemoveAt(j);
 
+                }
+            }       
+        }
+    }
+
+    public void ConsumeItem(int indexCharacter, int indexItem)
+    {
+        switch(Characters[indexCharacter].resourcesAttribuated[indexItem].type)
+        {
+            case "food":
+                Characters[indexCharacter].hunger -= Characters[indexCharacter].resourcesAttribuated[indexItem].nutritiveValue;
+                break;
+            case "clothe":
+                Characters[indexCharacter].cold -= Characters[indexCharacter].resourcesAttribuated[indexItem].heat;
+                if (Characters[indexCharacter].efficiencyAtWork < 100)
+                {
+                    Characters[indexCharacter].efficiencyAtWork += Characters[indexCharacter].resourcesAttribuated[indexItem].efficiencyAtWork;
+                }
+                break;
+            case "medicine":
+                Characters[indexCharacter].isSick = false;
+                if (Characters[indexCharacter].health < 100)
+                {
+                    Characters[indexCharacter].health += Characters[indexCharacter].resourcesAttribuated[indexItem].health;
+                }
+                break;
+            default:
+                Debug.LogWarning("unknown type");
+                break;
+        }
+    }
+
+    void UpdateCharactersState()
+    {
+        for (int i = 0; i < Characters.Length; i++)
+        {
+            if(Characters[i].cold < 100)
+            {
+                Characters[i].cold += 10;
+            }
+            if(Characters[i].hunger < 100)
+            {
+                Characters[i].hunger += 10;
+            }
+            if(!Characters[i].isSick)
+            {
+                Characters[i].isSick = isBecomingSick(i);
+            }
+            if(Characters[i].isSick)
+            {
+                Characters[i].health -= 10;
+                Characters[i].efficiencyAtWork -= 10;
+            }
+        }
+
+    }
+
+    bool isBecomingSick(int indexCharacter)
+    {
+        int probability = (Characters[indexCharacter].cold + Characters[indexCharacter].hunger)/2;
+        System.Random random = new System.Random();
+        if(random.Next(101) > probability)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+   
+
+    public void UpdateCharactersLists()
+    {
+        UpdateCharactersResources();
+        UpdateCharactersState();
+        for (int i = 0; i < Characters.Length; i++)
+        {
+            if(MayDisappear(i))
+            {
+                Debug.LogWarning("Someone as been replaced");
+                CharacterDisappears(i);
+                SomeoneAppears(i);
+            }
+        }
+       
+        ui.UpdateMainUi();
+    }
+    
+    bool MayDisappear(int index)
+    {
+        System.Random random = new System.Random();
+        int luck = random.Next(101);
+        int probabilityOfDisapearing = (luck + Characters[index].health + Characters[index].efficiencyAtWork) / 3;
+        int x = random.Next(101);
+        Debug.LogWarning("x = " + x);
+        Debug.LogWarning(probabilityOfDisapearing);
+        if(x > probabilityOfDisapearing)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+    void SomeoneAppears(int index)
+    {
+        if (Newcomers.Count > 0)
+        {
+            Characters[index] = Newcomers[0];
+            Newcomers.Remove(Newcomers[0]);
+        }
+    }
     void CharacterDisappears(int characterIndex)
     {
         if (Characters[characterIndex].id != 0)
         {
-           DeceasedCharacters.Add(Characters[characterIndex]);
-           Characters[characterIndex] = empty;
+            DeceasedCharacters.Add(Characters[characterIndex]);
+            Characters[characterIndex] = empty;
         }
-    }
-
-    int IsEmptySpot()
-    {
-        for (int i = 0; i < Characters.Length; i++)
-        {
-            if (Characters[i].id == 0)
-            {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    void SomeoneAppears()
-    {
-        int index = IsEmptySpot();
-
-        if (Newcomers.Count <= 0)
-        {
-            return;
-        }
-
-        if (index != -1)
-        {
-            Characters[index] = Inventory.instance.Newcomers[0];
-            Newcomers.Remove(Inventory.instance.Newcomers[0]);
-        }
-    }
-
-    public void UpdateCharactersLists()
-    {
-        
-        // System.Random random = new System.Random();
-        // int probability = random.Next(100);
-        // if(probability > 70)
-        // {
-        //     SomeoneDisappears();
-        // }
-        // System.Random random2 = new System.Random();
-        // int probability2 = random2.Next(100);
-        // if (probability2 > 70)
-        // {
-        //     SomeoneAppears();
-        // }
-
-        /*for(int i=0; i < Characters.Length; i++)
-        {
-            if(Characters[i].id != 0)
-            {
-                if(Characters[i].resourcesAttribuated.Any())
-                {
-                    Characters[i].nbOfDaysWithoutFood = 0;
-                    Characters[i].nbOfUseOfLastItem++;
-                    if(Characters[i].resourcesAttribuated[0].amount < Characters[i].nbOfUseOfLastItem)
-                    {
-                        Characters[i].resourcesAttribuated.Remove(Characters[i].resourcesAttribuated[0]);
-                        Characters[i].nbOfUseOfLastItem = 0;
-                    } 
-                }
-                else
-                {
-                    Characters[i].nbOfDaysWithoutFood++;
-                    MayDisappear(i);
-                }
-            }
-        }*/
-        ui.UpdateMainUi();
-    }
-    void MayDisappear(int index)
-    {
-        int chanceOfDisappearing;
-        System.Random random = new System.Random();
-        int probability = random.Next(101);
-        switch(Characters[index].nbOfDaysWithoutFood)
-        {
-            case 1:
-            chanceOfDisappearing = 50;
-            break;
-            case 2:
-            chanceOfDisappearing = 60;
-            break;
-            case 3:
-            chanceOfDisappearing = 70; 
-            break;
-            case 4:
-            chanceOfDisappearing = 80;
-            break;
-            case 5:
-            chanceOfDisappearing = 90;
-            break;
-            default:
-            chanceOfDisappearing = 100;
-            break;
-        }
-        if(probability < chanceOfDisappearing)
-        {
-            CharacterDisappears(index);
-        }
-
     }
 
 }

@@ -51,7 +51,7 @@ public class LoadAndSave : MonoBehaviour
             if (resourcesSavedArray[i] != "")
             {
                 int id = int.Parse(resourcesSavedArray[i]);
-                FoodData currentResource = ResourcesDataBase.instance.allResources.Single(x => x.id == id);
+                ItemData currentResource = ResourcesDataBase.instance.allResources.Single(x => x.id == id);
                 Inventory.instance.content.Add(currentResource);
             }
         }

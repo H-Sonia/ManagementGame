@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ResourcesDataBase : MonoBehaviour
 {
-    public FoodData[] allResources;
+    public ItemData[] allResources;
 
     public static ResourcesDataBase instance;
 
