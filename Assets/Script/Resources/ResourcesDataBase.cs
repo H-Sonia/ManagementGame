@@ -5,6 +5,9 @@ using UnityEngine;
 public class ResourcesDataBase : MonoBehaviour
 {
     public ItemData[] allResources;
+    public ItemData[] commonResources;
+    public ItemData[] rareResources;
+    public ItemData[] veryRareResources;
 
     public static ResourcesDataBase instance;
 

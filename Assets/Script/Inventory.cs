@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using System;
+using TMPro;
 
 public class Inventory : MonoBehaviour
 {
@@ -13,7 +14,9 @@ public class Inventory : MonoBehaviour
     public List<CharactersData> DeceasedCharacters = new List<CharactersData>();
     public List<CharactersData> Newcomers = new List<CharactersData>(); 
     public int currentCharacter;
+    bool isWinter;
     public UIDisplay ui;
+    public TMP_Text infos;
     public static Inventory instance;
     
 
@@ -50,6 +53,7 @@ public class Inventory : MonoBehaviour
             CharacterDatabase.instance.allCharacters[i].isSick = false;
             CharacterDatabase.instance.allCharacters[i].health = 100;
             CharacterDatabase.instance.allCharacters[i].efficiencyAtWork = 50;
+            CharacterDatabase.instance.allCharacters[i].friendshipLevel = 0;
         }
     }
     public void FillNewcomers()
@@ -140,11 +144,19 @@ public class Inventory : MonoBehaviour
             if(!Characters[i].isSick)
             {
                 Characters[i].isSick = isBecomingSick(i);
+                if(Characters[i].friendshipLevel > 0)
+                {
+                    infos.text += Characters[i].firstname + " seems sick today";
+                }
             }
             if(Characters[i].isSick)
             {
                 Characters[i].health -= 10;
                 Characters[i].efficiencyAtWork -= 10;
+                if (Characters[i].friendshipLevel > 0)
+                {
+                    infos.text += Characters[i].firstname + " still sick today";
+                }
             }
         }
 
@@ -169,18 +181,62 @@ public class Inventory : MonoBehaviour
     {
         UpdateCharactersResources();
         UpdateCharactersState();
+
+        Dictionary<int, int> chanceOfDisapearing = new Dictionary<int, int>();
         for (int i = 0; i < Characters.Length; i++)
         {
-            if(MayDisappear(i))
-            {
-                Debug.LogWarning("Someone as been replaced");
-                CharacterDisappears(i);
-                SomeoneAppears(i);
-            }
+            chanceOfDisapearing.Add(Characters[i].id, (Characters[i].health + Characters[i].efficiencyAtWork));
         }
-       
+        var sortedList = chanceOfDisapearing.ToList();
+        sortedList.Sort((pair1, pair2) => pair1.Value.CompareTo(pair2.Value));
+
+        int nbOfOccurences = 1;
+        List<int> drawList = new List<int>();
+        foreach (var value in sortedList)
+        {
+            for(int i=0; i<nbOfOccurences; i++)
+            {
+                drawList.Add(value.Key);
+            }
+            nbOfOccurences += 2; 
+        }
+
+        System.Random rd = new System.Random();
+        var shuffledList = drawList.OrderBy(a => rd.Next()).ToList();
+
+        int howManyDisappear = HowManyDisappear();
+
+        if(howManyDisappear == 0)
+        {
+            infos.text = "Nobody disappeared today";
+        }
+
+        for(int i=0; i<howManyDisappear;i++)
+        {
+            int index = shuffledList[rd.Next(shuffledList.Count())];
+            CharacterDisappears(index);
+            SomeoneAppears(index);
+            shuffledList.RemoveAll(item => item == index);
+
+        }
+
         ui.UpdateMainUi();
     }
+
+    int HowManyDisappear()
+    {
+        System.Random random = new System.Random();
+        if (isWinter)
+        {
+            return random.Next(5);
+        }
+        else
+        {
+            return random.Next(3);
+        }
+    }
+
+
     
     bool MayDisappear(int index)
     {
@@ -210,10 +266,22 @@ public class Inventory : MonoBehaviour
     }
     void CharacterDisappears(int characterIndex)
     {
+        Debug.LogWarning(characterIndex);
         if (Characters[characterIndex].id != 0)
         {
             DeceasedCharacters.Add(Characters[characterIndex]);
             Characters[characterIndex] = empty;
+            string name;
+            if(Characters[characterIndex].friendshipLevel == 0)
+            {
+                name = "Someone";
+            }
+            else
+            {
+                name = Characters[characterIndex].firstname;
+            }
+
+            infos.text += name + " disappeared.\n";
         }
     }
 

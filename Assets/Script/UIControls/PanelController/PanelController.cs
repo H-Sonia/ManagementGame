@@ -74,6 +74,7 @@ public class PanelController : MonoBehaviour
         ItemData currentResource = Inventory.instance.content[Inventory.instance.currentResource];
         Inventory.instance.Characters[Inventory.instance.currentCharacter].resourcesAttribuated.Add(currentResource);
         Inventory.instance.Characters[Inventory.instance.currentCharacter].daysBeforeExpiration.Add(currentResource.daysBeforeExpiration);
+        Inventory.instance.Characters[Inventory.instance.currentCharacter].friendshipLevel += 1;
         Inventory.instance.content.Remove(currentResource);
         GetNextResources();
         UpdatePanelUI();

@@ -15,8 +15,9 @@ MonoBehaviour:
   id: 11
   firstname: Bartel
   surname: Eisen
-  picture: {fileID: 0}
+  picture: {fileID: 21300000, guid: 627b7733caa4f3948aaaff0ba7e7fe63, type: 3}
   infos: 
+  friendshipLevel: 0
   resourcesAttribuated: []
   daysBeforeExpiration: 
   hunger: 0

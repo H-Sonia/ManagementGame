@@ -10,7 +10,6 @@ public class ItemData : ScriptableObject
     public string type;
     public string itemName;
     public Sprite itemImage;
-    public int rarity;
     public int daysBeforeExpiration;
     public int nutritiveValue;
     public int heat;

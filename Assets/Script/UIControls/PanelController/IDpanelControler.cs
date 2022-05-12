@@ -15,10 +15,18 @@ public class IDpanelControler : MonoBehaviour
 
     public void DisplayID()
     {
-        firstname.text = Inventory.instance.Characters[Inventory.instance.currentCharacter].firstname;
-        surname.text = Inventory.instance.Characters[Inventory.instance.currentCharacter].surname;
-        backstory.text = Inventory.instance.Characters[Inventory.instance.currentCharacter].infos;
         IDpicture.sprite = Inventory.instance.Characters[Inventory.instance.currentCharacter].picture;
+
+        if(Inventory.instance.Characters[Inventory.instance.currentCharacter].friendshipLevel > 0)
+        {
+            firstname.text = Inventory.instance.Characters[Inventory.instance.currentCharacter].firstname;
+            surname.text = Inventory.instance.Characters[Inventory.instance.currentCharacter].surname;
+        }
+        if (Inventory.instance.Characters[Inventory.instance.currentCharacter].friendshipLevel > 2)
+        {
+            backstory.text = Inventory.instance.Characters[Inventory.instance.currentCharacter].infos;
+        }
+        
     }
     public void Quit()
     {
