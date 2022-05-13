@@ -15,9 +15,21 @@ public class UIDisplay : MonoBehaviour
     public TMP_Text infos;
 
     
-    public void UpdateMainUi()
+    public void UpdateMainUi(string characterMessage, bool opening)
     {
-        infoPanel.SetActive(true);
+        if (opening)
+        {
+            infoPanel.SetActive(true);
+        }
+        else
+        {
+            if(characterMessage != "")
+            {
+                infos.text = characterMessage;
+                infoPanel.SetActive(true);
+            }
+        }
+        
 
         for (int i = 0; i < names.Length; i++)
         {

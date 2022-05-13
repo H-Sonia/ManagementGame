@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using TMPro;
+using UnityEngine.UI;
 
 public class KitchenScript : MonoBehaviour
 {
+    public Button CookButton;
     public GameObject Kitchen;
     public GameObject ResultPanel;
     public TMP_Text itemObtain;
@@ -43,12 +45,18 @@ public class KitchenScript : MonoBehaviour
             
         }
         ResultPanel.SetActive(true);
-        
+        CookButton.interactable = false;
+
+
+
+    }
+    public void QuitResultPanel()
+    {
+        ResultPanel.SetActive(false);
     }
 
-    public void quit()
+    public void ActiveCook()
     {
-        Kitchen.SetActive(false);
-        ResultPanel.SetActive(false);
+        CookButton.interactable = true;
     }
 }

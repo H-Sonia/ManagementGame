@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class MapManagerScript : MonoBehaviour
 {
     [SerializeField]
-    GameObject dorm, Boxing, Kitchen;
+    GameObject dorm, Boxing, Kitchen, Map;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +21,8 @@ public class MapManagerScript : MonoBehaviour
     }
     public void ChangeRoomState(GameObject gin)
     {
-        gin.SetActive(!gin.active);
+        gin.SetActive(!gin.activeInHierarchy);
+        Map.SetActive(!Map.activeInHierarchy);
     }
 
     public void GoToMainMenu()

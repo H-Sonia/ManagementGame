@@ -34,7 +34,7 @@ public class Inventory : MonoBehaviour
         ClearInventory();
         ClearAllCharactersResources();
         FillCharacters();
-        ui.UpdateMainUi();
+        ui.UpdateMainUi("",true);
     }
 
     public void ClearInventory()
@@ -129,7 +129,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    void UpdateCharactersState()
+    void UpdateCharactersState(ref string sickPeople)
     {
         for (int i = 0; i < Characters.Length; i++)
         {
@@ -144,18 +144,18 @@ public class Inventory : MonoBehaviour
             if(!Characters[i].isSick)
             {
                 Characters[i].isSick = isBecomingSick(i);
-                if(Characters[i].friendshipLevel > 0)
+                if(Characters[i].isSick && Characters[i].friendshipLevel > 0)
                 {
-                    infos.text += Characters[i].firstname + " seems sick today";
+                    sickPeople += Characters[i].firstname + " seems sick today\n";
                 }
             }
-            if(Characters[i].isSick)
+            else
             {
                 Characters[i].health -= 10;
                 Characters[i].efficiencyAtWork -= 10;
                 if (Characters[i].friendshipLevel > 0)
                 {
-                    infos.text += Characters[i].firstname + " still sick today";
+                    sickPeople += Characters[i].firstname + " still sick today\n";
                 }
             }
         }
@@ -165,8 +165,13 @@ public class Inventory : MonoBehaviour
     bool isBecomingSick(int indexCharacter)
     {
         int probability = (Characters[indexCharacter].cold + Characters[indexCharacter].hunger)/2;
+        if(probability < 50)
+        {
+            return false;
+        }
+
         System.Random random = new System.Random();
-        if(random.Next(101) > probability)
+        if(random.Next(101) < probability)
         {
             return false;
         }
@@ -175,52 +180,91 @@ public class Inventory : MonoBehaviour
             return true;
         }
     }
-   
 
-    public void UpdateCharactersLists()
+    public List<KeyValuePair<int, int>> SortPeopleByMostLikelyToDisapear()
     {
-        UpdateCharactersResources();
-        UpdateCharactersState();
-
         Dictionary<int, int> chanceOfDisapearing = new Dictionary<int, int>();
         for (int i = 0; i < Characters.Length; i++)
         {
-            chanceOfDisapearing.Add(Characters[i].id, (Characters[i].health + Characters[i].efficiencyAtWork));
+            chanceOfDisapearing.Add(i, (Characters[i].health + Characters[i].efficiencyAtWork));
         }
-        var sortedList = chanceOfDisapearing.ToList();
+        List<KeyValuePair<int,int>> sortedList = chanceOfDisapearing.ToList();
         sortedList.Sort((pair1, pair2) => pair1.Value.CompareTo(pair2.Value));
+        return sortedList;
+    }
 
+    public List<int> CreateDrawList(List<KeyValuePair<int, int>> sortedList)
+    {
         int nbOfOccurences = 1;
         List<int> drawList = new List<int>();
         foreach (var value in sortedList)
         {
-            for(int i=0; i<nbOfOccurences; i++)
+            for (int i = 0; i < nbOfOccurences; i++)
             {
                 drawList.Add(value.Key);
             }
-            nbOfOccurences += 2; 
+            nbOfOccurences += 2;
         }
+        return drawList;
+    }
 
+    public List<int> ShuffleList(List<int> listToShuffle)
+    {
         System.Random rd = new System.Random();
-        var shuffledList = drawList.OrderBy(a => rd.Next()).ToList();
+        var shuffledList = listToShuffle.OrderBy(a => rd.Next()).ToList();
+        return shuffledList;
+    }
 
-        int howManyDisappear = HowManyDisappear();
-
-        if(howManyDisappear == 0)
-        {
-            infos.text = "Nobody disappeared today";
-        }
-
-        for(int i=0; i<howManyDisappear;i++)
+    public void ChangeCharacters(int howManyChanges, List<int> shuffledList, ref string friendsWhoDisappeared, ref int disappearingCounter)
+    {
+        System.Random rd = new System.Random();
+        for (int i = 0; i < howManyChanges; i++)
         {
             int index = shuffledList[rd.Next(shuffledList.Count())];
-            CharacterDisappears(index);
+            CharacterDisappears(index, ref friendsWhoDisappeared, ref disappearingCounter);
             SomeoneAppears(index);
             shuffledList.RemoveAll(item => item == index);
 
         }
+    }
+    void UpdateCharactersPresent(ref string nbOfPeopleDisappearing, ref string friendsWhoDisappeared)
+    {
+        List<KeyValuePair<int, int>> sortedList = SortPeopleByMostLikelyToDisapear();
 
-        ui.UpdateMainUi();
+        List<int> drawList = CreateDrawList(sortedList);
+
+        List<int> shuffledList = ShuffleList(drawList);
+
+        int howManyDisappear = HowManyDisappear();
+
+        int disappearingCounter = 0; 
+
+        ChangeCharacters(howManyDisappear, shuffledList, ref friendsWhoDisappeared, ref disappearingCounter);
+
+        switch (disappearingCounter)
+        {
+            case 0:
+                nbOfPeopleDisappearing = "Nobody disappeared today\n";
+                break;
+            case 1:
+                nbOfPeopleDisappearing = "Someone disappeared today\n";
+                break;
+            default:
+                nbOfPeopleDisappearing = howManyDisappear + " people disappeared today\n";
+                break;
+        }
+
+    }
+    public void UpdateCharactersLists()
+    {
+        string sickPeolple = "";
+        string nbOfPeopleDisappearing = "";
+        string friendsWhoDisappeared = "";
+        UpdateCharactersResources();
+        UpdateCharactersState(ref sickPeolple);
+        UpdateCharactersPresent(ref nbOfPeopleDisappearing, ref friendsWhoDisappeared);
+        infos.text = nbOfPeopleDisappearing + friendsWhoDisappeared + sickPeolple;
+        ui.UpdateMainUi("",true);
     }
 
     int HowManyDisappear()
@@ -264,24 +308,19 @@ public class Inventory : MonoBehaviour
             Newcomers.Remove(Newcomers[0]);
         }
     }
-    void CharacterDisappears(int characterIndex)
+    void CharacterDisappears(int characterIndex, ref string friendsWhoDisappeared, ref int disappearingCounter)
     {
         Debug.LogWarning(characterIndex);
         if (Characters[characterIndex].id != 0)
         {
+            disappearingCounter += 1;
             DeceasedCharacters.Add(Characters[characterIndex]);
+            if(Characters[characterIndex].friendshipLevel > 0)
+            {
+                Debug.LogWarning(Characters[characterIndex].firstname);
+                friendsWhoDisappeared += Characters[characterIndex].firstname + " disappeared.\n";
+            }
             Characters[characterIndex] = empty;
-            string name;
-            if(Characters[characterIndex].friendshipLevel == 0)
-            {
-                name = "Someone";
-            }
-            else
-            {
-                name = Characters[characterIndex].firstname;
-            }
-
-            infos.text += name + " disappeared.\n";
         }
     }
 
