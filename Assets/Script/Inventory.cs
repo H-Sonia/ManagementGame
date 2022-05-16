@@ -41,6 +41,10 @@ public class Inventory : MonoBehaviour
         }
             
     }
+    public void DayFunction()
+    {
+
+    }
 
     public void ClearInventory()
     {
@@ -232,6 +236,7 @@ public class Inventory : MonoBehaviour
 
         }
     }
+
     void UpdateCharactersPresent(ref string nbOfPeopleDisappearing, ref string friendsWhoDisappeared)
     {
         List<KeyValuePair<int, int>> sortedList = SortPeopleByMostLikelyToDisapear();

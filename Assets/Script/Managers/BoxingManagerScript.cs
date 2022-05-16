@@ -16,21 +16,22 @@ public class BoxingManagerScript : MonoBehaviour
 
     public void Fight()
     {
-        Debug.Log(PlayerManager.instance.check);
-        FighterStats ps = PlayerManager.instance.fighterStats;
-        //Create a random fighter
-        FighterStats fighter = new FighterStats(Random.Range(ps.strength-2,ps.strength +2), Random.Range(ps.strength - 2, ps.dexterity + 1), Random.Range(1,8));
+        EndFight(0);
+        //Debug.Log(PlayerManager.instance.check);
+        //FighterStats ps = PlayerManager.instance.fighterStats;
+        ////Create a random fighter
+        //FighterStats fighter = new FighterStats(Random.Range(ps.strength-2,ps.strength +2), Random.Range(ps.strength - 2, ps.dexterity + 1), Random.Range(1,8));
 
-        //Check scores
-        float score = ps.strength + (ps.strength * ps.dexterity) * 0.1f + 10 - ps.hunger;
-        float enScore = fighter.strength + (fighter.strength * fighter.dexterity) * 0.1f + 10 - fighter.hunger;
-        EndFight(score - enScore);
+        ////Check scores
+        //float score = ps.strength + (ps.strength * ps.dexterity) * 0.1f + 10 - ps.hunger;
+        //float enScore = fighter.strength + (fighter.strength * fighter.dexterity) * 0.1f + 10 - fighter.hunger;
+        //EndFight(score - enScore);
     }
 
     void EndFight(float num)
     {
         resultsScreen.SetActive(true);
-        Debug.Log(num);
+        //Debug.Log(num);
         num = Random.Range(0,100);
         if (num > 20)
         {
@@ -43,7 +44,6 @@ public class BoxingManagerScript : MonoBehaviour
             wintext.text = "LOSE";
             Debug.Log("LOSE");
         }
-
-        MainManager.instance.ChangeTime();
+        MainManager.instance.Pause(true);
     }
 }

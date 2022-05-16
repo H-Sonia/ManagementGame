@@ -35,8 +35,22 @@ public class MainManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        //in case something goes wrong and values are unassigned
+        if (uiManager == null)
+            uiManager = GameObject.Find("EventSystem").GetComponent<UIDisplay>();
+        if (mManager == null)
+            mManager = GameObject.Find("MapManager").GetComponent<MapManagerScript>();
+
+        if (instance != null)
+        {
+            if (instance != null)
+            {
+                Debug.LogWarning("There is more than one Inventory instance in this scene");
+                return;
+            }
+        }
         instance = this;
-        Debug.Log(daycount);
     }
 
     // Update is called once per frame
@@ -70,6 +84,7 @@ public class MainManager : MonoBehaviour
     //NEEDS CHECKING FOR ACCURACY WHEN PROPER SPRITES AVAILABLE
     public void ChangeDay()
     {
+        Inventory.instance.DayFunction();
         //cue sounds here
         //
         //
@@ -97,9 +112,14 @@ public class MainManager : MonoBehaviour
     //for events on day/season change
     void Event()
     {
-        if (daycount % 3 == 0)
+        if (daycount % 1 == 0)
             mManager.boxingOpen = true;
         else
             mManager.boxingOpen = false;
+    }
+
+    public void Pause(bool ToPause)
+    {
+        paused = ToPause;
     }
 }

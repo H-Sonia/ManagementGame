@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class MapManagerScript : MonoBehaviour
 {
+
     [SerializeField]
     GameObject dorm, boxing, kitchen;
     [SerializeField]
