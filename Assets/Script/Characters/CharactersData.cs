@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [CreateAssetMenu(fileName = "CharactersData", menuName = "Character")]
 public class CharactersData : ScriptableObject
@@ -10,6 +11,12 @@ public class CharactersData : ScriptableObject
     public string surname;
     public Sprite picture;
     public string infos;
-    public List<FoodData> resourcesAttribuated;
-    
+    public int friendshipLevel;
+    public List<ItemData> resourcesAttribuated;
+    public List<int> daysBeforeExpiration;
+    public int hunger;
+    public int cold;
+    public bool isSick;
+    public int health;
+    public int efficiencyAtWork;
 }

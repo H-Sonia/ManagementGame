@@ -5,22 +5,15 @@ using UnityEngine;
 public class ButtonController : MonoBehaviour
 {
     public GameObject ResourcesManagementPanel;
-    public GameObject SeeResourcesPanel;
     public GameObject IdPanel;
-    public SeeResourcesPanelControler panelControler;
     public IDpanelControler idpanelController;
+    public PanelController panelController;
 
     public void openResourcesPanel(int characterId)
     {
         ResourcesManagementPanel.SetActive(true);
         Inventory.instance.currentCharacter = characterId;
-    }
-
-    public void openSeeResourcesPanel(int characterId)
-    {
-        SeeResourcesPanel.SetActive(true);
-        Inventory.instance.currentCharacter = characterId;
-        panelControler.UpdatePanelUI();
+        panelController.UpdatePanelUI();
     }
 
     public void openIdPanel(int characterId)
