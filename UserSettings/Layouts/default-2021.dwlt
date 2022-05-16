@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Project
   m_RootView: {fileID: 4}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 18
+  controlID: 85
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 15
+  controlID: 96
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -195,7 +195,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 16
+  controlID: 83
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -220,7 +220,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 8096}
   vertical: 0
-  controlID: 17
+  controlID: 84
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -357,8 +357,8 @@ MonoBehaviour:
     m_SaveData: []
   m_MixersTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 
-    m_LastClickedID: 24498
+    m_SelectedIDs: c6d1ffff
+    m_LastClickedID: -11834
     m_ExpandedIDs: 12eb343c
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -474,7 +474,7 @@ MonoBehaviour:
       oldMaxSizes: 
       oldSplitSize: 0
     m_HorizontalSplitter:
-      ID: 29
+      ID: 5213
       splitterInitialOffset: 0
       currentActiveSplitter: -1
       realSizes:
@@ -562,9 +562,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: 96bd0000
       m_LastClickedID: 0
-      m_ExpandedIDs: 4abfffff96bfffffd8bfffffecbfffffe0c4ffffb2c5fffffcc5ffff1ec6ffff2ec6ffff0ac7ffff54c7ffffb0c8ffffccc8ffff48cfffff70d5ffff56d6ffffa0d6ffffc0d6ffffd0d6ffffaad7fffff4d7ffff14d8ffff24d8fffff0d8ffff3ad9ffff94daffffb0daffffbeebffff08ecffff66edffff86edffff3aefffff84efffffdef0fffffaf0ffff6ef4ffffb8f4ffff12f6ffff2ef6ffffb0f6ffff2efbffffbe92000094930000182c01002c2d0100
+      m_ExpandedIDs: bedaffff04dbffff96e6ffffcaf8ffffdaf9ffff2efbffff3866000080ab00009cac0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -580,7 +580,7 @@ MonoBehaviour:
         m_IsRenaming: 0
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 10}
+        m_ClientGUIView: {fileID: 12}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -835,9 +835,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -0.9797571, y: 5.2581234, z: -0.064295456}
+    m_Target: {x: 1.6511216, y: -0.0070181973, z: 0.11313656}
     speed: 2
-    m_Value: {x: -0.9797571, y: 5.2581234, z: -0.064295456}
+    m_Value: {x: 1.6511216, y: -0.0070181973, z: 0.11313656}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -888,9 +888,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 10.761034
+    m_Target: 10
     speed: 2
-    m_Value: 10.761034
+    m_Value: 10
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1048,22 +1048,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Script/Audio
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Script/Audio
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Sonia Hammami\Documents\GitHub\ManagementGame
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: ae690000
-    m_LastClickedID: 27054
-    m_ExpandedIDs: 0000000038650000806e00005870000000ca9a3b
+    scrollPos: {x: 0, y: 25}
+    m_SelectedIDs: 1e710000
+    m_LastClickedID: 28958
+    m_ExpandedIDs: 000000004865000052650000546500002471000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1091,7 +1091,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000038650000
+    m_ExpandedIDs: 0000000048650000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

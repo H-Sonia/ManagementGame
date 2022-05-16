@@ -37,7 +37,7 @@ public class Inventory : MonoBehaviour
             ClearInventory();
             ClearAllCharactersResources();
             FillCharacters();
-            ui.UpdateMainUi("", true);
+            ui.UpdateMainUi("", false);
         }
             
     }

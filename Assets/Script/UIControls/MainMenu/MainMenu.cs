@@ -6,10 +6,16 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
   public GameObject settingPanel;
+    public GameObject NewGamePanel;
   
   public void LoadGame()
   {
       SceneManager.LoadScene("UiTest");
+  }
+
+  public void NewGame()
+  {
+        NewGamePanel.SetActive(true);
   }
   public void QuitGame()
   {
