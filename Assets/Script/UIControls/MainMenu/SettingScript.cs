@@ -10,6 +10,7 @@ public class SettingScript : MonoBehaviour
 {
     public GameObject settingPanel;
     public AudioMixer audioMixer;
+    public AudioMixer soundMixer;
     public TMP_Dropdown resolutionDropdown;
     Resolution[] resolutions;
 
@@ -45,6 +46,10 @@ public class SettingScript : MonoBehaviour
         audioMixer.SetFloat("volume", Volume);
     }
 
+    public void SetSoud(float Volume)
+    {
+        soundMixer.SetFloat("volume", Volume);
+    }
     public void SetFullScreen(bool isFullScreen)
     {
         Screen.fullScreen = isFullScreen;

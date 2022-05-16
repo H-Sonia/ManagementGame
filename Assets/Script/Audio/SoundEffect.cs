@@ -9,7 +9,7 @@ public class SoundEffect : MonoBehaviour
 
     public void ButtonClick()
     {
-        
+        audioSource.clip = ButtonSound;
         audioSource.Play();
     }
 }
