@@ -31,10 +31,15 @@ public class Inventory : MonoBehaviour
     }
     public void Start()
     {
-        ClearInventory();
-        ClearAllCharactersResources();
-        FillCharacters();
-        ui.UpdateMainUi("",true);
+        int firstTimeInDorms = PlayerPrefs.GetInt("firstTimeInDorms", 0);
+        if (firstTimeInDorms == 0)
+        {
+            ClearInventory();
+            ClearAllCharactersResources();
+            FillCharacters();
+            ui.UpdateMainUi("", true);
+        }
+            
     }
 
     public void ClearInventory()
@@ -257,14 +262,19 @@ public class Inventory : MonoBehaviour
     }
     public void UpdateCharactersLists()
     {
-        string sickPeolple = "";
-        string nbOfPeopleDisappearing = "";
-        string friendsWhoDisappeared = "";
-        UpdateCharactersResources();
-        UpdateCharactersState(ref sickPeolple);
-        UpdateCharactersPresent(ref nbOfPeopleDisappearing, ref friendsWhoDisappeared);
-        infos.text = nbOfPeopleDisappearing + friendsWhoDisappeared + sickPeolple;
-        ui.UpdateMainUi("",true);
+        int firstTimeInDorms = PlayerPrefs.GetInt("firstTimeInDorms", 0);
+        if (firstTimeInDorms != 0)
+        {
+            string sickPeolple = "";
+            string nbOfPeopleDisappearing = "";
+            string friendsWhoDisappeared = "";
+            UpdateCharactersResources();
+            UpdateCharactersState(ref sickPeolple);
+            UpdateCharactersPresent(ref nbOfPeopleDisappearing, ref friendsWhoDisappeared);
+            infos.text = nbOfPeopleDisappearing + friendsWhoDisappeared + sickPeolple;
+            ui.UpdateMainUi("", true);
+        }
+        
     }
 
     int HowManyDisappear()

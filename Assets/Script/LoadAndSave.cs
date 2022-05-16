@@ -8,6 +8,7 @@ public class LoadAndSave : MonoBehaviour
     public static LoadAndSave instance;
     public PanelController PanelUi;
     public UIDisplay MainUi;
+    public CharactersData empty;
 
     private void Awake()
     {
@@ -25,7 +26,7 @@ public class LoadAndSave : MonoBehaviour
         string characterSaved = PlayerPrefs.GetString("characters", "");
         string deceasedCharactersSaved = PlayerPrefs.GetString("deceasedCharacters", "");
         string newcomersSaved = PlayerPrefs.GetString("newcomers", "");
-
+        Debug.Log(characterSaved);
        
 
         //This condition is only here for a test
@@ -55,6 +56,14 @@ public class LoadAndSave : MonoBehaviour
                 Inventory.instance.content.Add(currentResource);
             }
         }
+
+        List<CharactersData> emptyList = new List<CharactersData>();
+        for (int i = 0; i < 18; i++)
+        {
+            emptyList.Add(empty);
+        }
+        Inventory.instance.Characters = emptyList.ToArray();
+
         for (int i = 0; i < characterSavedArray.Length; i++)
         {
             if (characterSavedArray[i] != "")
@@ -96,5 +105,6 @@ public class LoadAndSave : MonoBehaviour
         PlayerPrefs.SetString("deceasedCharacters", deceasedCharacters);
         string newcomers = string.Join(",", Inventory.instance.Newcomers.Select(x => x.id));
         PlayerPrefs.SetString("newcomers", newcomers);
+        PlayerPrefs.SetInt("firstTimeInDorms", 1);
     }
 }
