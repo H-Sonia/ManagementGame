@@ -5,8 +5,8 @@ using TMPro;
 
 public class BoxingManagerScript : MonoBehaviour
 {
-    [SerializeField]
-    FoodData prize;
+    //[SerializeField]
+    //FoodData prize;
 
     [SerializeField]
     TMP_Text wintext;
@@ -36,7 +36,7 @@ public class BoxingManagerScript : MonoBehaviour
         {
             Debug.Log("WIN");
             wintext.text = "WIN";
-            Inventory.instance.content.Add(prize);
+            //Inventory.instance.content.Add(prize);
         }
         else
         {

@@ -13,7 +13,11 @@ public class UIDisplay : MonoBehaviour
     public GameObject infoPanel;
     public TMP_Text infos;
 
-    
+    public void DayFunction()
+    {
+        Debug.Log("beep");
+    }
+
     public void UpdateMainUi(string characterMessage, bool opening)
     {
         if (opening)
