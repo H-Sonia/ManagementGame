@@ -31,7 +31,8 @@ public class BoxingManagerScript : MonoBehaviour
     {
         resultsScreen.SetActive(true);
         Debug.Log(num);
-        if (num > 0)
+        num = Random.Range(0,100);
+        if (num > 20)
         {
             Debug.Log("WIN");
             wintext.text = "WIN";
@@ -42,5 +43,7 @@ public class BoxingManagerScript : MonoBehaviour
             wintext.text = "LOSE";
             Debug.Log("LOSE");
         }
+
+        MainManager.instance.ChangeTime();
     }
 }

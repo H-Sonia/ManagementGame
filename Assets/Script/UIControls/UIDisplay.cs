@@ -26,12 +26,19 @@ public class UIDisplay : MonoBehaviour
             SomeoneDisappears();
         }
         System.Random random2 = new System.Random();
+        /* UPDATED AFTER REQUEST TO KEEP FULL
         int probability2 = random2.Next(100);
         if (probability2 > 70)
         {
             SomeoneAppears();
-        }
+        }*/
+
         UpdateMainUi();
+    }
+
+    public void DayFunction()
+    {
+        UpdateCheck();
     }
 
     public void UpdateMainUi()
