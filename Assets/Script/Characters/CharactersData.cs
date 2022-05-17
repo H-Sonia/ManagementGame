@@ -11,6 +11,7 @@ public class CharactersData : ScriptableObject
     public string surname;
     public Sprite picture;
     public string infos;
+    public TextData[] message;
     public int friendshipLevel;
     public List<ItemData> resourcesAttribuated;
     public List<int> daysBeforeExpiration;

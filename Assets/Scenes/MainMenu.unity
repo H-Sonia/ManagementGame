@@ -4909,7 +4909,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7137d3a09cce0b3488cc4240d0ae7f73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ButtonSound: {fileID: 0}
+  ButtonSound: {fileID: 8300000, guid: 761553c7ff30e264f86ee0bc169761d8, type: 3}
   audioSource: {fileID: 1672221352}
 --- !u!82 &1672221352
 AudioSource:
@@ -5671,7 +5671,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -16.539978, y: -34.919983}
+  m_AnchoredPosition: {x: -16.539917, y: -34.91992}
   m_SizeDelta: {x: -363.87, y: -191.13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1874963237

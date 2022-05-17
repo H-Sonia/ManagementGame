@@ -16,12 +16,20 @@ MonoBehaviour:
   firstname: Bartel
   surname: Eisen
   picture: {fileID: 21300000, guid: 627b7733caa4f3948aaaff0ba7e7fe63, type: 3}
-  infos: 
-  friendshipLevel: 0
-  resourcesAttribuated: []
-  daysBeforeExpiration: 
-  hunger: 0
-  cold: 0
+  infos: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+    eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+    in culpa qui officia deserunt mollit anim id est laborum.
+  friendshipLevel: 3
+  resourcesAttribuated:
+  - {fileID: 11400000, guid: e85027c35f8649f4383976c7da6d7ac1, type: 2}
+  - {fileID: 11400000, guid: 9a865ec28da5d704facf0798e0649324, type: 2}
+  - {fileID: 11400000, guid: d7a8b1161a22a454f8fc48e808e86602, type: 2}
+  daysBeforeExpiration: 020000003c00000003000000
+  hunger: 20
+  cold: 20
   isSick: 0
   health: 100
   efficiencyAtWork: 0

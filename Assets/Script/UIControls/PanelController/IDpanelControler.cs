@@ -16,6 +16,9 @@ public class IDpanelControler : MonoBehaviour
     public void DisplayID()
     {
         IDpicture.sprite = Inventory.instance.Characters[Inventory.instance.currentCharacter].picture;
+        firstname.text = "";
+        surname.text = "";
+        backstory.text = ""; 
 
         if(Inventory.instance.Characters[Inventory.instance.currentCharacter].friendshipLevel > 0)
         {
