@@ -290,26 +290,6 @@ public class Inventory : MonoBehaviour
         }
     }
 
-
-    
-    bool MayDisappear(int index)
-    {
-        System.Random random = new System.Random();
-        int luck = random.Next(101);
-        int probabilityOfDisapearing = (luck + Characters[index].health + Characters[index].efficiencyAtWork) / 3;
-        int x = random.Next(101);
-        Debug.LogWarning("x = " + x);
-        Debug.LogWarning(probabilityOfDisapearing);
-        if(x > probabilityOfDisapearing)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-
-    }
     void SomeoneAppears(int index)
     {
         if (Newcomers.Count > 0)
