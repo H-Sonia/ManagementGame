@@ -6,6 +6,8 @@ using System;
 [CreateAssetMenu(fileName = "CharactersData", menuName = "Character")]
 public class CharactersData : ScriptableObject
 {
+    public bool alreadyKnown;
+    public bool surviveUntilTheEnd;
     public int id;
     public string firstname;
     public string surname;

@@ -5,6 +5,8 @@ using UnityEngine;
 public class CharacterDatabase : MonoBehaviour
 {
     public CharactersData[] allCharacters;
+    public string[] nameForEmptyCharacter;
+    public string[] surnameForEmptyCharacter;
 
     public static CharacterDatabase instance;
 

@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0edaea27c90b5144ac723dbe62733ca, type: 3}
   m_Name: 1_JohnDoe
   m_EditorClassIdentifier: 
+  alreadyKnown: 1
+  surviveUntilTheEnd: 0
   id: 1
   firstname: John
   surname: Doe
