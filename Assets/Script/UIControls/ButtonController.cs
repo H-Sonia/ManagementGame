@@ -12,14 +12,14 @@ public class ButtonController : MonoBehaviour
     public void openResourcesPanel(int characterId)
     {
         ResourcesManagementPanel.SetActive(true);
-        Inventory.instance.currentCharacter = characterId;
+        CharacterManager.instance.charactersLists.currentCharacter = characterId;
         panelController.UpdatePanelUI();
     }
 
     public void openIdPanel(int characterId)
     {
         IdPanel.SetActive(true);
-        Inventory.instance.currentCharacter = characterId;
+        CharacterManager.instance.charactersLists.currentCharacter = characterId;
         idpanelController.DisplayID();
     }
 }

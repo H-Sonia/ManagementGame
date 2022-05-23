@@ -6970,9 +6970,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charactersLists:
+    DormCapacity: 18
+    currentCharacter: 0
     CharactersInDorm: []
     TrueNewcomers: []
     DeadCharacters: []
+    nameNotUsed: 
+  netralPicture: {fileID: 21300000, guid: 0b690560a516eac449b77778fadaf43a, type: 3}
+  ui: {fileID: 433318628}
 --- !u!1 &722438175
 GameObject:
   m_ObjectHideFlags: 0
@@ -9436,9 +9441,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1439603717}
-        m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
-        m_MethodName: UpdateCharactersLists
+      - m_Target: {fileID: 195892012}
+        m_TargetAssemblyTypeName: GameAudio, Assembly-CSharp
+        m_MethodName: PlayDormMusic
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9448,9 +9453,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 195892012}
-        m_TargetAssemblyTypeName: GameAudio, Assembly-CSharp
-        m_MethodName: PlayDormMusic
+      - m_Target: {fileID: 717746295}
+        m_TargetAssemblyTypeName: CharacterManager, Assembly-CSharp
+        m_MethodName: UpdateCharacterLists
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

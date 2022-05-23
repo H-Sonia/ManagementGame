@@ -80,13 +80,13 @@ public class PanelController : MonoBehaviour
     public void GiveResources()
     {
         ItemData currentResource = Inventory.instance.content[Inventory.instance.currentResource];
-        Inventory.instance.Characters[Inventory.instance.currentCharacter].resourcesAttribuated.Add(currentResource);
-        Inventory.instance.Characters[Inventory.instance.currentCharacter].daysBeforeExpiration.Add(currentResource.daysBeforeExpiration);
-        Inventory.instance.Characters[Inventory.instance.currentCharacter].friendshipLevel += 1;
+        CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter].resourcesAttribuated.Add(currentResource);
+        CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter].daysBeforeExpiration.Add(currentResource.daysBeforeExpiration);
+        CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter].friendshipLevel += 1;
         Inventory.instance.content.Remove(currentResource);
         GetNextResources();
         UpdatePanelUI();
-        characterMessage = Inventory.instance.Characters[Inventory.instance.currentCharacter].firstname + " thanks you.\n";
+        characterMessage = CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter].firstname + " thanks you.\n";
     }
 
 }

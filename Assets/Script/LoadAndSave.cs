@@ -57,7 +57,7 @@ public class LoadAndSave : MonoBehaviour
             }
         }
 
-        List<CharactersData> emptyList = new List<CharactersData>();
+        /*List<CharactersData> emptyList = new List<CharactersData>();
         for (int i = 0; i < 18; i++)
         {
             emptyList.Add(empty);
@@ -91,7 +91,7 @@ public class LoadAndSave : MonoBehaviour
                 CharactersData character = CharacterDatabase.instance.allCharacters.Single(x => x.id == id);
                 Inventory.instance.Newcomers.Add(character);
             }
-        }
+        }*/
         PanelUi.UpdatePanelUI();
     }
 

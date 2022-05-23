@@ -15,19 +15,19 @@ public class IDpanelControler : MonoBehaviour
 
     public void DisplayID()
     {
-        IDpicture.sprite = Inventory.instance.Characters[Inventory.instance.currentCharacter].picture;
+        IDpicture.sprite = CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter].picture;
         firstname.text = "";
         surname.text = "";
         backstory.text = ""; 
 
-        if(Inventory.instance.Characters[Inventory.instance.currentCharacter].friendshipLevel > 0)
+        if(CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter].friendshipLevel > 0)
         {
-            firstname.text = Inventory.instance.Characters[Inventory.instance.currentCharacter].firstname;
-            surname.text = Inventory.instance.Characters[Inventory.instance.currentCharacter].surname;
+            firstname.text = CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter].firstname;
+            surname.text = CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter].surname;
         }
-        if (Inventory.instance.Characters[Inventory.instance.currentCharacter].friendshipLevel > 2)
+        if (CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter].friendshipLevel > 2)
         {
-            backstory.text = Inventory.instance.Characters[Inventory.instance.currentCharacter].infos;
+            backstory.text = CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter].infos;
         }
         
     }

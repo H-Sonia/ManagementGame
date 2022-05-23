@@ -33,7 +33,7 @@ public class UIDisplay : MonoBehaviour
 
         for (int i = 0; i < names.Length; i++)
         {
-            CharactersData character = Inventory.instance.Characters[i];
+            Character character = CharacterManager.instance.charactersLists.CharactersInDorm[i];
 
             
             if (character.id == 0)
