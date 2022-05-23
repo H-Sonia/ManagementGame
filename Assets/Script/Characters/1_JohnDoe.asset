@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0edaea27c90b5144ac723dbe62733ca, type: 3}
   m_Name: 1_JohnDoe
   m_EditorClassIdentifier: 
+  alreadyKnown: 1
+  surviveUntilTheEnd: 0
   id: 1
   firstname: John
   surname: Doe
@@ -22,5 +24,12 @@ MonoBehaviour:
     Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
     eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
     in culpa qui officia deserunt mollit anim id est laborum.
+  message: []
+  friendshipLevel: 0
   resourcesAttribuated: []
-  nbOfDaysWithoutFood: 0
+  daysBeforeExpiration: 
+  hunger: 0
+  cold: 0
+  isSick: 0
+  health: 100
+  efficiencyAtWork: 50

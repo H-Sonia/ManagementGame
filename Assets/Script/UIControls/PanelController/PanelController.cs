@@ -35,7 +35,7 @@ public class PanelController : MonoBehaviour
 
         if (Inventory.instance.content.Count > 0)
         {
-            ResourceDescription.text = Inventory.instance.currentResource +") " +Inventory.instance.content[Inventory.instance.currentResource].itemName;
+            ResourceDescription.text = Inventory.instance.content[Inventory.instance.currentResource].itemName;
             RessourceImage.sprite = Inventory.instance.content[Inventory.instance.currentResource].itemImage;
         }
         else 

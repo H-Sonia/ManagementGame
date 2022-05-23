@@ -12,7 +12,9 @@ public class Inventory : MonoBehaviour
     public CharactersData empty;
     public CharactersData[] Characters;
     public List<CharactersData> DeceasedCharacters = new List<CharactersData>();
-    public List<CharactersData> Newcomers = new List<CharactersData>(); 
+    public List<CharactersData> Newcomers = new List<CharactersData>();
+    public List<CharactersData> TrueCharacter = new List<CharactersData>();
+    public List<CharactersData> PlaceHolderCharacter = new List<CharactersData>();
     public int currentCharacter;
     bool isWinter;
     public UIDisplay ui;
@@ -53,7 +55,7 @@ public class Inventory : MonoBehaviour
 
     public void ClearAllCharactersResources()
     {
-        for(int i=0; i< CharacterDatabase.instance.allCharacters.Length; i++)
+        for (int i = 0; i < CharacterDatabase.instance.allCharacters.Length; i++)
         {
             CharacterDatabase.instance.allCharacters[i].resourcesAttribuated.Clear();
             CharacterDatabase.instance.allCharacters[i].daysBeforeExpiration.Clear();
@@ -62,9 +64,28 @@ public class Inventory : MonoBehaviour
             CharacterDatabase.instance.allCharacters[i].isSick = false;
             CharacterDatabase.instance.allCharacters[i].health = 100;
             CharacterDatabase.instance.allCharacters[i].efficiencyAtWork = 50;
-            CharacterDatabase.instance.allCharacters[i].friendshipLevel = 0;
+            if (CharacterDatabase.instance.allCharacters[i].alreadyKnown)
+            {
+               CharacterDatabase.instance.allCharacters[i].friendshipLevel = 5;
+            }
+            else
+            {
+                CharacterDatabase.instance.allCharacters[i].friendshipLevel = 0;
+            }
+           
         }
     }
+
+    public void FillTrueCharacter()
+    {
+        for (int i = 1; i < CharacterDatabase.instance.allCharacters.Length; i++)
+        {
+            TrueCharacter.Add(CharacterDatabase.instance.allCharacters[i]);
+        }
+    }
+
+  
+
     public void FillNewcomers()
     {
         for (int i = 1; i < CharacterDatabase.instance.allCharacters.Length; i++)
@@ -83,9 +104,19 @@ public class Inventory : MonoBehaviour
         }
         Characters = emptyList.ToArray();
 
+        int indexCharacter = 0;
+        for(int i = 0; i < CharacterDatabase.instance.allCharacters.Length; i++)
+        {
+            if(CharacterDatabase.instance.allCharacters[i].alreadyKnown)
+            {
+                Characters[indexCharacter] = CharacterDatabase.instance.allCharacters[i];
+                indexCharacter++;
+            }
+        }
+
 
         System.Random random = new System.Random();
-        for (int i = 0; i < 18; i++)
+        for (int i = indexCharacter; i < 18; i++)
         {
             int index = random.Next(Newcomers.Count);
             Characters[i] = Newcomers[index];
@@ -295,26 +326,6 @@ public class Inventory : MonoBehaviour
         }
     }
 
-
-    
-    bool MayDisappear(int index)
-    {
-        System.Random random = new System.Random();
-        int luck = random.Next(101);
-        int probabilityOfDisapearing = (luck + Characters[index].health + Characters[index].efficiencyAtWork) / 3;
-        int x = random.Next(101);
-        Debug.LogWarning("x = " + x);
-        Debug.LogWarning(probabilityOfDisapearing);
-        if(x > probabilityOfDisapearing)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-
-    }
     void SomeoneAppears(int index)
     {
         if (Newcomers.Count > 0)
@@ -325,7 +336,6 @@ public class Inventory : MonoBehaviour
     }
     void CharacterDisappears(int characterIndex, ref string friendsWhoDisappeared, ref int disappearingCounter)
     {
-        Debug.LogWarning(characterIndex);
         if (Characters[characterIndex].id != 0)
         {
             disappearingCounter += 1;

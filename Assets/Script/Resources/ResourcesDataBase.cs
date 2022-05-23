@@ -8,6 +8,7 @@ public class ResourcesDataBase : MonoBehaviour
     public ItemData[] commonResources;
     public ItemData[] rareResources;
     public ItemData[] veryRareResources;
+    public ItemData medicine;
 
     public static ResourcesDataBase instance;
 

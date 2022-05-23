@@ -29,7 +29,7 @@ public class KitchenScript : MonoBehaviour
             }
             else
             {
-                if (rarity <= 30)
+                if (rarity <= 20)
                 {
                     int foodIndex = random.Next(ResourcesDataBase.instance.rareResources.Length);
                     Inventory.instance.content.Add(ResourcesDataBase.instance.rareResources[foodIndex]);
@@ -44,12 +44,35 @@ public class KitchenScript : MonoBehaviour
             }
             
         }
+        if(IsSomeoneSick())
+        {
+            int rarity = random.Next(100);
+            Debug.LogWarning("rarity = " + rarity);
+            if (rarity <= 20)
+            {
+                
+                Inventory.instance.content.Add(ResourcesDataBase.instance.medicine);
+                itemObtain.text += " - Medicine Bottle\n";
+            }
+
+        }
         ResultPanel.SetActive(true);
         CookButton.interactable = false;
-
-
-
     }
+
+    bool IsSomeoneSick()
+    {
+        for (int i = 0; i < Inventory.instance.Characters.Length; i++)
+        {
+            if(Inventory.instance.Characters[i].isSick)
+            {
+                
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void QuitResultPanel()
     {
         ResultPanel.SetActive(false);
