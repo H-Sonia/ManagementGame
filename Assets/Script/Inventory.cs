@@ -21,7 +21,6 @@ public class Inventory : MonoBehaviour
     public TMP_Text infos;
     public static Inventory instance;
     
-
     private void Awake()
     {
         if(instance != null)
@@ -41,7 +40,6 @@ public class Inventory : MonoBehaviour
             FillCharacters();
             ui.UpdateMainUi("", false);
         }
-            
     }
     public void DayFunction()
     {

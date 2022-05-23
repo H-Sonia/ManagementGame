@@ -74,10 +74,18 @@ public class CharacterManager : MonoBehaviour
 
     public void LoadFromJson()
     {
-        string filePath = Application.persistentDataPath + "/CharactersData.json";
-        string charactersListsData = System.IO.File.ReadAllText(filePath);
-        charactersLists = JsonUtility.FromJson<CharacterDataLists>(charactersListsData);
-        Debug.Log("Data loaded");
+        try
+        {
+            string filePath = Application.persistentDataPath + "/CharactersData.json";
+            string charactersListsData = System.IO.File.ReadAllText(filePath);
+            charactersLists = JsonUtility.FromJson<CharacterDataLists>(charactersListsData);
+            Debug.Log("Data loaded");
+        }
+        catch
+        {
+            Debug.Log("NO SAVE DATA FOUND, CREATING NEW");
+            InitializeCharactersData();
+        }
     }
 }
 

@@ -14,7 +14,9 @@ public class MainManager : MonoBehaviour
     [SerializeField]
     private UIDisplay uiManager;
     [SerializeField]
-    private BoxingManagerScript bScript;
+    private BoxingManagerScript bManager;
+    [SerializeField]
+    private KitchenScript kManager;
 
     /* UNCOMMENT WHEN SOUND IN THIS BUILD
     [SerializeField]
@@ -26,8 +28,8 @@ public class MainManager : MonoBehaviour
 
     bool isDay = true;
 
-    //timer for forced progression
-    float Timer = 1.0f;
+    //timer for forced progression in seconds
+    float Timer = 10.0f;
     bool paused = false;
 
     int daycount = 1;
@@ -36,21 +38,41 @@ public class MainManager : MonoBehaviour
     void Start()
     {
 
+        if (instance != null)
+        {
+            if (instance != null)
+            {
+                Debug.LogWarning("There is more than one MainManager instance in this scene");
+                return;
+            }
+        }
+        instance = this;
+
         //in case something goes wrong and values are unassigned
         if (uiManager == null)
             uiManager = GameObject.Find("EventSystem").GetComponent<UIDisplay>();
         if (mManager == null)
             mManager = GameObject.Find("MapManager").GetComponent<MapManagerScript>();
+        if (bManager == null)
+            bManager = GameObject.Find("Boxing").GetComponent<BoxingManagerScript>();
+        if (kManager == null)
+            kManager = GameObject.Find("Kitchen Manager").GetComponent<KitchenScript>();
 
-        if (instance != null)
-        {
-            if (instance != null)
-            {
-                Debug.LogWarning("There is more than one Inventory instance in this scene");
-                return;
-            }
-        }
-        instance = this;
+        MainStart();
+    }
+
+    void MainStart()
+    {
+        GameObject.Find("EventSystem").GetComponent<UIDisplay>().Setup();
+        GameObject.Find("EventSystem").GetComponent<PanelController>().Setup();
+        MainCheck();
+    }
+    int mainCheck = 0;
+    public void MainCheck()
+    {
+        mainCheck++;
+        if(mainCheck > 2)
+            mManager.ChangeRoomState(0);
     }
 
     // Update is called once per frame
@@ -76,7 +98,7 @@ public class MainManager : MonoBehaviour
         isDay = !isDay;
         if (isDay)
             ChangeDay();
-        Timer = 5.0f;
+        Timer = 60.0f;
         mManager.ChangeTime(isDay);
         Event();
     }
@@ -96,6 +118,7 @@ public class MainManager : MonoBehaviour
         }
         //UI change day
         uiManager.DayFunction();
+        kManager.DayFunction();
         daycount++;
     }
 

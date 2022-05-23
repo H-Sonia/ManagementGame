@@ -82,4 +82,8 @@ public class KitchenScript : MonoBehaviour
     {
         CookButton.interactable = true;
     }
+    public void DayFunction()
+    {
+        CookButton.interactable = true;
+    }
 }

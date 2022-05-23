@@ -24,6 +24,9 @@ public class MapManagerScript : MonoBehaviour
     private void Start()
     {
         currImage.sprite = bgImages[BGID];
+        dorm = GameObject.Find("Dorm");
+        boxing = GameObject.Find("Boxing");
+        kitchen = GameObject.Find("Kitchen");
     }
 
     //Change room, includes checks to prevent night/daytime access to certain rooms
@@ -76,6 +79,7 @@ public class MapManagerScript : MonoBehaviour
                 bButton.gameObject.SetActive(true);
 
             BGID -= 1;
+            ChangeRoomState(0);
         }
         //Switch to daytime
         else
@@ -84,7 +88,7 @@ public class MapManagerScript : MonoBehaviour
             kButton.gameObject.SetActive(false);
             bButton.gameObject.SetActive(false);
 
-            if (!dorm.activeInHierarchy)
+            if (dorm.activeInHierarchy)
                 ChangeRoomState(0);
             BGID += 1;
         }

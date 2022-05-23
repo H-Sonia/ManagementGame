@@ -15,6 +15,7 @@ public class IDpanelControler : MonoBehaviour
 
     public void DisplayID()
     {
+        Debug.Log(Inventory.instance.currentCharacter);
         IDpicture.sprite = Inventory.instance.Characters[Inventory.instance.currentCharacter].picture;
         firstname.text = "";
         surname.text = "";

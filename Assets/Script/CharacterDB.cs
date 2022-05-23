@@ -25,10 +25,17 @@ public class CharacterDB : MonoBehaviour
 
     public void LoadJsonFile()
     {
-        string filePath = "C:/Users/Sonia Hammami/Documents/GitHub/Playing-in-the-Remnant/Assets/Json/TrueCharacterData.json";
-        string initialDB = System.IO.File.ReadAllText(filePath);
-        db = JsonUtility.FromJson<DataBaseCharacter>(initialDB);
-        Debug.Log("Data loaded");
+        try
+        {
+            string filePath = "Playing-in-the-Remnant/Assets/Json/TrueCharacterData.json";
+            string initialDB = System.IO.File.ReadAllText(filePath);
+            db = JsonUtility.FromJson<DataBaseCharacter>(initialDB);
+            Debug.Log("Data loaded");
+        }
+        catch
+        {
+            Debug.Log("NO SAVE FILE FOUND");
+        }
     }
 }
 

@@ -15,9 +15,10 @@ public class PanelController : MonoBehaviour
     string characterMessage;
 
 
-    public void Start()
+    public void Setup()
     {
         UpdatePanelUI();
+        MainManager.instance.MainCheck();
     }
    
 
@@ -43,6 +44,7 @@ public class PanelController : MonoBehaviour
             ResourceDescription.text = "";
             RessourceImage.sprite = emptyImage;
         }
+
     }
 
     public void GetNextResources()
