@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
+using TMPro;
 
 public class CharacterManager : MonoBehaviour
 {
     public CharacterDataLists charactersLists = new CharacterDataLists();
     public Sprite netralPicture;
+    public bool isWinter;
+    public TMP_Text infos;
     public UIDisplay ui;
 
     public static CharacterManager instance;
@@ -25,58 +28,42 @@ public class CharacterManager : MonoBehaviour
 
     public void Start()
     {
-        InitializeCharactersData();
+        string filePath = Application.persistentDataPath + "/CharactersData.json";
+        if(!System.IO.File.Exists(filePath))
+        {
+            InitializeCharactersData();
+        }
+        else
+        {
+            LoadFromJson();
+        }
+        
         ui.UpdateMainUi("", false);
     }
 
     public void UpdateCharacterLists()
     {
-        /*int firstTimeInDorms = PlayerPrefs.GetInt("firstTimeInDorms", 0);
-        if (firstTimeInDorms != 0)
+        string filePath = Application.persistentDataPath + "/CharactersData.json";
+        if (System.IO.File.Exists(filePath))
         {
             string sickPeolple = "";
             string nbOfPeopleDisappearing = "";
             string friendsWhoDisappeared = "";
-            //UpdateCharactersResources();
-            *//*UpdateCharactersState(ref sickPeolple);
+            UpdateCharactersResources();
+            UpdateCharactersState(ref sickPeolple);
             UpdateCharactersPresent(ref nbOfPeopleDisappearing, ref friendsWhoDisappeared);
             infos.text = nbOfPeopleDisappearing + friendsWhoDisappeared + sickPeolple;
-            ui.UpdateMainUi("", true);*//*
-        }*/
+            ui.UpdateMainUi("", true);
+        }
     }
 
     public void InitializeCharactersData()
     {
-        FillTrueNewcomers();
-        GetAllFriends();
         FillNameNotUsed();
         FillWithPlaceHolders();
         charactersLists.CharactersInDorm =  ShuffleCharacterList(charactersLists.CharactersInDorm);
     }
 
-    public void FillTrueNewcomers()
-    {
-        for (int i = 0; i < CharacterDB.instance.db.allTrueCharacters.Length; i++)
-        {
-            if(!CharacterDB.instance.db.allTrueCharacters[i].alreadyKnown)
-            {
-                charactersLists.TrueNewcomers.Add(CharacterDB.instance.db.allTrueCharacters[i]);
-            }
-            
-        }
-    }
-
-    public void GetAllFriends()
-    {
-        for (int i = 0; i < CharacterDB.instance.db.allTrueCharacters.Length; i++)
-        {
-            if (CharacterDB.instance.db.allTrueCharacters[i].alreadyKnown)
-            {
-                charactersLists.CharactersInDorm.Add(CharacterDB.instance.db.allTrueCharacters[i]);
-            }
-
-        }
-    }
 
     public void FillNameNotUsed()
     {
@@ -109,8 +96,7 @@ public class CharacterManager : MonoBehaviour
             character.efficiencyAtWork = 50;
             character.resourcesAttribuated = new List<ItemData>();
             character.daysBeforeExpiration = new List<int>();
-
-    charactersLists.CharactersInDorm.Add(character);
+            charactersLists.CharactersInDorm.Add(character);
         }
     }
 
@@ -125,17 +111,25 @@ public class CharacterManager : MonoBehaviour
     {
         for (int i = 0; i < charactersLists.CharactersInDorm.Count; i++)
         {
-            for (int j = 0; j < charactersLists.CharactersInDorm[i].resourcesAttribuated.Count; j++)
+            List<int> newDaysBeforeExpiration = new List<int>();
+            List<ItemData> newResourcesAttribuated = new List<ItemData>();
+            Debug.LogWarning(i+":"+charactersLists.CharactersInDorm[i].resourcesAttribuated.Count);
+            if(charactersLists.CharactersInDorm[i].resourcesAttribuated.Count > 0)
             {
-                ConsumeItem(i, j);
-                charactersLists.CharactersInDorm[i].daysBeforeExpiration[j]--;
-                if (charactersLists.CharactersInDorm[i].daysBeforeExpiration[j] <= 0)
+                for (int j = 0; j < charactersLists.CharactersInDorm[i].resourcesAttribuated.Count; j++)
                 {
-                    charactersLists.CharactersInDorm[i].resourcesAttribuated.RemoveAt(j);
-                    charactersLists.CharactersInDorm[i].daysBeforeExpiration.RemoveAt(j);
-
+                    ConsumeItem(i, j);
+                    charactersLists.CharactersInDorm[i].daysBeforeExpiration[j]--;
+                    if (charactersLists.CharactersInDorm[i].daysBeforeExpiration[j] > 0)
+                    {
+                        newDaysBeforeExpiration.Add(charactersLists.CharactersInDorm[i].daysBeforeExpiration[j]);
+                        newResourcesAttribuated.Add(charactersLists.CharactersInDorm[i].resourcesAttribuated[j]);
+                    }
                 }
+                charactersLists.CharactersInDorm[i].daysBeforeExpiration = newDaysBeforeExpiration;
+                charactersLists.CharactersInDorm[i].resourcesAttribuated = newResourcesAttribuated;
             }
+            
         }
     }
 
@@ -167,7 +161,198 @@ public class CharacterManager : MonoBehaviour
         }
     }
 
+    void UpdateCharactersState(ref string sickPeople)
+    {
+        for (int i = 0; i < charactersLists.CharactersInDorm.Count; i++)
+        {
+            if(charactersLists.CharactersInDorm[i].cold < 100)
+            {
+                charactersLists.CharactersInDorm[i].cold += 10;
+            }
+            if(charactersLists.CharactersInDorm[i].hunger < 100)
+            {
+                charactersLists.CharactersInDorm[i].hunger += 10;
+            }
+            if(!charactersLists.CharactersInDorm[i].isSick)
+            {
+                charactersLists.CharactersInDorm[i].isSick = isBecomingSick(i);
+                if(charactersLists.CharactersInDorm[i].isSick && charactersLists.CharactersInDorm[i].friendshipLevel > 0)
+                {
+                    sickPeople += charactersLists.CharactersInDorm[i].firstname + " seems sick today\n";
+                }
+            }
+            else
+            {
+                charactersLists.CharactersInDorm[i].health -= 10;
+                charactersLists.CharactersInDorm[i].efficiencyAtWork -= 10;
+                if (charactersLists.CharactersInDorm[i].friendshipLevel > 0)
+                {
+                    sickPeople += charactersLists.CharactersInDorm[i].firstname + " still sick today\n";
+                }
+            }
+        }
 
+    }
+
+    bool isBecomingSick(int indexCharacter)
+    {
+        int probability = (charactersLists.CharactersInDorm[indexCharacter].cold + charactersLists.CharactersInDorm[indexCharacter].hunger)/2;
+        if(probability < 50)
+        {
+            return false;
+        }
+
+        System.Random random = new System.Random();
+        if(random.Next(101) < probability)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    void UpdateCharactersPresent(ref string nbOfPeopleDisappearing, ref string friendsWhoDisappeared)
+    {
+        List<KeyValuePair<int, int>> sortedList = SortPeopleByMostLikelyToDisapear();
+
+        List<int> drawList = CreateDrawList(sortedList);
+
+        List<int> shuffledList = ShuffleList(drawList);
+
+        int howManyDisappear = HowManyDisappear();
+
+        int disappearingCounter = 0; 
+
+        ChangeCharacters(howManyDisappear, shuffledList, ref friendsWhoDisappeared, ref disappearingCounter);
+
+        switch (disappearingCounter)
+        {
+            case 0:
+                nbOfPeopleDisappearing = "Nobody disappeared today\n";
+                break;
+            case 1:
+                nbOfPeopleDisappearing = "Someone disappeared today\n";
+                break;
+            default:
+                nbOfPeopleDisappearing = howManyDisappear + " people disappeared today\n";
+                break;
+        }
+
+    }
+
+    public List<KeyValuePair<int, int>> SortPeopleByMostLikelyToDisapear()
+    {
+        Dictionary<int, int> chanceOfDisapearing = new Dictionary<int, int>();
+        for (int i = 0; i < charactersLists.CharactersInDorm.Count; i++)
+        {
+            if(CanDie(i))
+            {
+                chanceOfDisapearing.Add(i, (charactersLists.CharactersInDorm[i].health + charactersLists.CharactersInDorm[i].efficiencyAtWork)/2);
+            }
+            
+        }
+        List<KeyValuePair<int,int>> sortedList = chanceOfDisapearing.ToList();
+        sortedList.Sort((pair1, pair2) => pair1.Value.CompareTo(pair2.Value));
+        return sortedList;
+    }
+
+    bool CanDie(int characterIndex)
+    {
+        if(!charactersLists.CharactersInDorm[characterIndex].surviveUntilTheEnd)
+        {
+            if(charactersLists.CharactersInDorm[characterIndex].id != -1)
+            {
+                if(charactersLists.CharactersInDorm[characterIndex].friendshipLevel > 1)
+                {
+                    return true;
+                }
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public List<int> CreateDrawList(List<KeyValuePair<int, int>> sortedList)
+    {
+        int nbOfOccurences = 1;
+        List<int> drawList = new List<int>();
+        foreach (var value in sortedList)
+        {
+            for (int i = 0; i < nbOfOccurences; i++)
+            {
+                drawList.Add(value.Key);
+            }
+            nbOfOccurences += 2;
+        }
+        return drawList;
+    }
+
+    public List<int> ShuffleList(List<int> listToShuffle)
+    {
+        System.Random rd = new System.Random();
+        var shuffledList = listToShuffle.OrderBy(a => rd.Next()).ToList();
+        return shuffledList;
+    }
+
+    int HowManyDisappear()
+    {
+        System.Random random = new System.Random();
+        if (isWinter)
+        {
+            return random.Next(5);
+        }
+        else
+        {
+            return random.Next(3);
+        }
+    }
+
+    public void ChangeCharacters(int howManyChanges, List<int> shuffledList, ref string friendsWhoDisappeared, ref int disappearingCounter)
+    {
+        System.Random rd = new System.Random();
+        for (int i = 0; i < howManyChanges; i++)
+        {
+            if(shuffledList.Count > 0)
+            {
+                int rdNumber = rd.Next(shuffledList.Count());
+                int index = shuffledList[rdNumber];
+                CharacterDisappears(index, ref friendsWhoDisappeared, ref disappearingCounter);
+                SomeoneAppears(index);
+                shuffledList.RemoveAll(item => item == index);
+            }
+            
+
+        }
+    }
+
+    void SomeoneAppears(int index)
+    {
+        if (charactersLists.TrueNewcomers.Count > 0)
+        {
+            charactersLists.CharactersInDorm[index] = charactersLists.TrueNewcomers[0];
+            charactersLists.TrueNewcomers.Remove(charactersLists.TrueNewcomers[0]);
+        }
+    }
+    void CharacterDisappears(int characterIndex, ref string friendsWhoDisappeared, ref int disappearingCounter)
+    {
+        if (charactersLists.CharactersInDorm[characterIndex].id != 0)
+        {
+            disappearingCounter += 1;
+            charactersLists.DeadCharacters.Add(charactersLists.CharactersInDorm[characterIndex]);
+            if(charactersLists.CharactersInDorm[characterIndex].friendshipLevel > 0)
+            {
+                friendsWhoDisappeared += charactersLists.CharactersInDorm[characterIndex].firstname + " disappeared.\n";
+            }
+            Character empty = new Character();
+            empty.id = 0;
+            empty.resourcesAttribuated = new List<ItemData>();
+            empty.daysBeforeExpiration = new List<int>();
+            charactersLists.CharactersInDorm[characterIndex] = empty;
+        }
+    }
 
     public void SaveToJson()
     {

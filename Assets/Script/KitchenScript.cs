@@ -47,7 +47,6 @@ public class KitchenScript : MonoBehaviour
         if(IsSomeoneSick())
         {
             int rarity = random.Next(100);
-            Debug.LogWarning("rarity = " + rarity);
             if (rarity <= 20)
             {
                 
@@ -62,9 +61,9 @@ public class KitchenScript : MonoBehaviour
 
     bool IsSomeoneSick()
     {
-        for (int i = 0; i < Inventory.instance.Characters.Length; i++)
+        for (int i = 0; i < CharacterManager.instance.charactersLists.CharactersInDorm.Count; i++)
         {
-            if(Inventory.instance.Characters[i].isSick)
+            if(CharacterManager.instance.charactersLists.CharactersInDorm[i].isSick)
             {
                 
                 return true;

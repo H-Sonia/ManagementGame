@@ -5,7 +5,7 @@ using UnityEngine;
 public class CharacterDB : MonoBehaviour
 {
     public DataBaseCharacter db = new DataBaseCharacter();
-
+    public Sprite[] allTrueCharactersPicture;
     public static CharacterDB instance;
 
     private void Awake()
@@ -21,14 +21,60 @@ public class CharacterDB : MonoBehaviour
     public void Start()
     {
         LoadJsonFile(); 
+        LoadAllPicture();
+        string filePath = Application.persistentDataPath + "/CharactersData.json";
+        if(!System.IO.File.Exists(filePath))
+        {
+            InitCharacterManager();
+        }
+        
+    }
+
+    public void InitCharacterManager()
+    {
+        FillTrueNewcomers();
+        GetAllFriends();
     }
 
     public void LoadJsonFile()
     {
-        string filePath = "C:/Users/Sonia Hammami/Documents/GitHub/Playing-in-the-Remnant/Assets/Json/TrueCharacterData.json";
+        string filePath = Application.dataPath + "/Json/TrueCharacterData.json";
         string initialDB = System.IO.File.ReadAllText(filePath);
         db = JsonUtility.FromJson<DataBaseCharacter>(initialDB);
         Debug.Log("Data loaded");
+    }
+
+    public void LoadAllPicture()
+    {
+       for (int i = 0; i < db.allTrueCharacters.Length; i++)
+        {
+            db.allTrueCharacters[i].picture = allTrueCharactersPicture[i];
+        }
+    }
+
+
+    public void FillTrueNewcomers()
+    {
+        for (int i = 0; i < db.allTrueCharacters.Length; i++)
+        {
+            if(!db.allTrueCharacters[i].alreadyKnown)
+            {
+                CharacterManager.instance.charactersLists.TrueNewcomers.Add(db.allTrueCharacters[i]);
+            }
+            
+        }
+    }
+
+    public void GetAllFriends()
+    {
+        for (int i = 0; i < db.allTrueCharacters.Length; i++)
+        {
+            if (db.allTrueCharacters[i].alreadyKnown)
+            {
+                CharacterManager.instance.charactersLists.CharactersInDorm.Add(db.allTrueCharacters[i]);
+            }
+
+        }
     }
 }
 

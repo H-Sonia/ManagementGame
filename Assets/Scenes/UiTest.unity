@@ -3419,7 +3419,6 @@ GameObject:
   - component: {fileID: 433318624}
   - component: {fileID: 433318623}
   - component: {fileID: 433318625}
-  - component: {fileID: 433318626}
   - component: {fileID: 433318627}
   - component: {fileID: 433318628}
   - component: {fileID: 433318630}
@@ -3539,21 +3538,6 @@ MonoBehaviour:
   veryRareResources:
   - {fileID: 11400000, guid: 9a865ec28da5d704facf0798e0649324, type: 2}
   medicine: {fileID: 11400000, guid: 90e2fec8c1e1765478b50fbb028b2d32, type: 2}
---- !u!114 &433318626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 433318619}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7daa9e0d073a62b4a8b47b18f5ec3fb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PanelUi: {fileID: 433318623}
-  MainUi: {fileID: 433318628}
-  empty: {fileID: 11400000, guid: 3d982980e53a95a47a5d7f5ca5c2736e, type: 2}
 --- !u!114 &433318627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6977,6 +6961,8 @@ MonoBehaviour:
     DeadCharacters: []
     nameNotUsed: 
   netralPicture: {fileID: 21300000, guid: 0b690560a516eac449b77778fadaf43a, type: 3}
+  isWinter: 0
+  infos: {fileID: 709751609}
   ui: {fileID: 433318628}
 --- !u!1 &722438175
 GameObject:
@@ -13332,15 +13318,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   content: []
   currentResource: 0
-  empty: {fileID: 11400000, guid: 3d982980e53a95a47a5d7f5ca5c2736e, type: 2}
-  Characters: []
-  DeceasedCharacters: []
-  Newcomers: []
-  TrueCharacter: []
-  PlaceHolderCharacter: []
-  currentCharacter: 0
   ui: {fileID: 433318628}
-  infos: {fileID: 709751609}
 --- !u!4 &1439603718
 Transform:
   m_ObjectHideFlags: 0
@@ -18235,9 +18213,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 433318626}
-        m_TargetAssemblyTypeName: LoadAndSave, Assembly-CSharp
-        m_MethodName: SaveData
+      - m_Target: {fileID: 195892012}
+        m_TargetAssemblyTypeName: GameAudio, Assembly-CSharp
+        m_MethodName: PlayMapMusic
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -18247,9 +18225,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 195892012}
-        m_TargetAssemblyTypeName: GameAudio, Assembly-CSharp
-        m_MethodName: PlayMapMusic
+      - m_Target: {fileID: 717746295}
+        m_TargetAssemblyTypeName: CharacterManager, Assembly-CSharp
+        m_MethodName: SaveToJson
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1439603717}
+        m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
+        m_MethodName: ClearInventory
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -21285,22 +21275,6 @@ MonoBehaviour:
       isSick: 0
       health: 0
       efficiencyAtWork: 0
-    - alreadyKnown: 0
-      surviveUntilTheEnd: 0
-      id: 0
-      firstname: 
-      surname: 
-      picture: {fileID: 0}
-      infos: 
-      message: []
-      friendshipLevel: 0
-      resourcesAttribuated: []
-      daysBeforeExpiration: 
-      hunger: 0
-      cold: 0
-      isSick: 0
-      health: 0
-      efficiencyAtWork: 0
     FirstnameForPlaceHolder:
     - Declan
     - Oscar
@@ -21331,6 +21305,30 @@ MonoBehaviour:
     - Davis
     - Rivera
     - ' Byrne'
+  allTrueCharactersPicture:
+  - {fileID: 21300000, guid: f3c9548c94864ee4fa5341d98e62a774, type: 3}
+  - {fileID: 21300000, guid: 1547b5baf3cee954088bd701f50cdfab, type: 3}
+  - {fileID: 21300000, guid: 286c866024f758542b9b6df605a00b25, type: 3}
+  - {fileID: 21300000, guid: b621db35b1158bc409f2a4eac145f4b0, type: 3}
+  - {fileID: 21300000, guid: b0c9406ef6194444e83806ae8a3732d9, type: 3}
+  - {fileID: 21300000, guid: fab55060e403e9b43bccd07413f2e3a1, type: 3}
+  - {fileID: 21300000, guid: e6969ee1daf540d4fb2b4668a1169aba, type: 3}
+  - {fileID: 21300000, guid: 483e737342bb5434984437793f0ff508, type: 3}
+  - {fileID: 21300000, guid: 30ac7e34a9190b74b8d239de8481a672, type: 3}
+  - {fileID: 21300000, guid: 178bd0be8396fed4d89fd885b86fec4a, type: 3}
+  - {fileID: 21300000, guid: 627b7733caa4f3948aaaff0ba7e7fe63, type: 3}
+  - {fileID: 21300000, guid: 427404a85ae735b489730c9f9da78486, type: 3}
+  - {fileID: 21300000, guid: d24dda6163bfd804180a8c548424eb3c, type: 3}
+  - {fileID: 21300000, guid: 4a680d6bda73f40479fb83764926346f, type: 3}
+  - {fileID: 21300000, guid: 90d2f26b8de8904468061f55ed1106ad, type: 3}
+  - {fileID: 21300000, guid: af7ae0265099d8a40a3d0531f4f4ed48, type: 3}
+  - {fileID: 21300000, guid: ec283f5dbe6f891489e9e86b03c166db, type: 3}
+  - {fileID: 21300000, guid: aada627ad29438d40a940b04a90b422b, type: 3}
+  - {fileID: 21300000, guid: 216c793add668f8468bf92f28343e4b6, type: 3}
+  - {fileID: 21300000, guid: cd79e2964f472934691a8a6198d90b3a, type: 3}
+  - {fileID: 21300000, guid: 05ece31a87684314a866e348e909e7fe, type: 3}
+  - {fileID: 21300000, guid: c51a144099fb1654194102aed76fd330, type: 3}
+  - {fileID: 21300000, guid: 5943aac48080a8249898f79fab17caa2, type: 3}
 --- !u!1 &2119953848
 GameObject:
   m_ObjectHideFlags: 0

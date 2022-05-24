@@ -9,11 +9,11 @@ public class NewGameScript : MonoBehaviour
 
     public void YesButton()
     {
-        PlayerPrefs.SetString("inventoryResources", "");
-        PlayerPrefs.SetString("characters", "");
-        PlayerPrefs.SetString("deceasedCharacters", "");
-        PlayerPrefs.SetString("newcomers", "");
-        PlayerPrefs.SetInt("firstTimeInDorms", 0);
+        string filePath = Application.persistentDataPath + "/CharactersData.json";
+        if(System.IO.File.Exists(filePath))
+        {
+            System.IO.File.Delete(filePath);
+        }
 
         SceneManager.LoadScene("UiTest");
     }
