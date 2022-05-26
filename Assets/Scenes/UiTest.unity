@@ -3434,9 +3434,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   empty: {fileID: 11400000, guid: 3d982980e53a95a47a5d7f5ca5c2736e, type: 2}
-  infoPanel: {fileID: 2119953848}
+  infoPanel: {fileID: 602710482}
   scrollRect: {fileID: 1116732733}
-  infos: {fileID: 709751609}
+  infos: {fileID: 2077903505}
   Dorm: {fileID: 1655884926}
 --- !u!114 &433318630
 MonoBehaviour:
@@ -5058,6 +5058,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 591402850}
   m_CullTransparentMesh: 1
+--- !u!1 &602710482 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5956432777368488169, guid: 8d0f280e52f191b46806763009f25e4e, type: 3}
+  m_PrefabInstance: {fileID: 1655884925}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &617073725
 GameObject:
   m_ObjectHideFlags: 0
@@ -12579,7 +12584,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1454456739
 GameObject:
@@ -15273,6 +15278,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -12.825928
       objectReference: {fileID: 0}
+    - target: {fileID: 5956432776782179565, guid: 8d0f280e52f191b46806763009f25e4e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 433318628}
+    - target: {fileID: 5956432776782179565, guid: 8d0f280e52f191b46806763009f25e4e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitInfoPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 5956432777080232357, guid: 8d0f280e52f191b46806763009f25e4e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 433318623}
+    - target: {fileID: 5956432777080232357, guid: 8d0f280e52f191b46806763009f25e4e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Quit
+      objectReference: {fileID: 0}
+    - target: {fileID: 5956432777080232357, guid: 8d0f280e52f191b46806763009f25e4e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: PanelController, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 5956432777468747782, guid: 8d0f280e52f191b46806763009f25e4e, type: 3}
       propertyPath: m_Name
       value: Dorm
@@ -15821,7 +15846,7 @@ Transform:
   m_Children:
   - {fileID: 1999755487}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1699231787
 GameObject:
@@ -19903,6 +19928,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2039238131}
   m_CullTransparentMesh: 1
+--- !u!114 &2077903505 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5956432776497256040, guid: 8d0f280e52f191b46806763009f25e4e, type: 3}
+  m_PrefabInstance: {fileID: 1655884925}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2099269052
 GameObject:
   m_ObjectHideFlags: 0

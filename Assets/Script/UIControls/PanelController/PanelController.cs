@@ -25,6 +25,7 @@ public class PanelController : MonoBehaviour
     public void Quit()
     {
         ResourcesPanel.SetActive(false);
+        Debug.LogWarning(characterMessage);
         MainUI.UpdateMainUi(characterMessage, false);
         characterMessage = "";
     }
@@ -89,6 +90,7 @@ public class PanelController : MonoBehaviour
         GetNextResources();
         UpdatePanelUI();
         characterMessage = CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter].firstname + " thanks you.\n";
+        
     }
 
 }
