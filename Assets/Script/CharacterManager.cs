@@ -37,7 +37,6 @@ public class CharacterManager : MonoBehaviour
         {
             LoadFromJson();
         }
-        
         ui.UpdateMainUi("", false);
     }
 

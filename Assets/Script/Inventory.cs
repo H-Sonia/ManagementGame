@@ -12,7 +12,6 @@ public class Inventory : MonoBehaviour
     public UIDisplay ui;
     public static Inventory instance;
     
-
     private void Awake()
     {
         if(instance != null)
@@ -30,12 +29,14 @@ public class Inventory : MonoBehaviour
             ClearInventory();
             ui.UpdateMainUi("", false);
         }
-            
+    }
+    public void DayFunction()
+    {
+
     }
 
     public void ClearInventory()
     {
         content.Clear();
     }
-
 }
