@@ -330,11 +330,40 @@ public class CharacterManager : MonoBehaviour
 
     void SomeoneAppears(int index)
     {
-        if (charactersLists.TrueNewcomers.Count > 0)
+        if(charactersLists.DaysPassedSinceLastTrueCharacter >= 5)
         {
+            charactersLists.DaysPassedSinceLastTrueCharacter = 0; 
+            if (charactersLists.TrueNewcomers.Count > 0)
+            {
             charactersLists.CharactersInDorm[index] = charactersLists.TrueNewcomers[0];
             charactersLists.TrueNewcomers.Remove(charactersLists.TrueNewcomers[0]);
+            }
         }
+        else
+        {
+            charactersLists.DaysPassedSinceLastTrueCharacter++; 
+
+            System.Random random = new System.Random();
+            int indexName = random.Next(charactersLists.nameNotUsed.Count);
+            string firstname = CharacterDB.instance.FirstnameForPlaceHolder[charactersLists.nameNotUsed[indexName]];
+            string lastname = CharacterDB.instance.LastNameForPlaceHolder[charactersLists.nameNotUsed[indexName]];
+            charactersLists.nameNotUsed.Remove(charactersLists.nameNotUsed[indexName]);
+
+            Character character = new Character();
+            character.alreadyKnown = false;
+            character.surviveUntilTheEnd = false;
+            character.id = -1;
+            character.firstname = firstname;
+            character.surname = lastname;
+            character.picture = netralPicture;
+            character.health = 100;
+            character.efficiencyAtWork = 50;
+            character.resourcesAttribuated = new List<ItemData>();
+            character.daysBeforeExpiration = new List<int>();
+
+            charactersLists.CharactersInDorm.Add(character);
+        }
+        
     }
     void CharacterDisappears(int characterIndex, ref string friendsWhoDisappeared, ref int disappearingCounter)
     {
