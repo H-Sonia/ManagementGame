@@ -76,28 +76,35 @@ public class CharacterManager : MonoBehaviour
     public void FillWithPlaceHolders()
     {
         int nbEmptyBeds = charactersLists.DormCapacity - charactersLists.CharactersInDorm.Count;
-        System.Random random = new System.Random();
 
         for (int i=0; i < nbEmptyBeds; i++)
         {
-            int index = random.Next(charactersLists.nameNotUsed.Count);
-            string firstname = CharacterDB.instance.FirstnameForPlaceHolder[charactersLists.nameNotUsed[index]];
-            string lastname = CharacterDB.instance.LastNameForPlaceHolder[charactersLists.nameNotUsed[index]];
-            charactersLists.nameNotUsed.Remove(charactersLists.nameNotUsed[index]);
-
-            Character character = new Character();
-            character.alreadyKnown = false;
-            character.surviveUntilTheEnd = false;
-            character.id = -1;
-            character.firstname = firstname;
-            character.surname = lastname;
-            character.picture = netralPicture;
-            character.health = 100;
-            character.efficiencyAtWork = 50;
-            character.resourcesAttribuated = new List<ItemData>();
-            character.daysBeforeExpiration = new List<int>();
+            Character character = CreatePlaceHolderCharacter();
             charactersLists.CharactersInDorm.Add(character);
         }
+    }
+
+    Character CreatePlaceHolderCharacter()
+    {
+        System.Random random = new System.Random();
+        int index = random.Next(charactersLists.nameNotUsed.Count);
+        string firstname = CharacterDB.instance.FirstnameForPlaceHolder[charactersLists.nameNotUsed[index]];
+        string lastname = CharacterDB.instance.LastNameForPlaceHolder[charactersLists.nameNotUsed[index]];
+        charactersLists.nameNotUsed.Remove(charactersLists.nameNotUsed[index]);
+
+        Character character = new Character();
+        character.alreadyKnown = false;
+        character.surviveUntilTheEnd = false;
+        character.id = -1;
+        character.firstname = firstname;
+        character.surname = lastname;
+        character.picture = netralPicture;
+        character.health = 100;
+        character.efficiencyAtWork = 50;
+        character.resourcesAttribuated = new List<ItemData>();
+        character.daysBeforeExpiration = new List<int>();
+
+        return character;
     }
 
     public List<Character> ShuffleCharacterList(List<Character> listToShuffle)
@@ -249,7 +256,15 @@ public class CharacterManager : MonoBehaviour
         {
             if(CanDie(i))
             {
-                chanceOfDisapearing.Add(i, (charactersLists.CharactersInDorm[i].health + charactersLists.CharactersInDorm[i].efficiencyAtWork)/2);
+                if(charactersLists.CharactersInDorm[i].id != -1)
+                {
+                    chanceOfDisapearing.Add(i, (charactersLists.DaysPassedSinceLastTrueCharacter + charactersLists.CharactersInDorm[i].health + charactersLists.CharactersInDorm[i].efficiencyAtWork) / 2);
+                }
+                else
+                {
+                    chanceOfDisapearing.Add(i, (charactersLists.CharactersInDorm[i].health + charactersLists.CharactersInDorm[i].efficiencyAtWork) / 2);
+                }
+                
             }
             
         }
@@ -330,39 +345,24 @@ public class CharacterManager : MonoBehaviour
 
     void SomeoneAppears(int index)
     {
-        if(charactersLists.DaysPassedSinceLastTrueCharacter >= 5)
+        if(charactersLists.DaysPassedSinceLastTrueCharacter > 5 && charactersLists.NbOfTrueCharacter < charactersLists.NbMaxTrueCharacter)
         {
-            charactersLists.DaysPassedSinceLastTrueCharacter = 0; 
             if (charactersLists.TrueNewcomers.Count > 0)
             {
-            charactersLists.CharactersInDorm[index] = charactersLists.TrueNewcomers[0];
-            charactersLists.TrueNewcomers.Remove(charactersLists.TrueNewcomers[0]);
+                charactersLists.CharactersInDorm[index] = charactersLists.TrueNewcomers[0];
+                charactersLists.TrueNewcomers.Remove(charactersLists.TrueNewcomers[0]);
+                charactersLists.NbOfTrueCharacter++;
+                charactersLists.DaysPassedSinceLastTrueCharacter = 0;
             }
         }
         else
         {
-            charactersLists.DaysPassedSinceLastTrueCharacter++; 
-
-            System.Random random = new System.Random();
-            int indexName = random.Next(charactersLists.nameNotUsed.Count);
-            string firstname = CharacterDB.instance.FirstnameForPlaceHolder[charactersLists.nameNotUsed[indexName]];
-            string lastname = CharacterDB.instance.LastNameForPlaceHolder[charactersLists.nameNotUsed[indexName]];
-            charactersLists.nameNotUsed.Remove(charactersLists.nameNotUsed[indexName]);
-
-            Character character = new Character();
-            character.alreadyKnown = false;
-            character.surviveUntilTheEnd = false;
-            character.id = -1;
-            character.firstname = firstname;
-            character.surname = lastname;
-            character.picture = netralPicture;
-            character.health = 100;
-            character.efficiencyAtWork = 50;
-            character.resourcesAttribuated = new List<ItemData>();
-            character.daysBeforeExpiration = new List<int>();
-
-            charactersLists.CharactersInDorm.Add(character);
+            Character character = CreatePlaceHolderCharacter();
+            charactersLists.CharactersInDorm[index] = character;
+            charactersLists.DaysPassedSinceLastTrueCharacter++;
         }
+        
+       
         
     }
     void CharacterDisappears(int characterIndex, ref string friendsWhoDisappeared, ref int disappearingCounter)
@@ -374,6 +374,10 @@ public class CharacterManager : MonoBehaviour
             if(charactersLists.CharactersInDorm[characterIndex].friendshipLevel > 0)
             {
                 friendsWhoDisappeared += charactersLists.CharactersInDorm[characterIndex].firstname + " disappeared.\n";
+            }
+            if(charactersLists.CharactersInDorm[characterIndex].id != -1)
+            {
+                charactersLists.NbOfTrueCharacter--;
             }
             Character empty = new Character();
             empty.id = 0;
@@ -405,7 +409,8 @@ public class CharacterManager : MonoBehaviour
 public class CharacterDataLists
 {
     public int DaysPassedSinceLastTrueCharacter;
-    public int NbMaxTrueCharacter; 
+    public int NbOfTrueCharacter;
+    public int NbMaxTrueCharacter = 3;
     public int DormCapacity = 18;
     public int currentCharacter; 
     public List<Character> CharactersInDorm = new List<Character>();

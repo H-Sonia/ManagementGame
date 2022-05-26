@@ -3676,6 +3676,7 @@ MonoBehaviour:
   - {fileID: 628846699}
   empty: {fileID: 11400000, guid: 3d982980e53a95a47a5d7f5ca5c2736e, type: 2}
   infoPanel: {fileID: 2119953848}
+  scrollRect: {fileID: 1116732733}
   infos: {fileID: 709751609}
 --- !u!114 &433318630
 MonoBehaviour:
@@ -6955,6 +6956,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charactersLists:
     DaysPassedSinceLastTrueCharacter: 0
+    NbOfTrueCharacter: 0
     NbMaxTrueCharacter: 0
     DormCapacity: 18
     currentCharacter: 0

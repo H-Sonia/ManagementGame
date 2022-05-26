@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using UnityEngine.UI;
 
 
 public class UIDisplay : MonoBehaviour
@@ -12,6 +13,7 @@ public class UIDisplay : MonoBehaviour
     public GameObject[] idButtons;
     public CharactersData empty;
     public GameObject infoPanel;
+    public ScrollRect scrollRect;
     public TMP_Text infos;
 
     
@@ -19,6 +21,7 @@ public class UIDisplay : MonoBehaviour
     {
         if (opening)
         {
+            scrollRect.verticalNormalizedPosition = 1f;
             infoPanel.SetActive(true);
         }
         else
@@ -26,6 +29,7 @@ public class UIDisplay : MonoBehaviour
             if(characterMessage != "")
             {
                 infos.text = characterMessage;
+                scrollRect.verticalNormalizedPosition = 1f; 
                 infoPanel.SetActive(true);
             }
         }

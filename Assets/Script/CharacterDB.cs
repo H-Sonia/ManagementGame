@@ -35,6 +35,9 @@ public class CharacterDB : MonoBehaviour
 
     public void InitCharacterManager()
     {
+        CharacterManager.instance.charactersLists.DaysPassedSinceLastTrueCharacter = 0;
+        CharacterManager.instance.charactersLists.NbMaxTrueCharacter = 3;
+        CharacterManager.instance.charactersLists.DormCapacity = 18;
         FillTrueNewcomers();
         GetAllFriends();
     }
@@ -74,10 +77,14 @@ public class CharacterDB : MonoBehaviour
         {
             if (db.allTrueCharacters[i].alreadyKnown)
             {
-                CharacterManager.instance.charactersLists.CharactersInDorm.Add(db.allTrueCharacters[i]);
+                Character character = db.allTrueCharacters[i];
+                character.friendshipLevel = 5;
+                CharacterManager.instance.charactersLists.CharactersInDorm.Add(character);
+                CharacterManager.instance.charactersLists.NbOfTrueCharacter++;
             }
 
         }
+        
     }
 }
 
