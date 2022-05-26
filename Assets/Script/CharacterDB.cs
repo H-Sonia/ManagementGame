@@ -6,6 +6,9 @@ public class CharacterDB : MonoBehaviour
 {
     public DataBaseCharacter db = new DataBaseCharacter();
     public Sprite[] allTrueCharactersPicture;
+    public string[] FirstnameForPlaceHolder;
+    public string[] LastNameForPlaceHolder;
+
     public static CharacterDB instance;
 
     private void Awake()
@@ -82,7 +85,5 @@ public class CharacterDB : MonoBehaviour
 public class DataBaseCharacter
 {
     public Character[] allTrueCharacters;
-    public string[] FirstnameForPlaceHolder;
-    public string[] LastNameForPlaceHolder;
 }
 

@@ -67,7 +67,7 @@ public class CharacterManager : MonoBehaviour
 
     public void FillNameNotUsed()
     {
-        for (int i = 0; i < CharacterDB.instance.db.FirstnameForPlaceHolder.Length; i++)
+        for (int i = 0; i < CharacterDB.instance.FirstnameForPlaceHolder.Length; i++)
         {
             charactersLists.nameNotUsed.Add(i);
         }
@@ -81,8 +81,8 @@ public class CharacterManager : MonoBehaviour
         for (int i=0; i < nbEmptyBeds; i++)
         {
             int index = random.Next(charactersLists.nameNotUsed.Count);
-            string firstname = CharacterDB.instance.db.FirstnameForPlaceHolder[charactersLists.nameNotUsed[index]];
-            string lastname = CharacterDB.instance.db.LastNameForPlaceHolder[charactersLists.nameNotUsed[index]];
+            string firstname = CharacterDB.instance.FirstnameForPlaceHolder[charactersLists.nameNotUsed[index]];
+            string lastname = CharacterDB.instance.LastNameForPlaceHolder[charactersLists.nameNotUsed[index]];
             charactersLists.nameNotUsed.Remove(charactersLists.nameNotUsed[index]);
 
             Character character = new Character();
@@ -375,6 +375,8 @@ public class CharacterManager : MonoBehaviour
 [System.Serializable]
 public class CharacterDataLists
 {
+    public int DaysPassedSinceLastTrueCharacter;
+    public int NbMaxTrueCharacter; 
     public int DormCapacity = 18;
     public int currentCharacter; 
     public List<Character> CharactersInDorm = new List<Character>();
