@@ -1363,7 +1363,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &195892012
 MonoBehaviour:
@@ -3297,21 +3297,6 @@ MonoBehaviour:
   veryRareResources:
   - {fileID: 11400000, guid: 9a865ec28da5d704facf0798e0649324, type: 2}
   medicine: {fileID: 11400000, guid: 90e2fec8c1e1765478b50fbb028b2d32, type: 2}
---- !u!114 &433318626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 433318619}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7daa9e0d073a62b4a8b47b18f5ec3fb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PanelUi: {fileID: 433318623}
-  MainUi: {fileID: 433318628}
-  empty: {fileID: 11400000, guid: 3d982980e53a95a47a5d7f5ca5c2736e, type: 2}
 --- !u!114 &433318627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3452,7 +3437,7 @@ MonoBehaviour:
   infoPanel: {fileID: 2119953848}
   scrollRect: {fileID: 1116732733}
   infos: {fileID: 709751609}
-  Dorm: {fileID: 0}
+  Dorm: {fileID: 1655884926}
 --- !u!114 &433318630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5073,11 +5058,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 591402850}
   m_CullTransparentMesh: 1
---- !u!1 &606909401 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5956432777368488169, guid: 8d0f280e52f191b46806763009f25e4e, type: 3}
-  m_PrefabInstance: {fileID: 1655884925}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &617073725
 GameObject:
   m_ObjectHideFlags: 0
@@ -6451,7 +6431,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &717746295
 MonoBehaviour:
@@ -6858,7 +6838,7 @@ Transform:
   - {fileID: 1631123985}
   - {fileID: 535182305}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &824792075
 GameObject:
@@ -8724,10 +8704,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 517318352}
-  m_Father: {fileID: 932547296}
-  m_RootOrder: 1
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8778,7 +8757,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 976445674}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MapManagerScript, Assembly-CSharp
         m_MethodName: ChangeRoomState
         m_Mode: 2
@@ -10807,7 +10786,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1293249193
 GameObject:
@@ -12600,7 +12579,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1454456739
 GameObject:
@@ -15368,6 +15347,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d0f280e52f191b46806763009f25e4e, type: 3}
+--- !u!1 &1655884926 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5956432777468747782, guid: 8d0f280e52f191b46806763009f25e4e, type: 3}
+  m_PrefabInstance: {fileID: 1655884925}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1661458988
 GameObject:
   m_ObjectHideFlags: 0
@@ -15837,7 +15821,7 @@ Transform:
   m_Children:
   - {fileID: 1999755487}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1699231787
 GameObject:
@@ -17246,7 +17230,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1834679723
 MonoBehaviour:
@@ -17667,6 +17651,15 @@ MonoBehaviour:
       - m_Target: {fileID: 1439603717}
         m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
         m_MethodName: ClearInventory
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 195892012}
         m_TargetAssemblyTypeName: GameAudio, Assembly-CSharp
         m_MethodName: PlayMapMusic
@@ -20221,7 +20214,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2114847868
 MonoBehaviour:
