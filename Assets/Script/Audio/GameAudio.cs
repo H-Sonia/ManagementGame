@@ -5,7 +5,8 @@ using UnityEngine;
 public class GameAudio : MonoBehaviour
 {
     public AudioClip MapMusic;
-    public AudioClip DormMusic;
+    public AudioClip Rain;
+    public AudioClip Birds; 
     public AudioClip KitchenMusic;
     public AudioClip ArenaMusic;
     public AudioSource audioSource;
@@ -67,12 +68,11 @@ public class GameAudio : MonoBehaviour
         switch(whichRoom)
         {
             case 0:
-                audioSource.clip = DormMusic;
+                audioSource.clip = MapMusic;
                 audioSource.Play();
                 break;
             case 1:
-                audioSource.clip = MapMusic;
-                audioSource.Play();
+                PlayDormMusic();
                 break;
             case 2:
                 audioSource.clip = KitchenMusic;
@@ -88,13 +88,19 @@ public class GameAudio : MonoBehaviour
         }
     }
 
-
-
-
     public void PlayDormMusic()
     {
-        audioSource.clip = DormMusic;
-        audioSource.Play();
+        if(MainManager.instance.season == 0 ||MainManager.instance.season == 1)
+        {
+            audioSource.clip = Birds;
+            audioSource.Play();
+        }
+        else
+        {
+            audioSource.clip = Rain;
+            audioSource.Play();
+        }
+        
     }
 
     public void PlayMapMusic()
