@@ -3435,7 +3435,7 @@ MonoBehaviour:
   - {fileID: 0}
   empty: {fileID: 11400000, guid: 3d982980e53a95a47a5d7f5ca5c2736e, type: 2}
   infoPanel: {fileID: 602710482}
-  scrollRect: {fileID: 1116732733}
+  scrollRect: {fileID: 810569588}
   infos: {fileID: 2077903505}
   Dorm: {fileID: 1655884926}
 --- !u!114 &433318630
@@ -6461,8 +6461,7 @@ MonoBehaviour:
     DeadCharacters: []
     nameNotUsed: 
   netralPicture: {fileID: 21300000, guid: 0b690560a516eac449b77778fadaf43a, type: 3}
-  isWinter: 0
-  infos: {fileID: 709751609}
+  infos: {fileID: 2077903505}
   ui: {fileID: 433318628}
 --- !u!1 &722438175
 GameObject:
@@ -6845,6 +6844,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &810569588 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5956432776895846508, guid: 8d0f280e52f191b46806763009f25e4e, type: 3}
+  m_PrefabInstance: {fileID: 1655884925}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &824792075
 GameObject:
   m_ObjectHideFlags: 0
@@ -10778,6 +10788,7 @@ MonoBehaviour:
   uiManager: {fileID: 0}
   bManager: {fileID: 0}
   kManager: {fileID: 0}
+  season: 0
 --- !u!4 &1289058235
 Transform:
   m_ObjectHideFlags: 0
@@ -15356,7 +15367,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5956432777642968396, guid: 8d0f280e52f191b46806763009f25e4e, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -37.9
+      value: -37.899902
       objectReference: {fileID: 0}
     - target: {fileID: 5956432777642968396, guid: 8d0f280e52f191b46806763009f25e4e, type: 3}
       propertyPath: m_AnchoredPosition.y

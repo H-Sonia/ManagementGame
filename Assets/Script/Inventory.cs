@@ -23,12 +23,8 @@ public class Inventory : MonoBehaviour
     }
     public void Start()
     {
-        int firstTimeInDorms = PlayerPrefs.GetInt("firstTimeInDorms", 0);
-        if (firstTimeInDorms == 0)
-        {
-            ClearInventory();
-            ui.UpdateMainUi("", false);
-        }
+        ClearInventory();
+        ui.UpdateMainUi("", false);
     }
     public void DayFunction()
     {

@@ -9,7 +9,6 @@ public class CharacterManager : MonoBehaviour
 {
     public CharacterDataLists charactersLists = new CharacterDataLists();
     public Sprite netralPicture;
-    public bool isWinter;
     public TMP_Text infos;
     public UIDisplay ui;
 
@@ -52,7 +51,9 @@ public class CharacterManager : MonoBehaviour
             UpdateCharactersState(ref sickPeolple);
             UpdateCharactersPresent(ref nbOfPeopleDisappearing, ref friendsWhoDisappeared);
             infos.text = nbOfPeopleDisappearing + friendsWhoDisappeared + sickPeolple;
+            Debug.LogWarning("before update ui :" + infos.text);
             ui.UpdateMainUi("", true);
+            Debug.LogWarning("after update ui : " + infos.text);
         }
     }
 
@@ -119,7 +120,6 @@ public class CharacterManager : MonoBehaviour
         {
             List<int> newDaysBeforeExpiration = new List<int>();
             List<ItemData> newResourcesAttribuated = new List<ItemData>();
-            Debug.LogWarning(i+":"+charactersLists.CharactersInDorm[i].resourcesAttribuated.Count);
             if(charactersLists.CharactersInDorm[i].resourcesAttribuated.Count > 0)
             {
                 for (int j = 0; j < charactersLists.CharactersInDorm[i].resourcesAttribuated.Count; j++)
@@ -314,14 +314,28 @@ public class CharacterManager : MonoBehaviour
     int HowManyDisappear()
     {
         System.Random random = new System.Random();
-        if (isWinter)
+        int nbDeath; 
+        switch (MainManager.instance.season)
         {
-            return random.Next(5);
+            case 0:
+                nbDeath = random.Next(3);
+                break;
+            case 1:
+                nbDeath = random.Next(3);
+                break;
+            case 2:
+                nbDeath = random.Next(7);
+                break;
+            case 3:
+                nbDeath = random.Next(9);
+                break;
+            default:
+                nbDeath = 0;
+                Debug.LogWarning("Season index out of range");
+                break;
         }
-        else
-        {
-            return random.Next(3);
-        }
+
+        return nbDeath;
     }
 
     public void ChangeCharacters(int howManyChanges, List<int> shuffledList, ref string friendsWhoDisappeared, ref int disappearingCounter)

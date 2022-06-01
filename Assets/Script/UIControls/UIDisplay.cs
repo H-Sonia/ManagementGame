@@ -73,9 +73,9 @@ public class UIDisplay : MonoBehaviour
 
     public void UpdateMainUi(string characterMessage, bool opening)
     {
+        scrollRect.verticalNormalizedPosition = 1f;
         if (opening)
         {
-            scrollRect.verticalNormalizedPosition = 1f;
             infoPanel.SetActive(true);
         }
         else
@@ -83,7 +83,7 @@ public class UIDisplay : MonoBehaviour
             if(characterMessage != "")
             {
                 infos.text = characterMessage;
-                scrollRect.verticalNormalizedPosition = 1f; 
+                
                 infoPanel.SetActive(true);
             }
         }

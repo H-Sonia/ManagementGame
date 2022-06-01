@@ -15,6 +15,7 @@ public class IDpanelControler : MonoBehaviour
 
     public void DisplayID()
     {
+        Debug.LogWarning("in DisplayID");
         IDpicture.sprite = CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter].picture;
         firstname.text = "";
         surname.text = "";

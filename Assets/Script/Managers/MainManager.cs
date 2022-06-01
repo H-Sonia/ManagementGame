@@ -24,7 +24,7 @@ public class MainManager : MonoBehaviour
     */
 
     //0 = spring 1 = Summer 2 = Autumn 3 = Winter
-    int season = 0;
+    public int season = 0;
 
     bool isDay = true;
 
@@ -106,6 +106,7 @@ public class MainManager : MonoBehaviour
     //NEEDS CHECKING FOR ACCURACY WHEN PROPER SPRITES AVAILABLE
     public void ChangeDay()
     {
+        CharacterManager.instance.UpdateCharacterLists();
         Inventory.instance.DayFunction();
         //cue sounds here
         //
@@ -120,6 +121,7 @@ public class MainManager : MonoBehaviour
         uiManager.DayFunction();
         kManager.DayFunction();
         daycount++;
+        CharacterManager.instance.SaveToJson();
     }
 
     //SeasonChange

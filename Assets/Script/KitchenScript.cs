@@ -11,13 +11,39 @@ public class KitchenScript : MonoBehaviour
     public GameObject Kitchen;
     public GameObject ResultPanel;
     public TMP_Text itemObtain;
+    int maxResources; 
+
+
+    public void MaxResourcesNumber()
+    {
+        switch (MainManager.instance.season)
+        {
+            case 0:
+                maxResources = 8;
+                break;
+            case 1:
+                maxResources = 10;
+                break;
+            case 2:
+                maxResources = 6;
+                break;
+            case 3:
+                maxResources = 4;
+                break;
+            default:
+                Debug.LogWarning("Season index out of range");
+                break;
+        }
+    }
+
 
     public void ObtainResources()
     {
         itemObtain.text = "You obtained :\n";
 
+        MaxResourcesNumber();
         System.Random random = new System.Random();
-        int nbResources = random.Next(10);
+        int nbResources = random.Next(maxResources);
         for (int i = 0; i < nbResources; i++)
         {
             int rarity = random.Next(100);

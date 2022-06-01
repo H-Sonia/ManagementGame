@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MapManagerScript : MonoBehaviour
 {
@@ -106,5 +107,10 @@ public class MapManagerScript : MonoBehaviour
             BGID = 4;
         if (season == 3)
             BGID = 6;
+    }
+
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }
