@@ -1379,8 +1379,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MapMusic: {fileID: 8300000, guid: 6766d904cd375df4981e6e0e6de9f628, type: 3}
   DormMusic: {fileID: 8300000, guid: a2fbba37e0df27e4d9881e53de73e527, type: 3}
-  KitchenMusic: {fileID: 8300000, guid: 2f26275dd8d8bb1428237ce23f5985b7, type: 3}
+  KitchenMusic: {fileID: 8300000, guid: 9ab2a21fb8f0e8d46a2b916524e85471, type: 3}
+  ArenaMusic: {fileID: 8300000, guid: 2f26275dd8d8bb1428237ce23f5985b7, type: 3}
   audioSource: {fileID: 195892010}
+  dorm: {fileID: 0}
+  boxing: {fileID: 0}
+  kitchen: {fileID: 0}
 --- !u!1 &210725854
 GameObject:
   m_ObjectHideFlags: 0
