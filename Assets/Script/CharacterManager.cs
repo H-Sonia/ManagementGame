@@ -51,9 +51,7 @@ public class CharacterManager : MonoBehaviour
             UpdateCharactersState(ref sickPeolple);
             UpdateCharactersPresent(ref nbOfPeopleDisappearing, ref friendsWhoDisappeared);
             infos.text = nbOfPeopleDisappearing + friendsWhoDisappeared + sickPeolple;
-            Debug.LogWarning("before update ui :" + infos.text);
             ui.UpdateMainUi("", true);
-            Debug.LogWarning("after update ui : " + infos.text);
         }
     }
 

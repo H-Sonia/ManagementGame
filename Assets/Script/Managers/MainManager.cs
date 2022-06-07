@@ -26,7 +26,7 @@ public class MainManager : MonoBehaviour
     //0 = spring 1 = Summer 2 = Autumn 3 = Winter
     public int season = 0;
 
-    bool isDay = true;
+    public bool isDay = true;
 
     //timer for forced progression in seconds
     float Timer = 10.0f;

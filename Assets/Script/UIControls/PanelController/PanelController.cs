@@ -25,7 +25,6 @@ public class PanelController : MonoBehaviour
     public void Quit()
     {
         ResourcesPanel.SetActive(false);
-        Debug.LogWarning(characterMessage);
         MainUI.UpdateMainUi(characterMessage, false);
         characterMessage = "";
     }

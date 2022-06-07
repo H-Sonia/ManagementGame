@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class GameAudio : MonoBehaviour
 {
-    public AudioClip MapMusic;
-    public AudioClip DormMusic;
-    public AudioClip KitchenMusic;
-    public AudioClip ArenaMusic;
+    public AudioClip KitchenAmbiance;
+    public AudioClip ArenaAmbiance;
+    public AudioClip NightMusic;
+    public AudioClip SpringDayAmbiance;
+    public AudioClip WinterDayAmbiance;
+    public AudioClip SpringNightAmbiance;
+    public AudioClip WinterNightAmbiance;
     public AudioSource audioSource;
     // 0 = map, 1 = dorm, 2 = kitchen, 3 = arena
     int room;
@@ -20,9 +23,6 @@ public class GameAudio : MonoBehaviour
         dorm = GameObject.Find("Dorm");
         boxing = GameObject.Find("Boxing");
         kitchen = GameObject.Find("Kitchen");
-
-        audioSource.clip = MapMusic;
-        audioSource.Play();
 
     }
 
@@ -67,19 +67,19 @@ public class GameAudio : MonoBehaviour
         switch(whichRoom)
         {
             case 0:
-                audioSource.clip = DormMusic;
+                DayNightAmbiance();
                 audioSource.Play();
                 break;
             case 1:
-                audioSource.clip = MapMusic;
+                DayNightAmbiance();
                 audioSource.Play();
                 break;
             case 2:
-                audioSource.clip = KitchenMusic;
+                audioSource.clip = KitchenAmbiance;
                 audioSource.Play();
                 break;
             case 3:
-                audioSource.clip = ArenaMusic;
+                audioSource.clip = ArenaAmbiance;
                 audioSource.Play();
                 break;
             default:
@@ -88,25 +88,31 @@ public class GameAudio : MonoBehaviour
         }
     }
 
-
-
-
-    public void PlayDormMusic()
+    public void DayNightAmbiance()
     {
-        audioSource.clip = DormMusic;
-        audioSource.Play();
-    }
+        if(MainManager.instance.isDay)
+        {
+            if(MainManager.instance.season == 1 || MainManager.instance.season == 0)
+            {
+                audioSource.clip = SpringDayAmbiance;
+            }
+            else
+            {
+                audioSource.clip = WinterDayAmbiance;
+            }
+        }
+        else
+        {
+            if (MainManager.instance.season == 1 || MainManager.instance.season == 0)
+            {
+                audioSource.clip = SpringNightAmbiance;
+            }
+            else
+            {
+                audioSource.clip = WinterDayAmbiance;
+            }
 
-    public void PlayMapMusic()
-    {
-        audioSource.clip = MapMusic;
-        audioSource.Play();
-    }
-
-    public void PlayKitchenMusic()
-    {
-        audioSource.clip = KitchenMusic;
-        audioSource.Play();
+        }
     }
 
 }
