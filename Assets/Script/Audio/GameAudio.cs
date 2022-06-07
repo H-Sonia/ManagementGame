@@ -111,7 +111,6 @@ public class GameAudio : MonoBehaviour
             {
                 audioSource.clip = WinterDayAmbiance;
             }
-
         }
     }
 
