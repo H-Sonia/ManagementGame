@@ -36,7 +36,6 @@ public class KitchenScript : MonoBehaviour
         }
     }
 
-
     public void ObtainResources()
     {
         itemObtain.text = "You obtained :\n";

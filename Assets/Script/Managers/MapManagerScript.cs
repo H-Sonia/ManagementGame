@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class MapManagerScript : MonoBehaviour
 {
 
     [SerializeField]
-    GameObject dorm, boxing, kitchen;
+    GameObject dorm, boxing, kitchen, dormSleep;
     [SerializeField]
     Button dButton, bButton, kButton;
+
+
 
     [SerializeField]
     Image currImage;
@@ -19,15 +22,17 @@ public class MapManagerScript : MonoBehaviour
     Sprite[] bgImages;
     int BGID = 0;
 
-    bool isDay;
+    bool isDay = true;
     public bool boxingOpen = false;
 
     private void Start()
     {
         currImage.sprite = bgImages[BGID];
         dorm = GameObject.Find("Dorm");
+        dormSleep = dorm.transform.GetChild(0).Find("TimeButton").gameObject;
         boxing = GameObject.Find("Boxing");
         kitchen = GameObject.Find("Kitchen");
+        StartRoomState();
     }
 
     //Change room, includes checks to prevent night/daytime access to certain rooms
@@ -44,7 +49,10 @@ public class MapManagerScript : MonoBehaviour
                 return;
             case (1):
                 if (!isDay)
+                {
                     g = dorm;
+                    dormSleep.SetActive(true);
+                }
                 else
                     return;
                 break;
@@ -64,36 +72,55 @@ public class MapManagerScript : MonoBehaviour
         }
         g.SetActive(!g.activeSelf);
         gameObject.SetActive(!gameObject.activeSelf);
+
+    }
+    public void StartRoomState()
+    {
+        dorm.SetActive(false);
+        boxing.SetActive(false);
+        kitchen.SetActive(false);
+        gameObject.SetActive(true);
     }
 
-    public void ChangeTime(bool isDayt)
+    public void ChangeTime(bool firstStart = false)
     {
-        isDay = isDayt;
-        //Switch to nighttime
-        if (isDayt)
+        isDay = MainManager.instance.isDay;
+        //Switch to daytime
+        if (isDay)
         {
             //Wakeup in dorm
             ChangeRoomState(1);
+            dormSleep.SetActive(false);
             dButton.gameObject.SetActive(false);
             kButton.gameObject.SetActive(true);
-            if(boxingOpen)
-                bButton.gameObject.SetActive(true);
 
-            BGID -= 1;
-            ChangeRoomState(0);
+            if (boxingOpen)
+            {
+                bButton.gameObject.SetActive(true);
+            }
+
+            BGID = MainManager.instance.season * 2;
         }
-        //Switch to daytime
+        //Switch to nighttime
         else
         {
+            dormSleep.SetActive(true);
             dButton.gameObject.SetActive(true);
             kButton.gameObject.SetActive(false);
             bButton.gameObject.SetActive(false);
 
             if (dorm.activeInHierarchy)
                 ChangeRoomState(0);
-            BGID += 1;
+            BGID = MainManager.instance.season * 2 + 1;
         }
 
+        if(firstStart)
+        {
+            ChangeRoomState(0);
+            dButton.gameObject.SetActive(false);
+            kButton.gameObject.SetActive(true);
+            bButton.gameObject.SetActive(false);
+        }
         currImage.sprite = bgImages[BGID];
     }
     //Change background on season, add values for events here too

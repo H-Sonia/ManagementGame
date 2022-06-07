@@ -91,6 +91,7 @@ public class UIDisplay : MonoBehaviour
 
         for (int i = 0; i < names.Length; i++)
         {
+            Debug.Log(CharacterManager.instance.charactersLists.CharactersInDorm.Count);
             Character character = CharacterManager.instance.charactersLists.CharactersInDorm[i];
 
             

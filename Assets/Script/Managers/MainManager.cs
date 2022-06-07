@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class MainManager : MonoBehaviour
 {
@@ -17,11 +18,11 @@ public class MainManager : MonoBehaviour
     private BoxingManagerScript bManager;
     [SerializeField]
     private KitchenScript kManager;
-
-    /* UNCOMMENT WHEN SOUND IN THIS BUILD
     [SerializeField]
-    private SoundManager soundManager;
-    */
+    private CharacterManager cManager;
+
+    [SerializeField]
+    TMP_Text dayCount, dayNight;
 
     //0 = spring 1 = Summer 2 = Autumn 3 = Winter
     public int season = 0;
@@ -37,7 +38,6 @@ public class MainManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         if (instance != null)
         {
             if (instance != null)
@@ -56,7 +56,7 @@ public class MainManager : MonoBehaviour
         if (bManager == null)
             bManager = GameObject.Find("Boxing").GetComponent<BoxingManagerScript>();
         if (kManager == null)
-            kManager = GameObject.Find("Kitchen Manager").GetComponent<KitchenScript>();
+            kManager = GameObject.Find("KitchenManager").GetComponent<KitchenScript>();
 
         MainStart();
     }
@@ -65,14 +65,21 @@ public class MainManager : MonoBehaviour
     {
         GameObject.Find("EventSystem").GetComponent<UIDisplay>().Setup();
         GameObject.Find("EventSystem").GetComponent<PanelController>().Setup();
+        Timer = 10.0f;
+        season = 0;
+        isDay = true;
+        daycount = 1;
         MainCheck();
     }
+
     int mainCheck = 0;
     public void MainCheck()
     {
         mainCheck++;
-        if(mainCheck > 2)
-            mManager.ChangeRoomState(0);
+        if (mainCheck > 2)
+        {
+            mManager.ChangeTime(true);
+        }
     }
 
     // Update is called once per frame
@@ -87,8 +94,7 @@ public class MainManager : MonoBehaviour
         //Day timer
         if(!paused)
             Timer -= Time.deltaTime;
-
-        if (Timer <= 0)
+       else if (Timer <= 0)
             ChangeTime();
     }
 
@@ -96,10 +102,20 @@ public class MainManager : MonoBehaviour
     public void ChangeTime()
     {
         isDay = !isDay;
+
         if (isDay)
+        {
+            dayNight.text = "Day";
+            dayCount.text = daycount.ToString();
             ChangeDay();
+        }
+        if(!isDay)
+        {
+            dayNight.text = "Night";
+        }
+
         Timer = 60.0f;
-        mManager.ChangeTime(isDay);
+        mManager.ChangeTime();
         Event();
     }
 
@@ -137,7 +153,7 @@ public class MainManager : MonoBehaviour
     //for events on day/season change
     void Event()
     {
-        if (daycount % 1 == 0)
+        if (daycount % 3 == 0)
             mManager.boxingOpen = true;
         else
             mManager.boxingOpen = false;
