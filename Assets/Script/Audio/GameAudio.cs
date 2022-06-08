@@ -15,6 +15,9 @@ public class GameAudio : MonoBehaviour
     public AudioClip SpringNightAmbiance;
     public AudioClip WinterNightAmbiance;
     public AudioSource audioSource;
+
+    public bool playMorning;
+
     // 0 = map, 1 = dorm, 2 = kitchen, 3 = arena
     int room;
 
@@ -80,27 +83,30 @@ public class GameAudio : MonoBehaviour
 
     public void ChangeMusic(int whichRoom)
     {
-        switch(whichRoom)
+        if (!playMorning)
         {
-            case 0:
-                DayNightAmbiance();
-                audioSource.Play();
-                break;
-            case 1:
-                DayNightAmbiance();
-                audioSource.Play();
-                break;
-            case 2:
-                audioSource.clip = KitchenAmbiance;
-                audioSource.Play();
-                break;
-            case 3:
-                audioSource.clip = ArenaAmbiance;
-                audioSource.Play();
-                break;
-            default:
-                Debug.LogWarning("Room index out of range");
-                break;
+            switch (whichRoom)
+            {
+                case 0:
+                    DayNightAmbiance();
+                    audioSource.Play();
+                    break;
+                case 1:
+                    DayNightAmbiance();
+                    audioSource.Play();
+                    break;
+                case 2:
+                    audioSource.clip = KitchenAmbiance;
+                    audioSource.Play();
+                    break;
+                case 3:
+                    audioSource.clip = ArenaAmbiance;
+                    audioSource.Play();
+                    break;
+                default:
+                    Debug.LogWarning("Room index out of range");
+                    break;
+            }
         }
     }
 
@@ -136,7 +142,7 @@ public class GameAudio : MonoBehaviour
         int index = random.Next(MorningMusic.Length);
         audioSource.clip = MorningMusic[index];
         audioSource.Play();
-
+        playMorning = true;
     }
 
 }

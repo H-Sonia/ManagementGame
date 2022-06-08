@@ -24,13 +24,17 @@ public class MainManager : MonoBehaviour
     [SerializeField]
     TMP_Text dayCount, dayNight;
 
+    [SerializeField]
+    private GameObject[] morningCovers;
+    [SerializeField]
+    private GameObject[] hideOnChange;
     //0 = spring 1 = Summer 2 = Autumn 3 = Winter
     public int season = 0;
 
     public bool isDay = true;
 
     //timer for forced progression in seconds
-    float Timer = 10.0f;
+    float Timer = 10.0f, morningTimer = 20.0f;
     bool paused = false;
 
     int daycount = 1;
@@ -115,8 +119,9 @@ public class MainManager : MonoBehaviour
         }
 
         Timer = 60.0f;
-        mManager.ChangeTime();
         Event();
+        mManager.ChangeTime();
+
     }
 
     //NEEDS CHECKING FOR ACCURACY WHEN PROPER SPRITES AVAILABLE
@@ -136,6 +141,8 @@ public class MainManager : MonoBehaviour
         kManager.DayFunction();
         daycount++;
         CharacterManager.instance.SaveToJson();
+        StartCoroutine(MorningFunction());
+        paused = true;
     }
 
     //SeasonChange
@@ -160,5 +167,29 @@ public class MainManager : MonoBehaviour
     public void Pause(bool ToPause)
     {
         paused = ToPause;
+    }
+
+    //Function to stop buttons being pressed on mornings
+    IEnumerator MorningFunction()
+    {
+        //Play music
+        GameAudio.instance.PlayDayMusic();
+        //set appropriate objects to be uninteractable
+        foreach (GameObject g in morningCovers)
+            g.SetActive(true);
+        foreach (GameObject g in hideOnChange)
+            g.SetActive(false);
+        //Wait for 20S CHANGE VALUE IF NEEDED FOR TESTING
+        yield return new WaitForSeconds(1.0f);
+        //reactivate appropriate objects
+        foreach (GameObject g in morningCovers)
+            g.SetActive(false);
+        foreach (GameObject g in hideOnChange)
+            g.SetActive(true);
+        //allows music source to change
+        GameAudio.instance.playMorning = false;
+        GameAudio.instance.ChangeMusic(0);
+        //Start countdown
+        paused = false;
     }
 }

@@ -13,8 +13,6 @@ public class MapManagerScript : MonoBehaviour
     [SerializeField]
     Button dButton, bButton, kButton;
 
-
-
     [SerializeField]
     Image currImage;
     //8 images? 2 per season
@@ -57,8 +55,14 @@ public class MapManagerScript : MonoBehaviour
                     return;
                 break;
             case (2):
-                if (isDay && boxingOpen)
-                    g = boxing;
+                if (isDay)
+                {
+                    if(boxingOpen)
+                    {
+                        Debug.Log("boxing open");
+                        g = boxing;
+                    }
+                }
                 else
                     return;
                 break;
@@ -92,6 +96,7 @@ public class MapManagerScript : MonoBehaviour
             ChangeRoomState(1);
             dormSleep.SetActive(false);
             dButton.gameObject.SetActive(false);
+            bButton.gameObject.SetActive(false);
             kButton.gameObject.SetActive(true);
 
             if (boxingOpen)
