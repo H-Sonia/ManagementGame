@@ -42,10 +42,7 @@ public class KitchenScript : MonoBehaviour
 
     public void ObtainResources()
     {
-        itemObtain.text = ifNoResources;
-        string itemText = "";
-        //itemObtain.text += "You obtained :\n";
-
+        List<string> resourcesObtained = new List<string>();
         MaxResourcesNumber();
         System.Random random = new System.Random();
         int nbResources = random.Next(maxResources);
@@ -56,8 +53,11 @@ public class KitchenScript : MonoBehaviour
             {
                 int foodIndex = random.Next(ResourcesDataBase.instance.veryRareResources.Length);
                 Inventory.instance.content.Add(ResourcesDataBase.instance.veryRareResources[foodIndex]);
-                itemObtain.text += " - "+ ResourcesDataBase.instance.veryRareResources[foodIndex].itemName+"\n";
-                itemText += ResourcesDataBase.instance.veryRareResources[foodIndex].itemName + ", ";
+                string itemName = ResourcesDataBase.instance.veryRareResources[foodIndex].itemName;
+                if(!resourcesObtained.Contains(itemName))
+                {
+                    resourcesObtained.Add(itemName);
+                }
             }
             else
             {
@@ -65,17 +65,22 @@ public class KitchenScript : MonoBehaviour
                 {
                     int foodIndex = random.Next(ResourcesDataBase.instance.rareResources.Length);
                     Inventory.instance.content.Add(ResourcesDataBase.instance.rareResources[foodIndex]);
-                    itemObtain.text += " - " + ResourcesDataBase.instance.rareResources[foodIndex].itemName + "\n";
-                    itemText += ResourcesDataBase.instance.rareResources[foodIndex].itemName + ", ";
+                    string itemName = ResourcesDataBase.instance.rareResources[foodIndex].itemName;
+                    if(!resourcesObtained.Contains(itemName))
+                    {
+                        resourcesObtained.Add(itemName);
+                    }
                 }
                 else
                 {
                     int foodIndex = random.Next(ResourcesDataBase.instance.commonResources.Length);
                     Inventory.instance.content.Add(ResourcesDataBase.instance.commonResources[foodIndex]);
-                    itemObtain.text += " - " + ResourcesDataBase.instance.commonResources[foodIndex].itemName + "\n";
-                    itemText += ResourcesDataBase.instance.commonResources[foodIndex].itemName + ", ";
+                    string itemName = ResourcesDataBase.instance.commonResources[foodIndex].itemName;
+                    if(!resourcesObtained.Contains(itemName))
+                    {
+                        resourcesObtained.Add(itemName);
+                    }
                 }
-                itemObtain.text = ifResources + itemText +ifResources2+ "\n";
             }
             
             
@@ -99,8 +104,6 @@ public class KitchenScript : MonoBehaviour
 
         ResultPanel.SetActive(true);
         CookButton.interactable = false;
-        MapManagerScript.instance.ChangeRoomState(0);
-        MainManager.instance.ChangeTime();
     }
 
     bool IsSomeoneSick()

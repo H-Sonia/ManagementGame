@@ -23,11 +23,8 @@ public class MapManagerScript : MonoBehaviour
     bool isDay = true;
     public bool boxingOpen = false;
 
-    public static MapManagerScript instance;
-
     private void Start()
     {
-        instance = this;
         currImage.sprite = bgImages[BGID];
         dorm = GameObject.Find("Dorm");
         dormSleep = dorm.transform.GetChild(0).Find("TimeButton").gameObject;
