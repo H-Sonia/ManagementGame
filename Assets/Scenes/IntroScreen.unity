@@ -796,38 +796,53 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textField: {fileID: 1551956729}
   textToDisplay:
-  - 'Text 1
-
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-    veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-    dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-    sunt in culpa qui officia deserunt mollit anim id est laborum."'
-  - 'Text 2
-
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-    veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-    dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-    sunt in culpa qui officia deserunt mollit anim id est laborum."'
-  - 'Text 3
-
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-    veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-    dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-    sunt in culpa qui officia deserunt mollit anim id est laborum."'
-  - 'Text 4
-
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-    veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-    dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-    sunt in culpa qui officia deserunt mollit anim id est laborum."'
+  - 'I arrived at the camp late spring in 1943. I arrived with my family: my father,
+    my mother, my two sisters, my brother and his wife. We were travelling for six
+    days from Thessalonica by train, in wagons made for animals. The fresh air was
+    bitter cold, but we welcomed it after being in this tight space with no windows
+    for so long. We were thinking that our troubles were over. We were promised that
+    the place where they were transferring us to would be our new home; secluded
+    and ghettoed but at least we would be able to set up a living and be as cofortable
+    as we could get. We had carried all our belongings with us, precious stones,
+    gold, money. We wanted to make sure we would have the means to buy a new life,
+    despite the hardships. We did not know that the only thing awaiting most of us
+    in the Lager was death.'
+  - "The most perceptive of us realised soon enough. We were immediately separated
+    from our families: strong men on one side, strong women on the other, and the
+    sick, the old, and the very young nowhere in between. We would later find out
+    what this meant. When you were not useful to the Lager, your existence was made
+    obsolete. For now, we were living with the agony, and the hope, of the unknown.
+    We could not have prepared ourselves for the Lager even if we knew. The Lager
+    is not something you conceive. It exists beyond logic and fiction. The Lager
+    is only something you live. It is the contradiction of the death camp. The absurdity
+    of experiencing death while living. Not someone else\u2019s death, but your own.
+    For each one of us was dead from the moment we stepped foot on this grey wasteland
+    and remained dead throughout our encampment. "
+  - 'My boxing skills were noticed soon enough by the Nazi officers. They started
+    treating me like a spectacle. This gave me an added value to their system of
+    priorities. I was still nothing more than an object, but I had gotten promoted
+    to an aesthetic object from a mere heuristic one. There were some others like
+    me. Those who could play an instrument were part of the camp orchestra. Those
+    who could sing and dance performed every once in a while for the Germans in their
+    impromptu cabaret. I fought for them. I gave exhibition boxing matches against
+    other inmates. The Germans better real money in the fights and because I was
+    good, I became their favourite. They gave me work at the kitchens. I was protected
+    from the cold and the back-breaking work in the factory or outside in the fields.
+    I was properly fed as I had to if I wanted to continue to be able to fight and
+    win. But every day I also tried to salvage as many resources as possible, bread,
+    soup, medicine, very rarely a spoon or a pair of shoes, and distribute them to
+    my fellow prisoners. '
+  - 'I knew that my actions had no absolute effect. The extermination taking place
+    in the Lager was methodically and carefully planned by a whole regime. A single
+    person could do nothing against that. My intention was only to help, even for
+    a moment, to alleviate some of the suffering we were all going through; some
+    more than others. Compassion, that was my only drive. In the Lager, there is
+    not much room left for other feelings besides the instinct to survive. Only later,
+    retrospectively, did I realise what else the camp meant for me. Guilt for all
+    the more I could have done but did not manage to do. Shame for surviving when
+    so many others did not. Most importantly, awe for how inconsequential my actions
+    were in the large scheme of things. I was simply a molecule drifting in the great
+    sea of entropy. Yet I had to fight. And fight I did. '
 --- !u!1 &2006000227
 GameObject:
   m_ObjectHideFlags: 0

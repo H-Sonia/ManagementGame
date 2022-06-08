@@ -237,7 +237,15 @@ public class CharacterManager : MonoBehaviour
                 nbOfPeopleDisappearing = "Nobody disappeared today\n";
                 break;
             case 1:
-                nbOfPeopleDisappearing = "Someone disappeared today\n";
+                nbOfPeopleDisappearing = "The morning comes. " +
+                    "Some people do not survive the night. The camp took them, too. " +
+                    "It might have been illness; it might have been hunger. " +
+                    "We all know the truth, as the bodies are carried outside. " +
+                    "They are one more sacrifice to the voracious beast that has shallowed us whole. " +
+                    "When will it be my turn? We all think it but do not exclaim it. " +
+                    "Maybe we don’t even think it." +
+                    " Maybe we just remember thinking it or think it when we remember. \n";
+                    //"Someone disappeared today\n";
                 break;
             default:
                 nbOfPeopleDisappearing = howManyDisappear + " people disappeared today\n";

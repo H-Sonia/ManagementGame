@@ -38,7 +38,9 @@ public class KitchenScript : MonoBehaviour
 
     public void ObtainResources()
     {
-        itemObtain.text = "You obtained :\n";
+        itemObtain.text = "I salvaged nothing.";
+        string itemText = "";
+        //itemObtain.text += "You obtained :\n";
 
         MaxResourcesNumber();
         System.Random random = new System.Random();
@@ -51,6 +53,7 @@ public class KitchenScript : MonoBehaviour
                 int foodIndex = random.Next(ResourcesDataBase.instance.veryRareResources.Length);
                 Inventory.instance.content.Add(ResourcesDataBase.instance.veryRareResources[foodIndex]);
                 itemObtain.text += " - "+ ResourcesDataBase.instance.veryRareResources[foodIndex].itemName+"\n";
+                itemText += ResourcesDataBase.instance.veryRareResources[foodIndex].itemName + ", ";
             }
             else
             {
@@ -59,13 +62,18 @@ public class KitchenScript : MonoBehaviour
                     int foodIndex = random.Next(ResourcesDataBase.instance.rareResources.Length);
                     Inventory.instance.content.Add(ResourcesDataBase.instance.rareResources[foodIndex]);
                     itemObtain.text += " - " + ResourcesDataBase.instance.rareResources[foodIndex].itemName + "\n";
+                    itemText += ResourcesDataBase.instance.rareResources[foodIndex].itemName + ", ";
                 }
                 else
                 {
                     int foodIndex = random.Next(ResourcesDataBase.instance.commonResources.Length);
                     Inventory.instance.content.Add(ResourcesDataBase.instance.commonResources[foodIndex]);
                     itemObtain.text += " - " + ResourcesDataBase.instance.commonResources[foodIndex].itemName + "\n";
+                    itemText += ResourcesDataBase.instance.commonResources[foodIndex].itemName + ", ";
                 }
+                itemObtain.text = "I manage to salvage some " + itemText +".It is too little.\n How can I be made responsible to whom to give them to? " +
+"How can I bear the responsibility of who lives and who dies?\n I don’t, I know that.\n The Lager is beyond any one man’s means." +
+"This is almost as terrible as the consolation this thought brings me when I return to the Block and start giving away the few extra provisions I collected. \n";
             }
             
         }
@@ -82,6 +90,8 @@ public class KitchenScript : MonoBehaviour
         }
         ResultPanel.SetActive(true);
         CookButton.interactable = false;
+        MapManagerScript.instance.ChangeRoomState(0);
+        MainManager.instance.ChangeTime();
     }
 
     bool IsSomeoneSick()

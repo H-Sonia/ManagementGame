@@ -45,5 +45,7 @@ public class BoxingManagerScript : MonoBehaviour
             Debug.Log("LOSE");
         }
         MainManager.instance.Pause(true);
+        MapManagerScript.instance.ChangeRoomState(0);
+        MainManager.instance.ChangeTime();
     }
 }
