@@ -180,7 +180,7 @@ public class MainManager : MonoBehaviour
         foreach (GameObject g in hideOnChange)
             g.SetActive(false);
         //Wait for 20S CHANGE VALUE IF NEEDED FOR TESTING
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(20.0f);
         //reactivate appropriate objects
         foreach (GameObject g in morningCovers)
             g.SetActive(false);
