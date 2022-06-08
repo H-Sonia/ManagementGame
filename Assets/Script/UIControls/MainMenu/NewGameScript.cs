@@ -15,7 +15,7 @@ public class NewGameScript : MonoBehaviour
             System.IO.File.Delete(filePath);
         }
 
-        SceneManager.LoadScene("UiTest");
+        SceneManager.LoadScene("IntroScreen");
     }
 
     public void NoButton()

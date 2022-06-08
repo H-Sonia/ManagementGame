@@ -19,16 +19,16 @@ public class KitchenScript : MonoBehaviour
         switch (MainManager.instance.season)
         {
             case 0:
-                maxResources = 8;
+                maxResources = 3;
                 break;
             case 1:
-                maxResources = 10;
+                maxResources = 3;
                 break;
             case 2:
-                maxResources = 6;
+                maxResources = 2;
                 break;
             case 3:
-                maxResources = 4;
+                maxResources = 2;
                 break;
             default:
                 Debug.LogWarning("Season index out of range");
