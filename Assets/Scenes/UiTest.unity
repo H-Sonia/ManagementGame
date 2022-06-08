@@ -1377,13 +1377,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a731a30809de2c4ab16e63c14526543, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  KitchenAmbiance: {fileID: 0}
-  ArenaAmbiance: {fileID: 0}
-  NightMusic: {fileID: 0}
-  SpringDayAmbiance: {fileID: 0}
-  WinterDayAmbiance: {fileID: 0}
-  SpringNightAmbiance: {fileID: 0}
-  WinterNightAmbiance: {fileID: 0}
+  KitchenAmbiance: {fileID: 8300000, guid: 5dc93f7a2d388f249a52a1e262c22868, type: 3}
+  ArenaAmbiance: {fileID: 8300000, guid: d0694fafcc74dc741ac1cdf38d66d4ee, type: 3}
+  MorningMusic:
+  - {fileID: 8300000, guid: f2575cc531134454bbfd87a1d9bd05c5, type: 3}
+  - {fileID: 8300000, guid: aa2016a2f4883694885ec5ba9f69f686, type: 3}
+  - {fileID: 8300000, guid: 4fc4293399c6c1243a356faf780467cb, type: 3}
+  SpringDayAmbiance: {fileID: 8300000, guid: 025036556ead8a1478f1889f5987dad6, type: 3}
+  WinterDayAmbiance: {fileID: 8300000, guid: a2fbba37e0df27e4d9881e53de73e527, type: 3}
+  SpringNightAmbiance: {fileID: 8300000, guid: 521bbbaf53ed53147b469a6d4d14fbc9, type: 3}
+  WinterNightAmbiance: {fileID: 8300000, guid: ee3d407b4128d8c48a73d641227e4abd, type: 3}
   audioSource: {fileID: 195892010}
   dorm: {fileID: 0}
   boxing: {fileID: 0}
@@ -16351,12 +16354,28 @@ PrefabInstance:
       value: 198.4
       objectReference: {fileID: 0}
     - target: {fileID: 5956432777642968399, guid: 8d0f280e52f191b46806763009f25e4e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5956432777642968399, guid: 8d0f280e52f191b46806763009f25e4e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1923695318023593525}
     - target: {fileID: 5956432777642968399, guid: 8d0f280e52f191b46806763009f25e4e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5956432777642968399, guid: 8d0f280e52f191b46806763009f25e4e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ChangeRoomState
+      objectReference: {fileID: 0}
+    - target: {fileID: 5956432777642968399, guid: 8d0f280e52f191b46806763009f25e4e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SaveData
+      objectReference: {fileID: 0}
+    - target: {fileID: 5956432777642968399, guid: 8d0f280e52f191b46806763009f25e4e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: LoadAndSave, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d0f280e52f191b46806763009f25e4e, type: 3}

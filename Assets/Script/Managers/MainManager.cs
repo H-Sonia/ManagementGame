@@ -126,10 +126,8 @@ public class MainManager : MonoBehaviour
         Inventory.instance.DayFunction();
         //cue sounds here
         //
-        //
-
         //Change season every 7 days
-        if(daycount %7 == 0)
+        if (daycount %7 == 0)
         {
             ChangeSeason();
         }

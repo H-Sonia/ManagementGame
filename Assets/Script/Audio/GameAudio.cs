@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GameAudio : MonoBehaviour
 {
+    public static GameAudio instance;
+
     public AudioClip KitchenAmbiance;
     public AudioClip ArenaAmbiance;
-    public AudioClip NightMusic;
+    public AudioClip[] MorningMusic;
     public AudioClip SpringDayAmbiance;
     public AudioClip WinterDayAmbiance;
     public AudioClip SpringNightAmbiance;
@@ -20,9 +23,22 @@ public class GameAudio : MonoBehaviour
 
     void Start()
     {
+        if (instance != null)
+        {
+            if (instance != null)
+            {
+                Debug.LogWarning("There is more than one MainManager instance in this scene");
+                return;
+            }
+        }
+        instance = this;
+
+
         dorm = GameObject.Find("Dorm");
         boxing = GameObject.Find("Boxing");
         kitchen = GameObject.Find("Kitchen");
+
+        DayNightAmbiance();
 
     }
 
@@ -112,6 +128,15 @@ public class GameAudio : MonoBehaviour
                 audioSource.clip = WinterDayAmbiance;
             }
         }
+    }
+
+    public void PlayDayMusic()
+    {
+        System.Random random = new System.Random();
+        int index = random.Next(MorningMusic.Length);
+        audioSource.clip = MorningMusic[index];
+        audioSource.Play();
+
     }
 
 }
