@@ -1543,7 +1543,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 26}
+  m_AnchoredPosition: {x: 0, y: -17}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &230413976
@@ -4435,6 +4435,14 @@ MonoBehaviour:
   Kitchen: {fileID: 808317663}
   ResultPanel: {fileID: 725118684}
   itemObtain: {fileID: 230413976}
+  ifNoResources: I didn't managed to salvage anything today... I go back in the block
+    with a heavy heart.
+  ifResources: 'I managed to salvage some '
+  ifResources2: "They are too little. How can I be made responsible to whom to give
+    them to? How can I bear the responsibility of who lives and who dies? I don\u2019t,
+    I know that. The Lager is beyond any one man\u2019s means. This is almost as
+    terrible as the consolation this thought brings me when I return to the Block
+    and start giving away the few extra provisions I collected."
 --- !u!1 &541384466
 GameObject:
   m_ObjectHideFlags: 0
@@ -6686,6 +6694,12 @@ MonoBehaviour:
   netralPicture: {fileID: 21300000, guid: 0b690560a516eac449b77778fadaf43a, type: 3}
   infos: {fileID: 5956432776993315349}
   ui: {fileID: 433318628}
+  ifSomeoneDie: "The morning comes. Some people do not survive the night. The camp
+    took them, too. It might have been illness; it might have been hunger. We all
+    know the truth, as the bodies are carried outside. They are one more sacrifice
+    to the voracious beast that has shallowed us whole. When will it be my turn?
+    We all think it but do not exclaim it. Maybe we don\u2019t even think it. Maybe
+    we just remember thinking it or think it when we remember."
 --- !u!1 &722438175
 GameObject:
   m_ObjectHideFlags: 0

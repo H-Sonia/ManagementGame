@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+  public GameObject creditPanel;
   public GameObject settingPanel;
     public GameObject NewGamePanel;
   
@@ -25,4 +26,14 @@ public class MainMenu : MonoBehaviour
   {
       settingPanel.SetActive(true);
   }
+
+  public void openCreditPanel()
+  {
+    creditPanel.SetActive(true);
+  }
+  public void closeCreditPanel()
+  {
+    creditPanel.SetActive(false);
+  }
+
 }

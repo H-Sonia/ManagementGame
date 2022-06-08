@@ -11,6 +11,7 @@ public class CharacterManager : MonoBehaviour
     public Sprite netralPicture;
     public TMP_Text infos;
     public UIDisplay ui;
+    public string ifSomeoneDie;
 
     public static CharacterManager instance;
 
@@ -234,13 +235,10 @@ public class CharacterManager : MonoBehaviour
         switch (disappearingCounter)
         {
             case 0:
-                nbOfPeopleDisappearing = "Nobody disappeared today\n";
-                break;
-            case 1:
-                nbOfPeopleDisappearing = "Someone disappeared today\n";
+                nbOfPeopleDisappearing = "The morning comes and we have to get up for another day in this hell, but for how much time left ?";
                 break;
             default:
-                nbOfPeopleDisappearing = howManyDisappear + " people disappeared today\n";
+                nbOfPeopleDisappearing = ifSomeoneDie+"\n";
                 break;
         }
 

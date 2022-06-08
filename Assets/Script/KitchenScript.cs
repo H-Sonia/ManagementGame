@@ -11,6 +11,10 @@ public class KitchenScript : MonoBehaviour
     public GameObject Kitchen;
     public GameObject ResultPanel;
     public TMP_Text itemObtain;
+    public string ifNoResources = "I didn't managed to salvage anything today... I go back in the block with a heavy heart.";
+    public string ifResources = "I managed to salvage some ";
+    [TextArea]
+    public string ifResources2;
     int maxResources; 
 
 
@@ -38,8 +42,7 @@ public class KitchenScript : MonoBehaviour
 
     public void ObtainResources()
     {
-        itemObtain.text = "You obtained :\n";
-
+        List<string> resourcesObtained = new List<string>();
         MaxResourcesNumber();
         System.Random random = new System.Random();
         int nbResources = random.Next(maxResources);
@@ -50,7 +53,11 @@ public class KitchenScript : MonoBehaviour
             {
                 int foodIndex = random.Next(ResourcesDataBase.instance.veryRareResources.Length);
                 Inventory.instance.content.Add(ResourcesDataBase.instance.veryRareResources[foodIndex]);
-                itemObtain.text += " - "+ ResourcesDataBase.instance.veryRareResources[foodIndex].itemName+"\n";
+                string itemName = ResourcesDataBase.instance.veryRareResources[foodIndex].itemName;
+                if(!resourcesObtained.Contains(itemName))
+                {
+                    resourcesObtained.Add(itemName);
+                }
             }
             else
             {
@@ -58,15 +65,24 @@ public class KitchenScript : MonoBehaviour
                 {
                     int foodIndex = random.Next(ResourcesDataBase.instance.rareResources.Length);
                     Inventory.instance.content.Add(ResourcesDataBase.instance.rareResources[foodIndex]);
-                    itemObtain.text += " - " + ResourcesDataBase.instance.rareResources[foodIndex].itemName + "\n";
+                    string itemName = ResourcesDataBase.instance.rareResources[foodIndex].itemName;
+                    if(!resourcesObtained.Contains(itemName))
+                    {
+                        resourcesObtained.Add(itemName);
+                    }
                 }
                 else
                 {
                     int foodIndex = random.Next(ResourcesDataBase.instance.commonResources.Length);
                     Inventory.instance.content.Add(ResourcesDataBase.instance.commonResources[foodIndex]);
-                    itemObtain.text += " - " + ResourcesDataBase.instance.commonResources[foodIndex].itemName + "\n";
+                    string itemName = ResourcesDataBase.instance.commonResources[foodIndex].itemName;
+                    if(!resourcesObtained.Contains(itemName))
+                    {
+                        resourcesObtained.Add(itemName);
+                    }
                 }
             }
+            
             
         }
         if(IsSomeoneSick())
@@ -76,10 +92,16 @@ public class KitchenScript : MonoBehaviour
             {
                 
                 Inventory.instance.content.Add(ResourcesDataBase.instance.medicine);
-                itemObtain.text += " - Medicine Bottle\n";
+                string itemName =  " a Medicine bottle";
+                if(!resourcesObtained.Contains(itemName))
+                    {
+                        resourcesObtained.Add(itemName);
+                    }
             }
 
         }
+        DisplayMessage(nbResources, ref resourcesObtained);
+
         ResultPanel.SetActive(true);
         CookButton.interactable = false;
     }
@@ -97,6 +119,36 @@ public class KitchenScript : MonoBehaviour
         return false;
     }
 
+    public void DisplayMessage(int numberOfResources, ref List<string> listOfResources)
+    {
+        Debug.LogWarning("nb :"+numberOfResources);
+        switch(numberOfResources)
+        {
+            case 0:
+                itemObtain.text = ifNoResources;
+                break;
+            case 1:
+                itemObtain.text = ifResources+listOfResources[0]+". "+ifResources2;
+                break;
+            default:
+                string itemlist = ListReceived(ref listOfResources);
+                itemObtain.text = ifResources+itemlist+". "+ifResources2;
+                break;
+        }
+    }
+
+    public string ListReceived(ref List<string> listOfResources)
+    {
+        string itemlist = "";
+
+        for(int i=0; i < listOfResources.Count-1; i++ )
+        {
+            itemlist += listOfResources[i]+", ";
+        }
+        itemlist += "and " + listOfResources[listOfResources.Count-1];
+
+        return itemlist;
+    }
     public void QuitResultPanel()
     {
         ResultPanel.SetActive(false);
