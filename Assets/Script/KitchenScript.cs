@@ -81,6 +81,7 @@ public class KitchenScript : MonoBehaviour
                         resourcesObtained.Add(itemName);
                     }
                 }
+                itemObtain.text = ifResources + itemText +ifResources2+ "\n";
             }
             
             
