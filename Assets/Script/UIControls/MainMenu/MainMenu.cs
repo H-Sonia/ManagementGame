@@ -7,6 +7,7 @@ public class MainMenu : MonoBehaviour
 {
   public GameObject settingPanel;
     public GameObject NewGamePanel;
+    public GameObject creditPanel;
   
   public void LoadGame()
   {
@@ -25,4 +26,14 @@ public class MainMenu : MonoBehaviour
   {
       settingPanel.SetActive(true);
   }
+
+  public void openCreditPanel()
+  {
+      creditPanel.SetActive(true);
+  }
+  public void closeCreditPanel()
+  {
+      creditPanel.SetActive(false);
+  }
+
 }
