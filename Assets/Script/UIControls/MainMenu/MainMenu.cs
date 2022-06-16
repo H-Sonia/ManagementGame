@@ -27,13 +27,9 @@ public class MainMenu : MonoBehaviour
       settingPanel.SetActive(true);
   }
 
-  public void openCreditPanel()
+  public void LoadCredit()
   {
-      creditPanel.SetActive(true);
-  }
-  public void closeCreditPanel()
-  {
-      creditPanel.SetActive(false);
+      SceneManager.LoadScene("Credit");
   }
 
 }
