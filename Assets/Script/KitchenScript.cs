@@ -42,6 +42,7 @@ public class KitchenScript : MonoBehaviour
 
     public void ObtainResources()
     {
+        string itemName = "DEFAULT";
         List<string> resourcesObtained = new List<string>();
         MaxResourcesNumber();
         System.Random random = new System.Random();
@@ -53,7 +54,7 @@ public class KitchenScript : MonoBehaviour
             {
                 int foodIndex = random.Next(ResourcesDataBase.instance.veryRareResources.Length);
                 Inventory.instance.content.Add(ResourcesDataBase.instance.veryRareResources[foodIndex]);
-                string itemName = ResourcesDataBase.instance.veryRareResources[foodIndex].itemName;
+                itemName = ResourcesDataBase.instance.veryRareResources[foodIndex].itemName;
                 if(!resourcesObtained.Contains(itemName))
                 {
                     resourcesObtained.Add(itemName);
@@ -65,7 +66,7 @@ public class KitchenScript : MonoBehaviour
                 {
                     int foodIndex = random.Next(ResourcesDataBase.instance.rareResources.Length);
                     Inventory.instance.content.Add(ResourcesDataBase.instance.rareResources[foodIndex]);
-                    string itemName = ResourcesDataBase.instance.rareResources[foodIndex].itemName;
+                    itemName = ResourcesDataBase.instance.rareResources[foodIndex].itemName;
                     if(!resourcesObtained.Contains(itemName))
                     {
                         resourcesObtained.Add(itemName);
@@ -75,13 +76,13 @@ public class KitchenScript : MonoBehaviour
                 {
                     int foodIndex = random.Next(ResourcesDataBase.instance.commonResources.Length);
                     Inventory.instance.content.Add(ResourcesDataBase.instance.commonResources[foodIndex]);
-                    string itemName = ResourcesDataBase.instance.commonResources[foodIndex].itemName;
+                    itemName = ResourcesDataBase.instance.commonResources[foodIndex].itemName;
                     if(!resourcesObtained.Contains(itemName))
                     {
                         resourcesObtained.Add(itemName);
                     }
                 }
-                itemObtain.text = ifResources + itemText +ifResources2+ "\n";
+                itemObtain.text = ifResources + itemName + ifResources2+ "\n";
             }
             
             
@@ -93,7 +94,7 @@ public class KitchenScript : MonoBehaviour
             {
                 
                 Inventory.instance.content.Add(ResourcesDataBase.instance.medicine);
-                string itemName =  " a Medicine bottle";
+                itemName =  " a Medicine bottle";
                 if(!resourcesObtained.Contains(itemName))
                     {
                         resourcesObtained.Add(itemName);

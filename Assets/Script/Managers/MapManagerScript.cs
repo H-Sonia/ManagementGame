@@ -23,13 +23,21 @@ public class MapManagerScript : MonoBehaviour
     bool isDay = true;
     public bool boxingOpen = false;
 
+    public static MapManagerScript instance;
+
     private void Start()
     {
+        instance = this;
         currImage.sprite = bgImages[BGID];
-        dorm = GameObject.Find("Dorm");
+
+        if(dorm == null)
+            dorm = GameObject.Find("Dorm");
+
         dormSleep = dorm.transform.GetChild(0).Find("TimeButton").gameObject;
-        boxing = GameObject.Find("Boxing");
-        kitchen = GameObject.Find("Kitchen");
+        if(boxing == null)
+            boxing = GameObject.Find("Boxing");
+        if(kitchen == null)
+            kitchen = GameObject.Find("Kitchen");
         StartRoomState();
     }
 
@@ -93,7 +101,7 @@ public class MapManagerScript : MonoBehaviour
         if (isDay)
         {
             //Wakeup in dorm
-            ChangeRoomState(1);
+            ChangeRoomState(0);
             dormSleep.SetActive(false);
             dButton.gameObject.SetActive(false);
             bButton.gameObject.SetActive(false);
@@ -114,7 +122,7 @@ public class MapManagerScript : MonoBehaviour
             kButton.gameObject.SetActive(false);
             bButton.gameObject.SetActive(false);
 
-            if (dorm.activeInHierarchy)
+            if (!dorm.activeInHierarchy)
                 ChangeRoomState(0);
             BGID = MainManager.instance.season * 2 + 1;
         }

@@ -28,11 +28,8 @@ public class GameAudio : MonoBehaviour
     {
         if (instance != null)
         {
-            if (instance != null)
-            {
-                Debug.LogWarning("There is more than one MainManager instance in this scene");
-                return;
-            }
+            Debug.LogWarning("There is more than one MainManager instance in this scene");
+            return;
         }
         instance = this;
 
@@ -41,7 +38,7 @@ public class GameAudio : MonoBehaviour
         boxing = GameObject.Find("Boxing");
         kitchen = GameObject.Find("Kitchen");
 
-        DayNightAmbiance();
+        //DayNightAmbiance();
 
     }
 

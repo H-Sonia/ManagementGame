@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class MainManager : MonoBehaviour
 {
@@ -20,7 +21,8 @@ public class MainManager : MonoBehaviour
     private KitchenScript kManager;
     [SerializeField]
     private CharacterManager cManager;
-
+    [SerializeField]
+    private GameAudio aManager;
     [SerializeField]
     TMP_Text dayCount, dayNight;
 
@@ -42,15 +44,14 @@ public class MainManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (instance != null)
-        {
-            if (instance != null)
-            {
-                Debug.LogWarning("There is more than one MainManager instance in this scene");
-                return;
-            }
-        }
-        instance = this;
+        if(instance == null)
+            instance = this;
+        //if (instance != null)
+        //{
+        //        Debug.LogWarning("There is more than one MainManager instance in this scene");
+        //        return;
+        //}
+
 
         //in case something goes wrong and values are unassigned
         if (uiManager == null)
@@ -63,6 +64,11 @@ public class MainManager : MonoBehaviour
             kManager = GameObject.Find("KitchenManager").GetComponent<KitchenScript>();
 
         MainStart();
+    }
+
+    public static MainManager Instance()
+    {
+        return instance;
     }
 
     void MainStart()
@@ -105,6 +111,7 @@ public class MainManager : MonoBehaviour
     //DayToNight
     public void ChangeTime()
     {
+        StartCoroutine("TimeChangeFunction");
         isDay = !isDay;
 
         if (isDay)
@@ -180,7 +187,7 @@ public class MainManager : MonoBehaviour
         foreach (GameObject g in hideOnChange)
             g.SetActive(false);
         //Wait for 20S CHANGE VALUE IF NEEDED FOR TESTING
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(5.0f);
         //reactivate appropriate objects
         foreach (GameObject g in morningCovers)
             g.SetActive(false);
@@ -191,5 +198,25 @@ public class MainManager : MonoBehaviour
         GameAudio.instance.ChangeMusic(0);
         //Start countdown
         paused = false;
+    }
+
+    [SerializeField]
+    Transform TimeCover;
+    IEnumerator TimeChangeFunction()
+    {
+        TimeCover.gameObject.SetActive(true);
+        TimeCover.GetChild(0).GetComponent<Image>().color = Color.black;
+        TimeCover.GetChild(0).GetComponent<Image>().CrossFadeAlpha(0, 2f, false);
+        TimeCover.GetChild(1).GetComponent<TMP_Text>().CrossFadeAlpha(0, 2f, false);
+
+        string temp = "";
+        if (!isDay)
+            temp = "Day";
+        if (isDay)
+            temp = "Night";
+
+        TimeCover.GetChild(1).GetComponent<TMP_Text>().text = temp;
+        yield return new WaitForSeconds(2f);
+        TimeCover.gameObject.SetActive(false);
     }
 }

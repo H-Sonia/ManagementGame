@@ -15,7 +15,6 @@ public class CharacterManager : MonoBehaviour
 
     public static CharacterManager instance;
 
-
     private void Awake()
     {
         if (instance != null)
@@ -37,6 +36,7 @@ public class CharacterManager : MonoBehaviour
         {
             LoadFromJson();
         }
+
         ui.UpdateMainUi("", false);
     }
 
@@ -411,6 +411,7 @@ public class CharacterManager : MonoBehaviour
         string charactersListsData = System.IO.File.ReadAllText(filePath);
         charactersLists = JsonUtility.FromJson<CharacterDataLists>(charactersListsData);
         Debug.Log("Data loaded");
+        ui.UpdateMainUi("", false);
     }
 }
 

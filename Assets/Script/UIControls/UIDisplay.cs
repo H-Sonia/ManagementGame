@@ -80,20 +80,20 @@ public class UIDisplay : MonoBehaviour
         }
         else
         {
-            if(characterMessage != "")
+            if (characterMessage != "")
             {
                 infos.text = characterMessage;
-                
+
                 infoPanel.SetActive(true);
             }
-        }
-        
+        }   
 
         for (int i = 0; i < names.Length; i++)
         {
             Debug.Log(CharacterManager.instance.charactersLists.CharactersInDorm.Count);
             Character character = CharacterManager.instance.charactersLists.CharactersInDorm[i];
-
+            Debug.Log(CharacterManager.instance.charactersLists.CharactersInDorm[i]);
+            Debug.Log("TOTAL = " + names.Length);
             
             if (character.id == 0)
             {

@@ -24,7 +24,7 @@ public class Inventory : MonoBehaviour
     public void Start()
     {
         ClearInventory();
-        ui.UpdateMainUi("", false);
+        //ui.UpdateMainUi("", false);
     }
     public void DayFunction()
     {
