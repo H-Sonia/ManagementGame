@@ -21,7 +21,7 @@ public class MapManagerScript : MonoBehaviour
     int BGID = 0;
 
     bool isDay = true;
-    public bool boxingOpen = false;
+    public bool boxingOpen = true;
 
     public static MapManagerScript instance;
 
@@ -110,6 +110,7 @@ public class MapManagerScript : MonoBehaviour
             if (boxingOpen)
             {
                 bButton.gameObject.SetActive(true);
+                kButton.gameObject.SetActive(false);
             }
 
             BGID = MainManager.instance.season * 2;
@@ -131,8 +132,8 @@ public class MapManagerScript : MonoBehaviour
         {
             ChangeRoomState(0);
             dButton.gameObject.SetActive(false);
-            kButton.gameObject.SetActive(true);
-            bButton.gameObject.SetActive(false);
+            kButton.gameObject.SetActive(false);
+            bButton.gameObject.SetActive(true);
         }
         currImage.sprite = bgImages[BGID];
     }

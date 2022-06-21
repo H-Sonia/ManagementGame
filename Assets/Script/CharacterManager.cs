@@ -142,28 +142,31 @@ public class CharacterManager : MonoBehaviour
 
     public void ConsumeItem(int indexCharacter, int indexItem)
     {
-        switch (charactersLists.CharactersInDorm[indexCharacter].resourcesAttribuated[indexItem].type)
+        if (charactersLists.CharactersInDorm[indexCharacter].resourcesAttribuated.Count > 0)
         {
-            case "food":
-                charactersLists.CharactersInDorm[indexCharacter].hunger -= charactersLists.CharactersInDorm[indexCharacter].resourcesAttribuated[indexItem].nutritiveValue;
-                break;
-            case "clothe":
-                charactersLists.CharactersInDorm[indexCharacter].cold -= charactersLists.CharactersInDorm[indexCharacter].resourcesAttribuated[indexItem].heat;
-                if (charactersLists.CharactersInDorm[indexCharacter].efficiencyAtWork < 100)
-                {
-                    charactersLists.CharactersInDorm[indexCharacter].efficiencyAtWork += charactersLists.CharactersInDorm[indexCharacter].resourcesAttribuated[indexItem].efficiencyAtWork;
-                }
-                break;
-            case "medicine":
-                charactersLists.CharactersInDorm[indexCharacter].isSick = false;
-                if (charactersLists.CharactersInDorm[indexCharacter].health < 100)
-                {
-                    charactersLists.CharactersInDorm[indexCharacter].health += charactersLists.CharactersInDorm[indexCharacter].resourcesAttribuated[indexItem].health;
-                }
-                break;
-            default:
-                Debug.LogWarning("unknown type");
-                break;
+            switch (charactersLists.CharactersInDorm[indexCharacter].resourcesAttribuated[indexItem].type)
+            {
+                case "food":
+                    charactersLists.CharactersInDorm[indexCharacter].hunger -= charactersLists.CharactersInDorm[indexCharacter].resourcesAttribuated[indexItem].nutritiveValue;
+                    break;
+                case "clothe":
+                    charactersLists.CharactersInDorm[indexCharacter].cold -= charactersLists.CharactersInDorm[indexCharacter].resourcesAttribuated[indexItem].heat;
+                    if (charactersLists.CharactersInDorm[indexCharacter].efficiencyAtWork < 100)
+                    {
+                        charactersLists.CharactersInDorm[indexCharacter].efficiencyAtWork += charactersLists.CharactersInDorm[indexCharacter].resourcesAttribuated[indexItem].efficiencyAtWork;
+                    }
+                    break;
+                case "medicine":
+                    charactersLists.CharactersInDorm[indexCharacter].isSick = false;
+                    if (charactersLists.CharactersInDorm[indexCharacter].health < 100)
+                    {
+                        charactersLists.CharactersInDorm[indexCharacter].health += charactersLists.CharactersInDorm[indexCharacter].resourcesAttribuated[indexItem].health;
+                    }
+                    break;
+                default:
+                    Debug.LogWarning("unknown type");
+                    break;
+            }
         }
     }
 

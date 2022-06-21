@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class IDpanelControler : MonoBehaviour
 {
@@ -20,9 +18,10 @@ public class IDpanelControler : MonoBehaviour
         //THIS LINE CAUSES A CRASH IN EDITOR
         //SPRITE GIVES TYPE MISMATCH, UNKNOWN WHY
         //sprite isnt null but doesnt work
+
         try
         {
-            if (CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter].picture != null)
+           if (CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter].picture != null)
                 IDpicture.sprite = CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter].picture;
         }
         catch

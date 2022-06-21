@@ -30,9 +30,9 @@ public class MainManager : MonoBehaviour
     private GameObject[] morningCovers;
     [SerializeField]
     private GameObject[] hideOnChange;
-    //0 = spring 1 = Summer 2 = Autumn 3 = Winter
-    public int season = 0;
 
+    //0 = Summer 1 = Autumn 2 = Winter 3 = Spring
+    public int season = 0;
     public bool isDay = true;
 
     //timer for forced progression in seconds
@@ -131,25 +131,46 @@ public class MainManager : MonoBehaviour
 
     }
 
+    bool checkedInv = false;
+
+    public bool InventoryCheck()
+    {
+        if (Inventory.instance.content.Count > 0)
+            return false;
+        else
+            return true;
+
+        checkedInv = true;
+    }
+
     //NEEDS CHECKING FOR ACCURACY WHEN PROPER SPRITES AVAILABLE
     public void ChangeDay()
     {
-        CharacterManager.instance.UpdateCharacterLists();
-        Inventory.instance.DayFunction();
-        //cue sounds here
-        //
-        //Change season every 7 days
-        if (daycount %7 == 0)
+        if (InventoryCheck() || checkedInv)
         {
-            ChangeSeason();
+            CharacterManager.instance.UpdateCharacterLists();
+            Inventory.instance.DayFunction();
+            //cue sounds here
+            //
+            //Change season every 7 days
+            if (daycount % 7 == 0)
+            {
+                ChangeSeason();
+            }
+            //UI change day
+            uiManager.DayFunction();
+            kManager.DayFunction();
+            mManager.ChangeRoomState(0);
+            daycount++;
+            CharacterManager.instance.SaveToJson();
+            StartCoroutine(MorningFunction());
+            paused = true;
+            Inventory.instance.ClearInventory();
+            if (daycount == 7 * 7)
+                Debug.Log("ENDING NOW");
         }
-        //UI change day
-        uiManager.DayFunction();
-        kManager.DayFunction();
-        daycount++;
-        CharacterManager.instance.SaveToJson();
-        StartCoroutine(MorningFunction());
-        paused = true;
+        else
+            InventoryCheck();
     }
 
     //SeasonChange
