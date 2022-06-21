@@ -7068,7 +7068,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &724540290
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13210,11 +13210,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4309295672635422906, guid: aef3a5787b0c4114c8f1e6976bb5024c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4309295672635422906, guid: aef3a5787b0c4114c8f1e6976bb5024c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4309295672635422906, guid: aef3a5787b0c4114c8f1e6976bb5024c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
@@ -13223,11 +13223,11 @@ PrefabInstance:
     - target: {fileID: 4309295672635422906, guid: aef3a5787b0c4114c8f1e6976bb5024c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1289058234}
+      objectReference: {fileID: 1923695318023593525}
     - target: {fileID: 4309295672635422906, guid: aef3a5787b0c4114c8f1e6976bb5024c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1923695318023593525}
+      objectReference: {fileID: 1289058234}
     - target: {fileID: 4309295672635422906, guid: aef3a5787b0c4114c8f1e6976bb5024c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
@@ -13242,11 +13242,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4309295672635422906, guid: aef3a5787b0c4114c8f1e6976bb5024c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ChangeTime
+      value: ChangeRoomState
       objectReference: {fileID: 0}
     - target: {fileID: 4309295672635422906, guid: aef3a5787b0c4114c8f1e6976bb5024c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: ChangeRoomState
+      value: ChangeTime
       objectReference: {fileID: 0}
     - target: {fileID: 4309295672635422906, guid: aef3a5787b0c4114c8f1e6976bb5024c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
@@ -13254,11 +13254,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4309295672635422906, guid: aef3a5787b0c4114c8f1e6976bb5024c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MainManager, Assembly-CSharp
+      value: MapManagerScript, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4309295672635422906, guid: aef3a5787b0c4114c8f1e6976bb5024c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: MapManagerScript, Assembly-CSharp
+      value: MainManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4309295672635422906, guid: aef3a5787b0c4114c8f1e6976bb5024c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
@@ -13289,12 +13289,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1923695318023593525}
     - target: {fileID: 4309295672816178399, guid: aef3a5787b0c4114c8f1e6976bb5024c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1289058234}
+    - target: {fileID: 4309295672816178399, guid: aef3a5787b0c4114c8f1e6976bb5024c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: ChangeRoomState
       objectReference: {fileID: 0}
     - target: {fileID: 4309295672816178399, guid: aef3a5787b0c4114c8f1e6976bb5024c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: 
+      value: ChangeTime
       objectReference: {fileID: 0}
     - target: {fileID: 4309295672816178399, guid: aef3a5787b0c4114c8f1e6976bb5024c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
@@ -13302,11 +13306,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4309295672816178399, guid: aef3a5787b0c4114c8f1e6976bb5024c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: MapManagerScript, Assembly-CSharp
+      value: MainManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4309295672816178399, guid: aef3a5787b0c4114c8f1e6976bb5024c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: 
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4309295673255680046, guid: aef3a5787b0c4114c8f1e6976bb5024c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
