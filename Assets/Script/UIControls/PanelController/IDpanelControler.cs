@@ -16,10 +16,23 @@ public class IDpanelControler : MonoBehaviour
     public void DisplayID()
     {
         Debug.LogWarning("in DisplayID");
-        IDpicture.sprite = CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter].picture;
-        firstname.text = "";
-        surname.text = "";
-        backstory.text = ""; 
+
+        //THIS LINE CAUSES A CRASH IN EDITOR
+        //SPRITE GIVES TYPE MISMATCH, UNKNOWN WHY
+        //sprite isnt null but doesnt work
+        try
+        {
+            if (CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter].picture != null)
+                IDpicture.sprite = CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter].picture;
+        }
+        catch
+        {
+            Debug.Log("ERROR WITH SPRITE");
+        }
+
+        firstname.text = "UNKNOWN";
+        surname.text = "UNKNOWN";
+        backstory.text = "UNKNOWN"; 
 
         if(CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter].friendshipLevel > 0)
         {

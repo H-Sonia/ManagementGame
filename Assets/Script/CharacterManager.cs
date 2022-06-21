@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using System;
 using TMPro;
+using UnityEngine.UI;
 
 public class CharacterManager : MonoBehaviour
 {

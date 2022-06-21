@@ -139,6 +139,7 @@ public class MapManagerScript : MonoBehaviour
     //Change background on season, add values for events here too
     public void ChangeSeason(int season)
     {
+        Debug.Log("NEWSEASON: " + season);
         if(season == 0)
             BGID = 0;
         if (season == 1)

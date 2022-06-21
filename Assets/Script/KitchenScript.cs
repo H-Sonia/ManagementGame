@@ -46,7 +46,7 @@ public class KitchenScript : MonoBehaviour
         List<string> resourcesObtained = new List<string>();
         MaxResourcesNumber();
         System.Random random = new System.Random();
-        int nbResources = random.Next(maxResources);
+        int nbResources = random.Next(1,maxResources);
         for (int i = 0; i < nbResources; i++)
         {
             int rarity = random.Next(100);
@@ -58,6 +58,7 @@ public class KitchenScript : MonoBehaviour
                 if(!resourcesObtained.Contains(itemName))
                 {
                     resourcesObtained.Add(itemName);
+
                 }
             }
             else
@@ -83,9 +84,7 @@ public class KitchenScript : MonoBehaviour
                     }
                 }
                 itemObtain.text = ifResources + itemName + ifResources2+ "\n";
-            }
-            
-            
+            }   
         }
         if(IsSomeoneSick())
         {
@@ -133,8 +132,19 @@ public class KitchenScript : MonoBehaviour
                 itemObtain.text = ifResources+listOfResources[0]+". "+ifResources2;
                 break;
             default:
+                string textToAdd = "";
+                textToAdd += listOfResources[0];
+                for (int i = 1; i < listOfResources.Count; i++)
+                {
+                    if (i == listOfResources.Count -1)
+                    {
+                        textToAdd += " and " + listOfResources[i];
+                    }
+                    else
+                        textToAdd += ", " + listOfResources[i];
+                }
                 string itemlist = ListReceived(ref listOfResources);
-                itemObtain.text = ifResources+itemlist+". "+ifResources2;
+                itemObtain.text = ifResources+textToAdd+". "+ifResources2;
                 break;
         }
     }

@@ -12,7 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0edaea27c90b5144ac723dbe62733ca, type: 3}
   m_Name: 0_Empty
   m_EditorClassIdentifier: 
+  alreadyKnown: 0
+  surviveUntilTheEnd: 0
   id: 0
   firstname: Test
   surname: Test
+  picture: {fileID: 21300000, guid: 6d1954a4f20f97e4ea44fb4de4906712, type: 3}
+  infos: 
+  message: []
+  friendshipLevel: 0
   resourcesAttribuated: []
+  daysBeforeExpiration: 
+  hunger: 0
+  cold: 0
+  isSick: 0
+  health: 0
+  efficiencyAtWork: 0

@@ -155,7 +155,7 @@ public class MainManager : MonoBehaviour
     //SeasonChange
     public void ChangeSeason()
     {
-        if (season < 2)
+        if (season < 4)
             season++;
         else
             season = 0;
