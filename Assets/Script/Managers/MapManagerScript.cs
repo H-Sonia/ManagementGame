@@ -18,6 +18,17 @@ public class MapManagerScript : MonoBehaviour
     //8 images? 2 per season
     [SerializeField]
     Sprite[] bgImages;
+
+    [SerializeField]
+    Image Tree;
+    [SerializeField]
+    Sprite[] treeImage;
+
+    [SerializeField]
+    Image grass;
+    [SerializeField]
+    Sprite[] grassImage;
+
     int BGID = 0;
 
     bool isDay = true;
@@ -141,14 +152,30 @@ public class MapManagerScript : MonoBehaviour
     public void ChangeSeason(int season)
     {
         Debug.Log("NEWSEASON: " + season);
-        if(season == 0)
+        if (season == 0)
+        {
             BGID = 0;
+            Tree.sprite = treeImage[0];
+            grass.sprite = grassImage[0];
+        }
         if (season == 1)
+        {
             BGID = 2;
+            Tree.sprite = treeImage[1];
+            grass.sprite = grassImage[1];
+        }
         if (season == 2)
+        {
             BGID = 4;
+            Tree.sprite = treeImage[2];
+            grass.sprite = grassImage[2];
+        }
         if (season == 3)
+        {
             BGID = 6;
+            Tree.sprite = treeImage[3];
+            grass.sprite = grassImage[3];
+        }
     }
 
     public void GoToMainMenu()

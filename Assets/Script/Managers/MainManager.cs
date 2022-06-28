@@ -111,11 +111,24 @@ public class MainManager : MonoBehaviour
     //DayToNight
     public void ChangeTime()
     {
+        if (!isDay)
+        {
+            if (!checkedInv)
+            {
+                if (InventoryCheck())
+                {
+                    Debug.Log("PROBLEM");
+                    return;
+                }
+            }
+        }
+
         StartCoroutine("TimeChangeFunction");
         isDay = !isDay;
 
         if (isDay)
         {
+
             dayNight.text = "Day";
             dayCount.text = daycount.ToString();
             ChangeDay();
@@ -133,44 +146,44 @@ public class MainManager : MonoBehaviour
 
     bool checkedInv = false;
 
+    //true if empty
     public bool InventoryCheck()
-    {
+    { 
+        checkedInv = true;
         if (Inventory.instance.content.Count > 0)
             return false;
         else
+            Debug.Log("YOU HAVE INVENTORY");
             return true;
 
-        checkedInv = true;
+
     }
 
     //NEEDS CHECKING FOR ACCURACY WHEN PROPER SPRITES AVAILABLE
     public void ChangeDay()
     {
-        if (InventoryCheck() || checkedInv)
+        CharacterManager.instance.UpdateCharacterLists();
+        Inventory.instance.DayFunction();
+        //cue sounds here
+        //
+        //Change season every 7 days
+        if (daycount % 2 == 0)
         {
-            CharacterManager.instance.UpdateCharacterLists();
-            Inventory.instance.DayFunction();
-            //cue sounds here
-            //
-            //Change season every 7 days
-            if (daycount % 7 == 0)
-            {
-                ChangeSeason();
-            }
-            //UI change day
-            uiManager.DayFunction();
-            kManager.DayFunction();
-            mManager.ChangeRoomState(0);
-            daycount++;
-            CharacterManager.instance.SaveToJson();
-            StartCoroutine(MorningFunction());
-            paused = true;
-            Inventory.instance.ClearInventory();
-            if (daycount == 7 * 7)
-                Debug.Log("ENDING NOW");
+            Debug.Log("NEWSEASON: ");
+            ChangeSeason();
         }
-        else
-            InventoryCheck();
+        //UI change day
+        uiManager.DayFunction();
+        kManager.DayFunction();
+        mManager.ChangeRoomState(0);
+        daycount++;
+        CharacterManager.instance.SaveToJson();
+        StartCoroutine(MorningFunction());
+        paused = true;
+        Inventory.instance.ClearInventory();
+        if (daycount == 7 * 7)
+            Debug.Log("ENDING NOW");
+        checkedInv = false;
     }
 
     //SeasonChange

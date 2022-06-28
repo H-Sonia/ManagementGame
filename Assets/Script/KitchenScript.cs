@@ -122,7 +122,6 @@ public class KitchenScript : MonoBehaviour
 
     public void DisplayMessage(int numberOfResources, ref List<string> listOfResources)
     {
-        Debug.LogWarning("nb :"+numberOfResources);
         switch(numberOfResources)
         {
             case 0:
