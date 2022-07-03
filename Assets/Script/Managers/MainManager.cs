@@ -24,7 +24,7 @@ public class MainManager : MonoBehaviour
     [SerializeField]
     private GameAudio aManager;
     [SerializeField]
-    TMP_Text dayCount, dayNight;
+    TMP_Text dayCount, dayNight, seasonTxt;
 
     [SerializeField]
     private GameObject[] morningCovers;
@@ -32,7 +32,7 @@ public class MainManager : MonoBehaviour
     private GameObject[] hideOnChange;
 
     //0 = Summer 1 = Autumn 2 = Winter 3 = Spring
-    public int season = 0;
+    public int season = 2;
     public bool isDay = true;
 
     //timer for forced progression in seconds
@@ -76,7 +76,7 @@ public class MainManager : MonoBehaviour
         GameObject.Find("EventSystem").GetComponent<UIDisplay>().Setup();
         GameObject.Find("EventSystem").GetComponent<PanelController>().Setup();
         Timer = 10.0f;
-        season = 0;
+        season = 2;
         isDay = true;
         daycount = 1;
         MainCheck();
@@ -110,16 +110,14 @@ public class MainManager : MonoBehaviour
 
     //DayToNight
     public void ChangeTime()
-    {
+    { 
+        //Check ONCE for inventory if changing day
         if (!isDay)
         {
-            if (!checkedInv)
+            if(!checkedInv && InventoryCheck())
             {
-                if (InventoryCheck())
-                {
-                    Debug.Log("PROBLEM");
-                    return;
-                }
+                checkedInv = true;
+                return;
             }
         }
 
@@ -128,7 +126,6 @@ public class MainManager : MonoBehaviour
 
         if (isDay)
         {
-
             dayNight.text = "Day";
             dayCount.text = daycount.ToString();
             ChangeDay();
@@ -148,15 +145,14 @@ public class MainManager : MonoBehaviour
 
     //true if empty
     public bool InventoryCheck()
-    { 
-        checkedInv = true;
+    {
         if (Inventory.instance.content.Count > 0)
-            return false;
-        else
+        {
             Debug.Log("YOU HAVE INVENTORY");
             return true;
-
-
+        }
+        else
+            return false;
     }
 
     //NEEDS CHECKING FOR ACCURACY WHEN PROPER SPRITES AVAILABLE
@@ -178,7 +174,6 @@ public class MainManager : MonoBehaviour
         mManager.ChangeRoomState(0);
         daycount++;
         CharacterManager.instance.SaveToJson();
-        StartCoroutine(MorningFunction());
         paused = true;
         Inventory.instance.ClearInventory();
         if (daycount == 7 * 7)
@@ -193,7 +188,12 @@ public class MainManager : MonoBehaviour
             season++;
         else
             season = 0;
+
+        print(season);
+
         mManager.ChangeSeason(season);
+        string[] texts = { "Spring", "Summer", "Autumn", "Winter"};
+        seasonTxt.text = texts[season];
     }
 
     //for events on day/season change
@@ -238,10 +238,12 @@ public class MainManager : MonoBehaviour
     Transform TimeCover;
     IEnumerator TimeChangeFunction()
     {
+        StartCoroutine(MorningFunction());
         TimeCover.gameObject.SetActive(true);
         TimeCover.GetChild(0).GetComponent<Image>().color = Color.black;
         TimeCover.GetChild(0).GetComponent<Image>().CrossFadeAlpha(0, 2f, false);
         TimeCover.GetChild(1).GetComponent<TMP_Text>().CrossFadeAlpha(0, 2f, false);
+        TimeCover.GetChild(2).GetComponent<TMP_Text>().CrossFadeAlpha(0, 2f, false);
 
         string temp = "";
         if (!isDay)

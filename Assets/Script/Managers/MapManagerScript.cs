@@ -29,7 +29,7 @@ public class MapManagerScript : MonoBehaviour
     [SerializeField]
     Sprite[] grassImage;
 
-    int BGID = 0;
+    int BGID = 2;
 
     bool isDay = true;
     public bool boxingOpen = true;
