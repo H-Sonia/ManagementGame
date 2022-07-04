@@ -24,16 +24,18 @@ public class MainManager : MonoBehaviour
     [SerializeField]
     private GameAudio aManager;
     [SerializeField]
-    TMP_Text dayCount, dayNight, seasonTxt;
+    TMP_Text dayCount, dayNight, seasonTxt, yearText;
 
     [SerializeField]
     private GameObject[] morningCovers;
     [SerializeField]
     private GameObject[] hideOnChange;
 
-    //0 = Summer 1 = Autumn 2 = Winter 3 = Spring
-    public int season = 2;
+    //0 = Spring 1 = Summer 2 = Autumn 3 = Winter 
+    public int season = 1;
     public bool isDay = true;
+
+    int year = 1943;
 
     //timer for forced progression in seconds
     float Timer = 10.0f, morningTimer = 20.0f;
@@ -76,7 +78,7 @@ public class MainManager : MonoBehaviour
         GameObject.Find("EventSystem").GetComponent<UIDisplay>().Setup();
         GameObject.Find("EventSystem").GetComponent<PanelController>().Setup();
         Timer = 10.0f;
-        season = 2;
+        season = 1;
         isDay = true;
         daycount = 1;
         MainCheck();
@@ -158,16 +160,18 @@ public class MainManager : MonoBehaviour
     //NEEDS CHECKING FOR ACCURACY WHEN PROPER SPRITES AVAILABLE
     public void ChangeDay()
     {
+        Event();
         CharacterManager.instance.UpdateCharacterLists();
         Inventory.instance.DayFunction();
         //cue sounds here
         //
+
         //Change season every 7 days
-        if (daycount % 2 == 0)
+        if (daycount % 5 == 0)
         {
-            Debug.Log("NEWSEASON: ");
             ChangeSeason();
         }
+
         //UI change day
         uiManager.DayFunction();
         kManager.DayFunction();
@@ -176,8 +180,6 @@ public class MainManager : MonoBehaviour
         CharacterManager.instance.SaveToJson();
         paused = true;
         Inventory.instance.ClearInventory();
-        if (daycount == 7 * 7)
-            Debug.Log("ENDING NOW");
         checkedInv = false;
     }
 
@@ -187,8 +189,13 @@ public class MainManager : MonoBehaviour
         if (season < 4)
             season++;
         else
+        {
             season = 0;
-
+            year += 1;
+            yearText.text = year.ToString();
+            if (year == 1945)
+                Debug.Log("END OF GAME");
+        }
         print(season);
 
         mManager.ChangeSeason(season);
@@ -199,7 +206,7 @@ public class MainManager : MonoBehaviour
     //for events on day/season change
     void Event()
     {
-        if (daycount % 3 == 0)
+        if (daycount % 4 == 0)
             mManager.boxingOpen = true;
         else
             mManager.boxingOpen = false;
