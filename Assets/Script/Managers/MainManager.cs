@@ -251,6 +251,7 @@ public class MainManager : MonoBehaviour
         TimeCover.GetChild(0).GetComponent<Image>().CrossFadeAlpha(0, 2f, false);
         TimeCover.GetChild(1).GetComponent<TMP_Text>().CrossFadeAlpha(0, 2f, false);
         TimeCover.GetChild(2).GetComponent<TMP_Text>().CrossFadeAlpha(0, 2f, false);
+        TimeCover.GetChild(3).GetComponent<TMP_Text>().CrossFadeAlpha(0, 2f, false);
 
         string temp = "";
         if (!isDay)

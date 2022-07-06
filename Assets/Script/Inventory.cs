@@ -8,7 +8,7 @@ using TMPro;
 public class Inventory : MonoBehaviour
 {
     public List<ItemData> content = new List<ItemData>();
-    public int currentResource = 0;
+    public int currentResource = -1;
     public UIDisplay ui;
     public static Inventory instance;
     

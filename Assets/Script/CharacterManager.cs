@@ -88,9 +88,23 @@ public class CharacterManager : MonoBehaviour
     {
         System.Random random = new System.Random();
         int index = random.Next(charactersLists.nameNotUsed.Count);
-        string firstname = CharacterDB.instance.FirstnameForPlaceHolder[charactersLists.nameNotUsed[index]];
-        string lastname = CharacterDB.instance.LastNameForPlaceHolder[charactersLists.nameNotUsed[index]];
-        charactersLists.nameNotUsed.Remove(charactersLists.nameNotUsed[index]);
+
+        string firstname = "FirstName";
+        string lastname = "LastName";
+
+        if (charactersLists.nameNotUsed.Count > 0)
+        {
+            firstname = CharacterDB.instance.FirstnameForPlaceHolder[charactersLists.nameNotUsed[index]];
+            lastname = CharacterDB.instance.LastNameForPlaceHolder[charactersLists.nameNotUsed[index]];
+            charactersLists.nameNotUsed.Remove(charactersLists.nameNotUsed[index]);
+        }
+        else
+        {
+            firstname = "FirstName";
+            lastname = "LastName";
+            Debug.Log("USING TEMP FILL!");
+        }
+
 
         Character character = new Character();
         character.alreadyKnown = false;

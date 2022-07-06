@@ -81,15 +81,21 @@ public class PanelController : MonoBehaviour
 
     public void GiveResources()
     {
-        ItemData currentResource = Inventory.instance.content[Inventory.instance.currentResource];
-        CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter].resourcesAttribuated.Add(currentResource);
-        CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter].daysBeforeExpiration.Add(currentResource.daysBeforeExpiration);
-        CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter].friendshipLevel += 1;
-        Inventory.instance.content.Remove(currentResource);
-        GetNextResources();
-        UpdatePanelUI();
-        characterMessage = CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter].firstname + " thanks you.\n";
-        
+        try
+        {
+            ItemData currentResource = Inventory.instance.content[Inventory.instance.currentResource];
+            CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter].resourcesAttribuated.Add(currentResource);
+            CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter].daysBeforeExpiration.Add(currentResource.daysBeforeExpiration);
+            CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter].friendshipLevel += 1;
+            Inventory.instance.content.Remove(currentResource);
+            GetNextResources();
+            UpdatePanelUI();
+            characterMessage = CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter].firstname + " thanks you.\n";
+        }
+        catch
+        {
+            Debug.Log("ERROR");
+        }
     }
 
 }
