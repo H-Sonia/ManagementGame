@@ -31,6 +31,9 @@ public class MainManager : MonoBehaviour
     [SerializeField]
     private GameObject[] hideOnChange;
 
+    [SerializeField]
+    private GameObject panel;
+
     //0 = Spring 1 = Summer 2 = Autumn 3 = Winter 
     public int season = 1;
 
@@ -97,34 +100,20 @@ public class MainManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //debugging for days
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            ChangeTime();
-        }
-
-        //Day timer
-        if(!paused)
-            Timer -= Time.deltaTime;
-       else if (Timer <= 0)
-            ChangeTime(true);
-    }
 
     //DayToNight
-    public void ChangeTime(bool force = false)
-    { 
-        //Check ONCE for inventory if changing day
-        if (!isDay)
+    public void ChangeTime(bool forced = false)
+    {
+        if (!forced)
         {
-            if(force)
-                checkedInv = true;
-            else if(!checkedInv && InventoryCheck())
+            //Check ONCE for inventory if changing day
+            if (!isDay)
             {
-                checkedInv = true;
-                return;
+                if (!checkedInv && InventoryCheck())
+                {
+                    checkedInv = true;
+                    return;
+                }
             }
         }
 
@@ -135,7 +124,7 @@ public class MainManager : MonoBehaviour
         {
             dayNight.text = "Day";
             dayCount.text = daycount.ToString();
-            ChangeDay(force);
+            ChangeDay();
         }
         if(!isDay)
         {
@@ -154,6 +143,7 @@ public class MainManager : MonoBehaviour
     {
         if (Inventory.instance.content.Count > 0)
         {
+            panel.SetActive(true);
             Debug.Log("YOU HAVE INVENTORY");
             return true;
         }
@@ -162,7 +152,7 @@ public class MainManager : MonoBehaviour
     }
 
     //NEEDS CHECKING FOR ACCURACY WHEN PROPER SPRITES AVAILABLE
-    public void ChangeDay(bool force = false)
+    public void ChangeDay()
     {
         Event();
         CharacterManager.instance.UpdateCharacterLists();
