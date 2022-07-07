@@ -33,6 +33,9 @@ public class MainManager : MonoBehaviour
 
     //0 = Spring 1 = Summer 2 = Autumn 3 = Winter 
     public int season = 1;
+
+    int lastSeason, maxSeason;
+
     public bool isDay = true;
 
     int year = 1943;
@@ -107,16 +110,18 @@ public class MainManager : MonoBehaviour
         if(!paused)
             Timer -= Time.deltaTime;
        else if (Timer <= 0)
-            ChangeTime();
+            ChangeTime(true);
     }
 
     //DayToNight
-    public void ChangeTime()
+    public void ChangeTime(bool force = false)
     { 
         //Check ONCE for inventory if changing day
         if (!isDay)
         {
-            if(!checkedInv && InventoryCheck())
+            if(force)
+                checkedInv = true;
+            else if(!checkedInv && InventoryCheck())
             {
                 checkedInv = true;
                 return;
@@ -130,7 +135,7 @@ public class MainManager : MonoBehaviour
         {
             dayNight.text = "Day";
             dayCount.text = daycount.ToString();
-            ChangeDay();
+            ChangeDay(force);
         }
         if(!isDay)
         {
@@ -140,7 +145,6 @@ public class MainManager : MonoBehaviour
         Timer = 60.0f;
         Event();
         mManager.ChangeTime();
-
     }
 
     bool checkedInv = false;
@@ -158,7 +162,7 @@ public class MainManager : MonoBehaviour
     }
 
     //NEEDS CHECKING FOR ACCURACY WHEN PROPER SPRITES AVAILABLE
-    public void ChangeDay()
+    public void ChangeDay(bool force = false)
     {
         Event();
         CharacterManager.instance.UpdateCharacterLists();
@@ -166,10 +170,17 @@ public class MainManager : MonoBehaviour
         //cue sounds here
         //
 
+        lastSeason++;
+        if(lastSeason == maxSeason)
+        {
+            ChangeSeason();
+            print("Changing Season!");
+        }
+
         //Change season every 7 days
         if (daycount % 5 == 0)
         {
-            ChangeSeason();
+            //ChangeSeason();
         }
 
         //UI change day
@@ -196,6 +207,11 @@ public class MainManager : MonoBehaviour
             if (year == 1945)
                 Debug.Log("END OF GAME");
         }
+        if (season < 2)
+            maxSeason = 5;
+        else
+            maxSeason = 7;
+
         print(season);
 
         mManager.ChangeSeason(season);
