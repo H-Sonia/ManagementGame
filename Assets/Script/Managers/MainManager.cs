@@ -143,6 +143,7 @@ public class MainManager : MonoBehaviour
     {
         if (Inventory.instance.content.Count > 0)
         {
+            panel.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text = "I still have resources, I should hand them out before they are confiscated.";
             panel.SetActive(true);
             Debug.Log("YOU HAVE INVENTORY");
             return true;
@@ -187,6 +188,7 @@ public class MainManager : MonoBehaviour
     //SeasonChange
     public void ChangeSeason()
     {
+        lastSeason = 0;
         if (season < 4)
             season++;
         else
@@ -256,8 +258,8 @@ public class MainManager : MonoBehaviour
         TimeCover.GetChild(0).GetComponent<Image>().color = Color.black;
         TimeCover.GetChild(0).GetComponent<Image>().CrossFadeAlpha(0, 2f, false);
         TimeCover.GetChild(1).GetComponent<TMP_Text>().CrossFadeAlpha(0, 2f, false);
-        TimeCover.GetChild(2).GetComponent<TMP_Text>().CrossFadeAlpha(0, 2f, false);
-        TimeCover.GetChild(3).GetComponent<TMP_Text>().CrossFadeAlpha(0, 2f, false);
+        TimeCover.GetChild(2).GetChild(0).GetComponent<TMP_Text>().CrossFadeAlpha(0, 2f, false);
+        TimeCover.GetChild(2).GetChild(1).GetComponent<TMP_Text>().CrossFadeAlpha(0, 2f, false);
 
         string temp = "";
         if (!isDay)

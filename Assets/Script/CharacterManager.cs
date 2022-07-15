@@ -184,6 +184,10 @@ public class CharacterManager : MonoBehaviour
         }
     }
 
+
+    [SerializeField]
+    GameObject panel;
+
     void UpdateCharactersState(ref string sickPeople)
     {
         for (int i = 0; i < charactersLists.CharactersInDorm.Count; i++)
@@ -199,6 +203,9 @@ public class CharacterManager : MonoBehaviour
             if(!charactersLists.CharactersInDorm[i].isSick)
             {
                 charactersLists.CharactersInDorm[i].isSick = isBecomingSick(i);
+                panel.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text = charactersLists.CharactersInDorm[i].firstname + " seems sick today\n";
+                panel.SetActive(true);
+                Debug.Log(charactersLists.CharactersInDorm[i] + "is sick!");
                 if(charactersLists.CharactersInDorm[i].isSick && charactersLists.CharactersInDorm[i].friendshipLevel > 0)
                 {
                     sickPeople += charactersLists.CharactersInDorm[i].firstname + " seems sick today\n";
