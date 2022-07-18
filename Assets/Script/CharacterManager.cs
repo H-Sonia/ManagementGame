@@ -425,8 +425,11 @@ public class CharacterManager : MonoBehaviour
     {
         string charactersListsData = JsonUtility.ToJson(charactersLists);
         string filePath = Application.persistentDataPath + "/CharactersData.json";
+
         Debug.Log(filePath);
         System.IO.File.WriteAllText(filePath, charactersListsData);
+
+        MainManager.instance.SaveDetails();
         Debug.Log("Data saved");
     }
 
@@ -437,6 +440,7 @@ public class CharacterManager : MonoBehaviour
         charactersLists = JsonUtility.FromJson<CharacterDataLists>(charactersListsData);
         Debug.Log("Data loaded");
         ui.UpdateMainUi("", false);
+        MainManager.instance.LoadDetails();
     }
 }
 

@@ -4,6 +4,16 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
+public class saveDetails
+{ 
+    public int[] details;
+    public saveDetails(int[] array)
+    {
+        details = array;
+    }
+
+}
+
 public class MainManager : MonoBehaviour
 {
     public static MainManager instance;
@@ -36,12 +46,49 @@ public class MainManager : MonoBehaviour
 
     //0 = Spring 1 = Summer 2 = Autumn 3 = Winter 
     public int season = 1;
-
     int lastSeason, maxSeason;
-
     public bool isDay = true;
-
     int year = 1943;
+
+    string[] texts = { "Spring", "Summer", "Autumn", "Winter" };
+
+    public string SaveDetails()
+    {
+        string saveSeason = JsonUtility.ToJson(season);
+        string saveLastSeason = JsonUtility.ToJson(lastSeason);
+        string saveMaxSeason = JsonUtility.ToJson(maxSeason);
+        string saveYear = JsonUtility.ToJson(year);
+
+        int[] savedeets = new int[]{season, lastSeason, maxSeason, year };
+        saveDetails s = new saveDetails(savedeets);
+
+        //Debug.Log(savedeets);
+        string save = JsonUtility.ToJson(s);
+
+        //string save = (saveSeason + "\n" + saveLastSeason + "\n" + saveMaxSeason + "\n" + saveYear);
+        //string save = (season + "\n" + lastSeason + "\n" + maxSeason + "\n" + year);
+
+        string filePath = Application.persistentDataPath + "/DataSave.json";
+        Debug.Log(s);
+        System.IO.File.WriteAllText(filePath, save);
+        return null;
+    }
+    public void LoadDetails()
+    {
+        string filePath = Application.persistentDataPath + "/DataSave.json";
+        string loaded = System.IO.File.ReadAllText(filePath);
+        saveDetails output = JsonUtility.FromJson<saveDetails>(loaded);
+
+        season = output.details[0];
+        lastSeason = output.details[1];
+        maxSeason = output.details[2];
+        year = output.details[3];
+
+        seasonTxt.text = texts[season];
+        yearText.text = year.ToString();
+        MapManagerScript.instance.ChangeSeason(season);
+
+    }
 
     //timer for forced progression in seconds
     float Timer = 10.0f, morningTimer = 20.0f;
@@ -59,7 +106,6 @@ public class MainManager : MonoBehaviour
         //        Debug.LogWarning("There is more than one MainManager instance in this scene");
         //        return;
         //}
-
 
         //in case something goes wrong and values are unassigned
         if (uiManager == null)
@@ -162,7 +208,8 @@ public class MainManager : MonoBehaviour
         //
 
         lastSeason++;
-        if(lastSeason == maxSeason)
+        Debug.Log(lastSeason);
+        if(lastSeason >= maxSeason)
         {
             ChangeSeason();
             print("Changing Season!");
@@ -207,7 +254,7 @@ public class MainManager : MonoBehaviour
         print(season);
 
         mManager.ChangeSeason(season);
-        string[] texts = { "Spring", "Summer", "Autumn", "Winter"};
+      
         seasonTxt.text = texts[season];
     }
 
