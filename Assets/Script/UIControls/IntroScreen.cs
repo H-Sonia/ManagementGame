@@ -25,7 +25,7 @@ public class IntroScreen : MonoBehaviour
         {
             textIndex++;
             textField.text = textToDisplay[textIndex];
-            Debug.Log(textIndex);
+            //Debug.Log(textIndex);
         }
         else
         {

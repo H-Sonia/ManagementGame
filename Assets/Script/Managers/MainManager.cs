@@ -46,7 +46,7 @@ public class MainManager : MonoBehaviour
 
     //0 = Spring 1 = Summer 2 = Autumn 3 = Winter 
     public int season = 1;
-    int lastSeason, maxSeason;
+    int lastSeason = 0, maxSeason = 5;
     public bool isDay = true;
     int year = 1943;
 
@@ -76,18 +76,20 @@ public class MainManager : MonoBehaviour
     public void LoadDetails()
     {
         string filePath = Application.persistentDataPath + "/DataSave.json";
-        string loaded = System.IO.File.ReadAllText(filePath);
-        saveDetails output = JsonUtility.FromJson<saveDetails>(loaded);
+        if (System.IO.File.Exists(filePath))
+        {
+            string loaded = System.IO.File.ReadAllText(filePath);
+            saveDetails output = JsonUtility.FromJson<saveDetails>(loaded);
 
-        season = output.details[0];
-        lastSeason = output.details[1];
-        maxSeason = output.details[2];
-        year = output.details[3];
+            season = output.details[0];
+            lastSeason = output.details[1];
+            maxSeason = output.details[2];
+            year = output.details[3];
 
-        seasonTxt.text = texts[season];
-        yearText.text = year.ToString();
-        MapManagerScript.instance.ChangeSeason(season);
-
+            seasonTxt.text = texts[season];
+            yearText.text = year.ToString();
+            MapManagerScript.instance.ChangeSeason(season);
+        }
     }
 
     //timer for forced progression in seconds
@@ -101,11 +103,6 @@ public class MainManager : MonoBehaviour
     {
         if(instance == null)
             instance = this;
-        //if (instance != null)
-        //{
-        //        Debug.LogWarning("There is more than one MainManager instance in this scene");
-        //        return;
-        //}
 
         //in case something goes wrong and values are unassigned
         if (uiManager == null)
@@ -208,17 +205,11 @@ public class MainManager : MonoBehaviour
         //
 
         lastSeason++;
-        Debug.Log(lastSeason);
+        Debug.Log(lastSeason + " .. " + maxSeason);
         if(lastSeason >= maxSeason)
         {
             ChangeSeason();
             print("Changing Season!");
-        }
-
-        //Change season every 7 days
-        if (daycount % 5 == 0)
-        {
-            //ChangeSeason();
         }
 
         //UI change day

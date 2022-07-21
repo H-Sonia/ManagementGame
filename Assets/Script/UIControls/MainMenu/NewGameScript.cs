@@ -14,6 +14,11 @@ public class NewGameScript : MonoBehaviour
         {
             System.IO.File.Delete(filePath);
         }
+        filePath = Application.persistentDataPath + "/DataSave.json";
+        if (System.IO.File.Exists(filePath))
+        {
+            System.IO.File.Delete(filePath);
+        }
 
         SceneManager.LoadScene("IntroScreen");
     }
