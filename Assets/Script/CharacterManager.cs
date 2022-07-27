@@ -59,11 +59,36 @@ public class CharacterManager : MonoBehaviour
 
     public void InitializeCharactersData()
     {
+        FillWithKey();
         FillNameNotUsed();
         FillWithPlaceHolders();
         charactersLists.CharactersInDorm =  ShuffleCharacterList(charactersLists.CharactersInDorm);
     }
 
+    void FillWithKey()
+    {
+        for (int i = 0; i < charactersLists.TrueNewcomers.Count; i++)
+        {      
+            Character character = charactersLists.TrueNewcomers[i];
+            if(character.firstname == "" )
+            {
+                if (character.id == 3)
+                    EventManager.instance.key3 = character;
+                else if(character.id == 5)
+                    EventManager.instance.key5 = character;
+
+                System.Random random = new System.Random();
+                int index = random.Next(charactersLists.nameNotUsed.Count);
+
+                character.firstname = CharacterDB.instance.FirstnameForPlaceHolder[charactersLists.nameNotUsed[index]];
+                character.surname = CharacterDB.instance.LastNameForPlaceHolder[charactersLists.nameNotUsed[index]];
+                charactersLists.nameUsed.Add(charactersLists.nameNotUsed[index]);
+                charactersLists.nameNotUsed.Remove(charactersLists.nameNotUsed[index]);
+            }
+
+            charactersLists.CharactersInDorm.Add(character);
+        }
+    }
 
     public void FillNameNotUsed()
     {
@@ -76,16 +101,20 @@ public class CharacterManager : MonoBehaviour
     public void FillWithPlaceHolders()
     {
         int nbEmptyBeds = charactersLists.DormCapacity - charactersLists.CharactersInDorm.Count;
-
-        for (int i=0; i < nbEmptyBeds; i++)
+        for (int i=5; i < nbEmptyBeds; i++)
         {
             Character character = CreatePlaceHolderCharacter();
             charactersLists.CharactersInDorm.Add(character);
         }
     }
-
     Character CreatePlaceHolderCharacter()
     {
+        if (charactersLists.nameNotUsed.Count == 0)
+        {
+            charactersLists.nameNotUsed = charactersLists.nameUsed;
+            charactersLists.nameUsed.Clear();
+        }
+
         System.Random random = new System.Random();
         int index = random.Next(charactersLists.nameNotUsed.Count);
 
@@ -96,12 +125,11 @@ public class CharacterManager : MonoBehaviour
         {
             firstname = CharacterDB.instance.FirstnameForPlaceHolder[charactersLists.nameNotUsed[index]];
             lastname = CharacterDB.instance.LastNameForPlaceHolder[charactersLists.nameNotUsed[index]];
+            charactersLists.nameUsed.Add(charactersLists.nameNotUsed[index]);
             charactersLists.nameNotUsed.Remove(charactersLists.nameNotUsed[index]);
         }
         else
         {
-            firstname = "FirstName";
-            lastname = "LastName";
             Debug.Log("USING TEMP FILL!");
         }
 
@@ -192,7 +220,8 @@ public class CharacterManager : MonoBehaviour
     {
         for (int i = 0; i < charactersLists.CharactersInDorm.Count; i++)
         {
-            if(charactersLists.CharactersInDorm[i].cold < 100)
+            charactersLists.CharactersInDorm[i].fedToday = false;
+            if (charactersLists.CharactersInDorm[i].cold < 100)
             {
                 charactersLists.CharactersInDorm[i].cold += 10;
             }
@@ -399,6 +428,12 @@ public class CharacterManager : MonoBehaviour
        
         
     }
+
+    public void RemoveCharacter(Character c)
+    {
+        charactersLists.CharactersInDorm.Remove(c);
+    }
+
     void CharacterDisappears(int characterIndex, ref string friendsWhoDisappeared, ref int disappearingCounter)
     {
         if (charactersLists.CharactersInDorm[characterIndex].id != 0)
@@ -456,6 +491,7 @@ public class CharacterDataLists
     public List<Character> TrueNewcomers = new List<Character>();
     public List<Character> DeadCharacters = new List<Character>();
     public List<int> nameNotUsed = new List<int>();
+    public List<int> nameUsed = new List<int>();
 }
 
 [System.Serializable]
@@ -469,6 +505,7 @@ public class Character
     public Sprite picture;
     public string infos;
     public TextData[] message;
+    public bool fedToday = false;
     public int friendshipLevel;
     public List<ItemData> resourcesAttribuated;
     public List<int> daysBeforeExpiration;
@@ -477,4 +514,6 @@ public class Character
     public bool isSick;
     public int health;
     public int efficiencyAtWork;
+    public bool isKey;
+    public int keyStage;
 }

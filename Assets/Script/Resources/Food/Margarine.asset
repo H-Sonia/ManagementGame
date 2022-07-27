@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 5
   type: food
   itemName: margarine
-  itemImage: {fileID: 0}
+  itemImage: {fileID: 21300000, guid: 99f54b075b833334faf37b7a88c93b2c, type: 3}
   daysBeforeExpiration: 1
   nutritiveValue: 5
   heat: 0

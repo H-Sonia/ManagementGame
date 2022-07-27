@@ -48,7 +48,7 @@ public class MainManager : MonoBehaviour
     public int season = 1;
     int lastSeason = 0, maxSeason = 5;
     public bool isDay = true;
-    int year = 1943;
+    public int year = 1943;
 
     string[] texts = { "Spring", "Summer", "Autumn", "Winter" };
 
@@ -237,6 +237,7 @@ public class MainManager : MonoBehaviour
             if (year == 1945)
                 Debug.Log("END OF GAME");
         }
+
         if (season < 2)
             maxSeason = 5;
         else
@@ -252,6 +253,7 @@ public class MainManager : MonoBehaviour
     //for events on day/season change
     void Event()
     {
+        EventManager.instance.UpdateDay();
         if (daycount % 4 == 0)
             mManager.boxingOpen = true;
         else

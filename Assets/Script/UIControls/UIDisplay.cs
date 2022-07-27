@@ -71,7 +71,7 @@ public class UIDisplay : MonoBehaviour
 
     }
 
-    public void UpdateMainUi(string characterMessage, bool opening)
+    public void UpdateMainUi(string characterMessage = "", bool opening = false)
     {
         scrollRect.verticalNormalizedPosition = 1f;
         if (opening)
@@ -83,7 +83,6 @@ public class UIDisplay : MonoBehaviour
             if (characterMessage != "")
             {
                 infos.text = characterMessage;
-
                 infoPanel.SetActive(true);
             }
         }   
@@ -94,24 +93,28 @@ public class UIDisplay : MonoBehaviour
             
             if (character.id == 0)
             {
-
                 names[i].text = "";
                 giveButtons[i].SetActive(false);
-                idButtons[i].SetActive(false);
+                //idButtons[i].SetActive(false);
             }
             else
             {
-                if (character.friendshipLevel > 0)
+                if(character.isKey)
+                {
+                    names[i].text = "[K] " + character.firstname + " " + character.surname;
+                    giveButtons[i].SetActive(true);
+                }
+                else if (character.friendshipLevel > 0)
                 {
                     names[i].text = character.firstname + " " + character.surname;
                     giveButtons[i].SetActive(true);
-                    idButtons[i].SetActive(true);
+                    //idButtons[i].SetActive(true);
                 }
                 else
                 {
-                    names[i].text = " ? ? ? ";
+                    names[i].text = " ";
                     giveButtons[i].SetActive(true);
-                    idButtons[i].SetActive(true);
+                    //idButtons[i].SetActive(true);
                 }
             }
         }

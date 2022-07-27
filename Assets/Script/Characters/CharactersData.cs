@@ -13,7 +13,7 @@ public class CharactersData : ScriptableObject
     public string surname;
     public Sprite picture;
     public string infos;
-    public TextData[] message;
+    public string[] message;
     public int friendshipLevel;
     public List<ItemData> resourcesAttribuated;
     public List<int> daysBeforeExpiration;
@@ -22,4 +22,6 @@ public class CharactersData : ScriptableObject
     public bool isSick;
     public int health;
     public int efficiencyAtWork;
+    public bool isKey;
+    public int keyStage;
 }
