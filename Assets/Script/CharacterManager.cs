@@ -67,6 +67,7 @@ public class CharacterManager : MonoBehaviour
 
     void FillWithKey()
     {
+        System.Random random = new System.Random();
         for (int i = 0; i < charactersLists.TrueNewcomers.Count; i++)
         {      
             Character character = charactersLists.TrueNewcomers[i];
@@ -77,13 +78,20 @@ public class CharacterManager : MonoBehaviour
                 else if(character.id == 5)
                     EventManager.instance.key5 = character;
 
-                System.Random random = new System.Random();
-                int index = random.Next(charactersLists.nameNotUsed.Count);
+                if (charactersLists.nameNotUsed.Count <= 0)
+                {
+                    charactersLists.nameNotUsed = charactersLists.nameUsed;
+                    charactersLists.nameUsed.Clear();
+                }
 
-                character.firstname = CharacterDB.instance.FirstnameForPlaceHolder[charactersLists.nameNotUsed[index]];
-                character.surname = CharacterDB.instance.LastNameForPlaceHolder[charactersLists.nameNotUsed[index]];
-                charactersLists.nameUsed.Add(charactersLists.nameNotUsed[index]);
-                charactersLists.nameNotUsed.Remove(charactersLists.nameNotUsed[index]);
+                //int index = random.Next(charactersLists.nameNotUsed.Count);
+                int index = UnityEngine.Random.Range(0, CharacterDB.instance.FirstnameForPlaceHolder.Length);
+                character.firstname = CharacterDB.instance.FirstnameForPlaceHolder[index];
+                index = UnityEngine.Random.Range(0, CharacterDB.instance.FirstnameForPlaceHolder.Length);
+                character.surname = CharacterDB.instance.LastNameForPlaceHolder[index];
+
+                charactersLists.nameUsed.Add(index);
+                charactersLists.nameNotUsed.Remove(index);
             }
 
             charactersLists.CharactersInDorm.Add(character);

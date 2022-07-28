@@ -38,7 +38,7 @@ public class CharacterDB : MonoBehaviour
         CharacterManager.instance.charactersLists.DaysPassedSinceLastTrueCharacter = 0;
         CharacterManager.instance.charactersLists.NbMaxTrueCharacter = 3;
         CharacterManager.instance.charactersLists.DormCapacity = 18;
-        FillTrueNewcomers();
+        //FillTrueNewcomers();
         GetAllFriends();
     }
 

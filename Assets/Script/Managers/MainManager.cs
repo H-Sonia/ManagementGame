@@ -200,12 +200,14 @@ public class MainManager : MonoBehaviour
     {
         Event();
         CharacterManager.instance.UpdateCharacterLists();
+        foreach (Character c in CharacterManager.instance.charactersLists.CharactersInDorm)
+            c.fedToday = false;
+
         Inventory.instance.DayFunction();
         //cue sounds here
         //
 
         lastSeason++;
-        Debug.Log(lastSeason + " .. " + maxSeason);
         if(lastSeason >= maxSeason)
         {
             ChangeSeason();

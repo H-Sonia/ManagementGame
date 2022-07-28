@@ -80,14 +80,19 @@ public class UIDisplay : MonoBehaviour
         }
         else
         {
-            if (characterMessage != "")
+            if(characterMessage == "UPDATE")
+            {
+                infoPanel.SetActive(true);
+            }
+            else if (characterMessage != "")
             {
                 infos.text = characterMessage;
                 infoPanel.SetActive(true);
             }
+
         }   
 
-        for (int i = 0; i < names.Length; i++)
+        for (int i = 0; i < names.Length && i < CharacterManager.instance.charactersLists.CharactersInDorm.Count; i++)
         {
             Character character = CharacterManager.instance.charactersLists.CharactersInDorm[i];
             

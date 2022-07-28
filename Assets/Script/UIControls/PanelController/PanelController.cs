@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,13 +23,17 @@ public class PanelController : MonoBehaviour
         MainManager.instance.MainCheck();
     }
    
-
     public void Quit()
     {
         ResourcesPanel.SetActive(false);
         if(characterMessage != "")
             MainUI.UpdateMainUi(characterMessage, false);
         characterMessage = "";
+    }
+    public void QuitWithUpdate()
+    {
+        ResourcesPanel.SetActive(false);
+        MainUI.UpdateMainUi("UPDATE", false);
     }
     public void Quit2()
     {
@@ -100,29 +105,34 @@ public class PanelController : MonoBehaviour
             //dirty system to get it implemented in time
             //check for Key character
             characterMessage = CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter].firstname + " thanks you.\n";
-            Debug.Log(curr.fedToday);
-            Debug.Log(curr.isKey);
+            bool cont = true;
+
+            bool updatingUI = false;
+
             if (EventManager.instance.key1EndEvent)
             {
                 characterMessage = curr.firstname + " thanks me. “Have you seen Alberto?” I ask. \n" +
                     " “Haven’t you heard? He tried to escape by jumping into Vistula River. They caught him, tortured him, and killed him.” \n";
-                /*+
-                    "[new screen] After the liberation, I learnt that Alberto’s pictures managed to be smuggled outside the camps. \n" +
-                    "They are the only pictorial evidence in existence taken by a prisoner of what was happening around the gas chambers.";*/
+                updatingUI = true;
+
+                string[] s = new string[2];
+                s[0] = curr.firstname + " thanks me. “Have you seen Alberto?” I ask. \n" +
+                    "“Haven’t you heard? He tried to escape by jumping into Vistula River. They caught him, tortured him, and killed him.” \n";
+                s[1] = "After the liberation, I learnt that Alberto’s pictures managed to be smuggled outside the camps. \n" +
+                    "They are the only pictorial evidence in existence taken by a prisoner of what was happening around the gas chambers.";
+
+                EventManager.instance.strings = s;
                 EventManager.instance.key1EndEvent = false;
             }
             else if (!curr.fedToday && curr.isKey)
             {
-                bool cont = true;
                 int stage = CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter].keyStage;
 
-                Debug.Log(stage);
-                Debug.Log(curr.message.Length);
                 if (curr.id == 1)
                 {
                     if (stage == 4)
                         EventManager.instance.key1EndEvent = true;
-                        //key1EndEvent = true;
+                    //key1EndEvent = true;
                     if (stage >= 5)
                     {
                         CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter].isKey = false;
@@ -130,6 +140,33 @@ public class PanelController : MonoBehaviour
                 }
                 else if (curr.id == 2)
                 {
+                    print("ID = 2");
+
+                    if (stage == 1)
+                    {
+                        print("SECOND STAGE");
+                        updatingUI = true;
+
+                        string[] s = new string[2];
+
+                        characterMessage = curr.firstname + " thanks me. “Are you married ?” he asks. \n " +
+                            "I shake my head. \n" +
+                            "“I miss my wife. I haven’t seen her since we arrived and they separated us. Do you think she’s still alive?” \n" +
+                            "I hesitate. \n" +
+                            "He looks away. “Maybe it’s for the better,” he says. \n" +
+                            "“What is?” \n";
+
+
+                        s[0] = curr.firstname + " thanks me. “Are you married ?” he asks. \n " +
+                            "I shake my head. \n" +
+                            "“I miss my wife. I haven’t seen her since we arrived and they separated us. Do you think she’s still alive?” \n" +
+                            "I hesitate. \n" +
+                            "He looks away. “Maybe it’s for the better,” he says. \n" +
+                            "“What is?” \n";
+
+                        s[1] = "That you are not married.";
+                        EventManager.instance.strings = s;
+                    }
                     if (stage >= 2)
                     {
                         CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter].isKey = false;
@@ -183,7 +220,7 @@ public class PanelController : MonoBehaviour
                     }
                 }
 
-                if (cont && stage < curr.message.Length)
+                if (cont && stage < curr.message.Length && !updatingUI)
                 {
                     characterMessage = "";
                     foreach (string s in curr.message[stage].sentences)
@@ -194,9 +231,7 @@ public class PanelController : MonoBehaviour
                     }
                 }
             }
-            else
-                Debug.Log("NOT KEY");
-             
+
             CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter].resourcesAttribuated.Add(currentResource);
             CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter].daysBeforeExpiration.Add(currentResource.daysBeforeExpiration);
             CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter].friendshipLevel += 1;
@@ -207,12 +242,21 @@ public class PanelController : MonoBehaviour
             {
                 curr.keyStage += 1;
             }
+
             UpdatePanelUI();
+
+            if (updatingUI)
+            {  
+                print("updatingUi");
+                EventManager.instance.UpdateUI();
+                //QuitWithUpdate();
+            }
             Quit();
 
         }
-        catch
+        catch (Exception e)
         {
+            Debug.LogException(e);
             Debug.Log("ERROR");
             characterMessage = "";
         }

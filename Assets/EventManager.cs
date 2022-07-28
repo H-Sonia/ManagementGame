@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class EventManager : MonoBehaviour
 {
@@ -37,5 +39,29 @@ public class EventManager : MonoBehaviour
             key3BadEndEvent = true;
         }
             //kill character
+    }
+
+    public GameObject quitKey;
+    public GameObject uiSection;
+    public GameObject nextButton; 
+    public string[] strings;
+    public int stringNo = 0;
+
+    public void UpdateUI()
+    {
+        Debug.Log("Updating ui");
+        print(stringNo);
+        nextButton.SetActive(false);
+        quitKey.SetActive(true);
+        if (stringNo+1 < strings.Length)
+        {
+            quitKey.SetActive(false);
+            nextButton.SetActive(true);
+        }
+
+        uiSection.SetActive(true);
+        uiSection.GetComponent<TMP_Text>().text = strings[stringNo];
+        print(strings[stringNo]);
+        stringNo++;
     }
 }
