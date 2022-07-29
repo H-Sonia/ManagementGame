@@ -13,6 +13,24 @@ public class KitchenScript : MonoBehaviour
     public TMP_Text itemObtain;
     public string ifNoResources = "I didn't managed to salvage anything today... I go back in the block with a heavy heart.";
     public string ifResources = "I managed to salvage some ";
+
+    string[] texts = { "It’s not enough. \n" +
+            " How can I decide to whom I will give this to?" +
+            "\n How can I bear the responsibility of who lives and who dies?\n" +
+            " It is not my responsibility, yet I can’t help but feel I should have done more. ",
+
+        "As happy as I am to be able to help even one more person, I hate that I must turn away when others ask for help and I have nothing to give to them. ",
+        
+        "Maybe it’d be better if I stopped sharing what little I can. \n" +
+        " If I don’t give anything to anyone, it would be fairer, surely? \n" +
+        " We’re all going to die, after all.\n" +
+        " Still, I take the provisions with me.\n" +
+        " If the Nazis have turned us into automata of death, I’ll remain an automaton of life. ",
+
+        "Counting resources is the only thing we’re capable of anymore.\n" +
+        " We cannot even pretend normality.\n" +
+        " We have been debased, surviving on pure, unconscious instinct. "};
+
     [TextArea]
     public string ifResources2;
     int maxResources; 
@@ -58,7 +76,6 @@ public class KitchenScript : MonoBehaviour
                 if(!resourcesObtained.Contains(itemName))
                 {
                     resourcesObtained.Add(itemName);
-
                 }
             }
             else
@@ -83,6 +100,7 @@ public class KitchenScript : MonoBehaviour
                         resourcesObtained.Add(itemName);
                     }
                 }
+                ifResources2 = texts[random.Next(texts.Length)];
                 itemObtain.text = ifResources + itemName + ifResources2+ "\n";
             }   
         }
@@ -95,11 +113,12 @@ public class KitchenScript : MonoBehaviour
                 Inventory.instance.content.Add(ResourcesDataBase.instance.medicine);
                 itemName =  " a Medicine bottle";
                 if(!resourcesObtained.Contains(itemName))
-                    {
-                        resourcesObtained.Add(itemName);
-                    }
+                {
+                    resourcesObtained.Add(itemName);
+                }
+                itemObtain.text += "With a little help from a Greek Jew who works at the infirmary, I manage to exchange five portions of food for a bottle of medicine. \n";
             }
-
+            //NEED SPOON AND SHOES
         }
         DisplayMessage(nbResources, ref resourcesObtained);
 
@@ -112,8 +131,7 @@ public class KitchenScript : MonoBehaviour
         for (int i = 0; i < CharacterManager.instance.charactersLists.CharactersInDorm.Count; i++)
         {
             if(CharacterManager.instance.charactersLists.CharactersInDorm[i].isSick)
-            {
-                
+            {          
                 return true;
             }
         }

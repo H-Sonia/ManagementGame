@@ -100,7 +100,11 @@ public class PanelController : MonoBehaviour
         try
         {
             ItemData currentResource = Inventory.instance.content[Inventory.instance.currentResource];
-
+            if (!Inventory.instance.content.Contains(currentResource))
+            {
+                Debug.Log("NOT ENOUGH");
+                return;
+            }
             Character curr = CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter];
             //dirty system to get it implemented in time
             //check for Key character

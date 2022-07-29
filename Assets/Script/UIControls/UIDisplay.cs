@@ -37,7 +37,7 @@ public class UIDisplay : MonoBehaviour
                     j++;
                 }
             }
-
+            /*
             children = Dorm.transform.GetChild(0).Find("IDButtons").GetComponentsInChildren<Transform>();
             idButtons = new GameObject[(children.Length-1) / 2];
             j = 0;
@@ -50,7 +50,7 @@ public class UIDisplay : MonoBehaviour
                     children[i].GetComponent<Button>().onClick.AddListener(() => IDButtonClick(temp));
                     j++;
                 }
-            }
+            }*/
         }
         MainManager.instance.MainCheck();
     }
@@ -92,36 +92,34 @@ public class UIDisplay : MonoBehaviour
 
         }   
 
+        if (Inventory.instance.content.Count > 0)
+                giveButtons[0].transform.parent.gameObject.SetActive(true);
+        else
+            giveButtons[0].transform.parent.gameObject.SetActive(false);
+
         for (int i = 0; i < names.Length && i < CharacterManager.instance.charactersLists.CharactersInDorm.Count; i++)
         {
             Character character = CharacterManager.instance.charactersLists.CharactersInDorm[i];
             
-            if (character.id == 0)
-            {
-                names[i].text = "";
-                giveButtons[i].SetActive(false);
-                //idButtons[i].SetActive(false);
-            }
-            else
-            {
                 if(character.isKey)
                 {
                     names[i].text = "[K] " + character.firstname + " " + character.surname;
-                    giveButtons[i].SetActive(true);
                 }
                 else if (character.friendshipLevel > 0)
                 {
                     names[i].text = character.firstname + " " + character.surname;
-                    giveButtons[i].SetActive(true);
                     //idButtons[i].SetActive(true);
                 }
                 else
                 {
-                    names[i].text = " ";
-                    giveButtons[i].SetActive(true);
+                    names[i].text = "";
                     //idButtons[i].SetActive(true);
                 }
-            }
+
+                //if (Inventory.instance.content.Count > 0)
+                //    giveButtons[i].SetActive(true);
+                //else
+                //    giveButtons[i].SetActive(false);
         }
     }
 

@@ -293,24 +293,63 @@ public class MainManager : MonoBehaviour
 
     [SerializeField]
     Transform TimeCover;
+
+    string[] seasons = {
+        "Autumn arrives. \n" +
+            " The days get shorter, the air turns bitterly cold.\n" +
+            " It’s hard to track the passing of time in the camp; every day feels like the last, months and seasons falling into one another.  ",
+
+        "Winter is here.\n" +
+            " Everything is covered with snow.\n" +
+            " Back home, I would have thought it beautiful, though I had never seen snow in Greece.\n" +
+            " Here at Auschwitz, beauty doesn’t cross my mind. ",
+
+        "The weather is getting warmer, leaves beginning to sprout in the barren trees.\n" +
+            " It’s Spring. ",
+
+        "A year has passed since I arrived at the camps. \n" +
+            " I’ve seen so many people die – worked to death, starved, or simply taken away and murdered.\n" +
+            " How much longer will I last? How much longer will any of us last?",
+
+        "Autumn is here again. \n" +
+            " I can feel the change in the air, the briskness, the bite. \n" +
+            " It is the season of wilting, of dwindling harvests. The season of death. ",
+
+        "The winter is upon us once more.\n" +
+            " I am cold. We are all cold.\n" +
+            " This is a cold I had never imagined – it freezes your skin, your bones and marrow, chills your brain deep down to the neurons. \n" +
+            "I will not last much longer. "
+    };
+    int seasonText = 0;
+    bool seasonChange = false;
+
     IEnumerator TimeChangeFunction()
     {
+        float val = 5f;
         StartCoroutine(MorningFunction());
         TimeCover.gameObject.SetActive(true);
         TimeCover.GetChild(0).GetComponent<Image>().color = Color.black;
-        TimeCover.GetChild(0).GetComponent<Image>().CrossFadeAlpha(0, 2f, false);
-        TimeCover.GetChild(1).GetComponent<TMP_Text>().CrossFadeAlpha(0, 2f, false);
-        TimeCover.GetChild(2).GetChild(0).GetComponent<TMP_Text>().CrossFadeAlpha(0, 2f, false);
-        TimeCover.GetChild(2).GetChild(1).GetComponent<TMP_Text>().CrossFadeAlpha(0, 2f, false);
+        TimeCover.GetChild(0).GetComponent<Image>().CrossFadeAlpha(0, val, false);
+        TimeCover.GetChild(1).GetComponent<TMP_Text>().CrossFadeAlpha(0, val, false);
+        TimeCover.GetChild(2).GetChild(0).GetComponent<TMP_Text>().CrossFadeAlpha(0, val, false);
+        TimeCover.GetChild(2).GetChild(1).GetComponent<TMP_Text>().CrossFadeAlpha(0, val, false);
 
         string temp = "";
-        if (!isDay)
-            temp = "Day";
-        if (isDay)
-            temp = "Night";
-
+        if (seasonChange)
+        {
+            temp = seasons[seasonText];
+            seasonChange = false;
+            seasonText++;
+        }
+        else
+        {
+            if (!isDay)
+                temp = "The dawn is upon us. The band plays as we are shoved outside. My comrades are marched to their graves. ";
+            if (isDay)
+                temp = "Another night comes. We return to our blocks, exhausted. ";
+        }
         TimeCover.GetChild(1).GetComponent<TMP_Text>().text = temp;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(val);
         TimeCover.gameObject.SetActive(false);
     }
 }
