@@ -143,10 +143,12 @@ public class MainManager : MonoBehaviour
         }
     }
 
-
+    public GameObject morninginfos;
     //DayToNight
     public void ChangeTime(bool forced = false)
     {
+
+        CharacterManager.instance.UpdateCharacterLists();
         if (!forced)
         {
             //Check ONCE for inventory if changing day
@@ -160,7 +162,6 @@ public class MainManager : MonoBehaviour
             }
         }
 
-        StartCoroutine("TimeChangeFunction");
         isDay = !isDay;
 
         if (isDay)
@@ -173,7 +174,8 @@ public class MainManager : MonoBehaviour
         {
             dayNight.text = "Night";
         }
-
+        
+        StartCoroutine("TimeChangeFunction");
         Timer = 60.0f;
         Event();
         mManager.ChangeTime();
@@ -188,7 +190,6 @@ public class MainManager : MonoBehaviour
         {
             panel.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text = "I still have resources, I should hand them out before they are confiscated.";
             panel.SetActive(true);
-            Debug.Log("YOU HAVE INVENTORY");
             return true;
         }
         else
@@ -199,7 +200,6 @@ public class MainManager : MonoBehaviour
     public void ChangeDay()
     {
         Event();
-        CharacterManager.instance.UpdateCharacterLists();
         foreach (Character c in CharacterManager.instance.charactersLists.CharactersInDorm)
             c.fedToday = false;
 
@@ -210,8 +210,8 @@ public class MainManager : MonoBehaviour
         lastSeason++;
         if(lastSeason >= maxSeason)
         {
+            seasonChange = true;
             ChangeSeason();
-            print("Changing Season!");
         }
 
         //UI change day
@@ -228,6 +228,8 @@ public class MainManager : MonoBehaviour
     //SeasonChange
     public void ChangeSeason()
     {
+        seasonChange = true;
+
         lastSeason = 0;
         if (season < 4)
             season++;
@@ -245,11 +247,7 @@ public class MainManager : MonoBehaviour
         else
             maxSeason = 7;
 
-        print(season);
-
         mManager.ChangeSeason(season);
-      
-        seasonTxt.text = texts[season];
     }
 
     //for events on day/season change
@@ -325,7 +323,26 @@ public class MainManager : MonoBehaviour
 
     IEnumerator TimeChangeFunction()
     {
+        morninginfos.SetActive(false);
         float val = 5f;
+
+        string temp = "";
+        if (seasonChange)
+        { 
+            seasonChange = false;
+            temp = seasons[seasonText];
+            seasonText++;
+            val = 10;
+        }
+        else
+        {
+            Debug.Log("WRONG HERE");
+            if (isDay)
+                temp = "The dawn is upon us. The band plays as we are shoved outside. My comrades are marched to their graves. ";
+            if (!isDay)
+                temp = "Another night comes. We return to our blocks, exhausted. ";
+        }
+
         StartCoroutine(MorningFunction());
         TimeCover.gameObject.SetActive(true);
         TimeCover.GetChild(0).GetComponent<Image>().color = Color.black;
@@ -334,22 +351,12 @@ public class MainManager : MonoBehaviour
         TimeCover.GetChild(2).GetChild(0).GetComponent<TMP_Text>().CrossFadeAlpha(0, val, false);
         TimeCover.GetChild(2).GetChild(1).GetComponent<TMP_Text>().CrossFadeAlpha(0, val, false);
 
-        string temp = "";
-        if (seasonChange)
-        {
-            temp = seasons[seasonText];
-            seasonChange = false;
-            seasonText++;
-        }
-        else
-        {
-            if (!isDay)
-                temp = "The dawn is upon us. The band plays as we are shoved outside. My comrades are marched to their graves. ";
-            if (isDay)
-                temp = "Another night comes. We return to our blocks, exhausted. ";
-        }
+
         TimeCover.GetChild(1).GetComponent<TMP_Text>().text = temp;
         yield return new WaitForSeconds(val);
         TimeCover.gameObject.SetActive(false);
+
+        if(isDay && morninginfos.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text != "")
+            morninginfos.SetActive(true);
     }
 }

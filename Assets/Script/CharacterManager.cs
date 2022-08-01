@@ -10,7 +10,10 @@ public class CharacterManager : MonoBehaviour
 {
     public CharacterDataLists charactersLists = new CharacterDataLists();
     public Sprite netralPicture;
+
     public TMP_Text infos;
+    public TMP_Text infos2;
+
     public UIDisplay ui;
     public string ifSomeoneDie;
 
@@ -52,7 +55,10 @@ public class CharacterManager : MonoBehaviour
             UpdateCharactersResources();
             UpdateCharactersState(ref sickPeolple);
             UpdateCharactersPresent(ref nbOfPeopleDisappearing, ref friendsWhoDisappeared);
-            infos.text = nbOfPeopleDisappearing + friendsWhoDisappeared + sickPeolple;
+            if(MainManager.instance.isDay)
+                infos.text = nbOfPeopleDisappearing + friendsWhoDisappeared + sickPeolple;
+            else if (!MainManager.instance.isDay)
+                infos2.text = nbOfPeopleDisappearing + friendsWhoDisappeared + sickPeolple;
             ui.UpdateMainUi("", true);
         }
     }
@@ -299,8 +305,48 @@ public class CharacterManager : MonoBehaviour
             case 0:
                 nbOfPeopleDisappearing = "The morning comes and we have to get up for another day in this hell, but for how much time left ?";
                 break;
+
             default:
-                nbOfPeopleDisappearing = ifSomeoneDie+"\n";
+                //night
+                int rand = UnityEngine.Random.Range(0, 100);
+
+                if (!MainManager.instance.isDay)
+                {
+                    //Morning
+                    rand = UnityEngine.Random.Range(0, 100);
+                    if (rand >= 90)
+                        ifSomeoneDie = "Perhaps it was illness; perhaps hunger. It does not matter. \n" +
+                            "We all know the truth, as the bodies are carried outside. We watch in silence, wondering who will be next. \n" +
+                            "Maybe we don’t even wonder. Maybe we only remember wondering.\n" +
+                            "Maybe we wonder when we remember.";
+                    else if (rand >= 80)
+                        ifSomeoneDie = "We watch in silence, wondering who will be next. Maybe we don’t even wonder. Maybe we only remember wondering. Maybe we wonder when we remember. ";
+                    else if (rand >= 70)
+                        ifSomeoneDie = "We watch in silence, wondering who will be next.";
+                    else if (rand >= 55)
+                        ifSomeoneDie = "Perhaps it was illness; perhaps hunger. It does not matter. \n" +
+                            "We all know the truth, as the bodies are carried outside. The camp took them.";
+                    else if (rand < 55)
+                        ifSomeoneDie = "";
+                    nbOfPeopleDisappearing = "The morning comes. Some people do not survive the night. \n" + ifSomeoneDie + "\n";
+                }
+                else if (MainManager.instance.isDay)
+                { 
+                //NIGHT
+                if (rand >= 75)
+                    ifSomeoneDie = "Not everyone makes it back to the camp. I am only grateful that I did not have to witness the Nazis putting a bullet through their head once their body was too weak to continue.";
+                else if (rand >= 40)
+                    ifSomeoneDie = "Some people do not return that evening.\n" +
+                        "We do not ask what happened – there is no need to ask those who were there to relive it.";
+                else
+                    ifSomeoneDie = "Fewer people return at night.\n" +
+                        "We do not ask what happened.\n" +
+                        "We don’t need to.";
+
+                nbOfPeopleDisappearing = ifSomeoneDie;
+
+                }
+
                 break;
         }
 
