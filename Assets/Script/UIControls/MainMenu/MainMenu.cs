@@ -29,7 +29,7 @@ public class MainMenu : MonoBehaviour
 
   public void openCreditPanel()
   {
-    creditPanel.SetActive(true);
+    SceneManager.LoadScene("Credits");
   }
   public void closeCreditPanel()
   {
