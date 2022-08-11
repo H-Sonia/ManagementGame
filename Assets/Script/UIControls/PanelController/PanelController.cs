@@ -128,6 +128,19 @@ public class PanelController : MonoBehaviour
 
                 if (curr.id == 1)
                 {
+                    if (stage == 2)
+                        EventManager.instance.key1ToothpasteEvent = true;
+                    if(stage == 3)
+                    {
+                        if (!EventManager.instance.key1toothpasteHeld)
+                            cont = false;
+                        else
+                        {
+                            EventManager.instance.key1toothpasteHeld = false;
+                            EventManager.instance.key1ToothpasteEvent = false;
+                        }
+                    }
+
                     if (stage == 4)
                     {
                         updatingUI = true;
@@ -144,6 +157,7 @@ public class PanelController : MonoBehaviour
                         s[5] = ("“How did you manage to take these?” I exclaim. The Nazis try to keep their atrocities hidden from everyone, even the prisoners in the camps. \n " +
                             "He smiles ruefully. “I told you to have faith.” ", null);
                         EventManager.instance.strings = s;
+                        EventManager.instance.key1EndEvent = true;
                     }
                     //key1EndEvent = true;
                     if (stage >= 5)
@@ -151,10 +165,9 @@ public class PanelController : MonoBehaviour
                         CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter].isKey = false;
                     }
                 }
+
                 else if (curr.id == 2)
                 {
-                    print("ID = 2");
-
                     if (stage == 1)
                     {
                         print("SECOND STAGE");
@@ -185,6 +198,7 @@ public class PanelController : MonoBehaviour
                         CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter].isKey = false;
                     }
                 }
+
                 else if (curr.id == 3) // needs diverging events
                 {
                     if (stage == 2)
@@ -209,6 +223,7 @@ public class PanelController : MonoBehaviour
                         CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter].isKey = false;
                     }
                 }
+
                 else if (curr.id == 4)
                 {
                     // characterMessage = keylist4[stage];
@@ -217,6 +232,7 @@ public class PanelController : MonoBehaviour
                         CharacterManager.instance.charactersLists.CharactersInDorm[CharacterManager.instance.charactersLists.currentCharacter].isKey = false;
                     }
                 }
+
                 else if (curr.id == 5)
                 {
 
@@ -276,6 +292,10 @@ public class PanelController : MonoBehaviour
                         characterMessage += s + "\n";
                     }
                 }
+                else
+                {
+                    characterMessage = curr.firstname + " thanks me";
+                }
 
                 characterMessage.Replace("[name]", curr.firstname);
                 characterMessage.Replace("[Name]", curr.firstname);
@@ -288,7 +308,7 @@ public class PanelController : MonoBehaviour
             curr.fedToday = true;
             GetNextResources();
 
-            if (curr.isKey)
+            if (curr.isKey && cont)
             {
                 curr.keyStage += 1;
             }

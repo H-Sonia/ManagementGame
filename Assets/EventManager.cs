@@ -14,12 +14,18 @@ public class EventManager : MonoBehaviour
         instance = this;
     }
 
+    public bool firstNight = true;
+
+    public bool key1ToothpasteEvent = false;
+    public bool key1toothpasteHeld = false;
     public bool key1EndEvent = false;
 
     public bool key3MedEvent = false;
     public bool key3BadEndEvent = false;
     public bool key3GoodEndEvent = false;
     public int days = 0;
+
+    public Character key1 = null;
     public Character key3 = null;
 
     public bool key5MetThief = false;
@@ -28,6 +34,9 @@ public class EventManager : MonoBehaviour
 
     public void UpdateDay()
     {
+        if(key1EndEvent)
+            CharacterManager.instance.RemoveCharacter(key1);
+
         if (key3MedEvent)
             days++;
 
@@ -48,7 +57,6 @@ public class EventManager : MonoBehaviour
     public (string, Sprite)[] strings;
     public int stringNo = 0;
 
-
     public void resetString()
     {
         stringNo = 0;
@@ -68,7 +76,6 @@ public class EventManager : MonoBehaviour
         }
         if (strings[stringNo].Item2 == null)
         {
-            Debug.Log("TEXT ONLY");
             ImageSection.SetActive(false);
             uiSection.SetActive(true);
 
@@ -76,7 +83,6 @@ public class EventManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("IMAGE INCLUDED");
             ImageSection.SetActive(true);
             uiSection.SetActive(false);
 
@@ -85,4 +91,76 @@ public class EventManager : MonoBehaviour
         }
         stringNo++;
     }
+
+    public eventDetails details;
+    public eventDetails saveEvents()
+    {
+        eventDetails ed = new eventDetails();
+        ed.firstNight = firstNight;
+
+        ed.key1ToothpasteEvent = key1ToothpasteEvent;
+        ed.key1toothpasteHeld = key1toothpasteHeld;
+        ed.key1EndEvent = key1EndEvent;
+
+        ed.key3MedEvent = key3MedEvent;
+        ed.key3BadEndEvent = key3BadEndEvent;
+        ed.key3GoodEndEvent = key3GoodEndEvent;
+        ed.days = days;
+
+        ed.key1 = key1;
+        ed.key3 = key3;
+        ed.key5 = key5;
+
+        ed.key5MetThief = key5MetThief;
+        ed.key5FedThief = key5FedThief;
+
+        Debug.Log("EVENTDETAILS EXIST :" + ed);
+        return ed;
+    }
+
+    public void loadEvents(eventDetails loadin)
+    {
+        Debug.Log("Loading");
+        if (loadin != null)
+        {
+            firstNight = loadin.firstNight;
+
+            key1ToothpasteEvent = loadin.key1ToothpasteEvent;
+            key1toothpasteHeld = loadin.key1toothpasteHeld;
+            key1EndEvent = loadin.key1EndEvent;
+
+            key3MedEvent = loadin.key3MedEvent;
+            key3BadEndEvent = loadin.key3BadEndEvent;
+            key3GoodEndEvent = loadin.key3GoodEndEvent;
+            days = loadin.days;
+
+            key1 = loadin.key1;
+            key3 = loadin.key3;
+            key5 = loadin.key5;
+
+            key5MetThief = loadin.key5MetThief;
+            key5FedThief = loadin.key5FedThief;
+        }
+    }
+}
+
+public class eventDetails
+{
+    public bool firstNight = true;
+
+    public bool key1ToothpasteEvent = false;
+    public bool key1toothpasteHeld = false;
+    public bool key1EndEvent = false;
+
+    public bool key3MedEvent = false;
+    public bool key3BadEndEvent = false;
+    public bool key3GoodEndEvent = false;
+    public int days = 0;
+
+    public Character key1 = null;
+    public Character key3 = null;
+
+    public bool key5MetThief = false;
+    public bool key5FedThief = false;
+    public Character key5 = null;
 }

@@ -15,8 +15,7 @@ MonoBehaviour:
   id: 4
   type: medicine
   itemName: Medicine Bottle
-  itemImage: {fileID: 21300000, guid: 4e76577737c5f2f40bf00ecc02470392, type: 3}
-  rarity: 70
+  itemImage: {fileID: 1083852664, guid: f2460eb030758c84a8a7395d7ee6d759, type: 3}
   daysBeforeExpiration: 3
   nutritiveValue: 0
   heat: 0

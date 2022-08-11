@@ -15,9 +15,9 @@ public class KitchenScript : MonoBehaviour
     public string ifResources = "I managed to salvage some ";
 
     string[] texts = { "It’s not enough. \n" +
-            " How can I decide to whom I will give this to?" +
-            "\n How can I bear the responsibility of who lives and who dies?\n" +
-            " It is not my responsibility, yet I can’t help but feel I should have done more. ",
+        " How can I decide to whom I will give this to?" +
+        "\n How can I bear the responsibility of who lives and who dies?\n" +
+        " It is not my responsibility, yet I can’t help but feel I should have done more. ",
 
         "As happy as I am to be able to help even one more person, I hate that I must turn away when others ask for help and I have nothing to give to them. ",
         
@@ -108,18 +108,29 @@ public class KitchenScript : MonoBehaviour
         {
             int rarity = random.Next(100);
             if (rarity <= 20)
-            {
-                
+            {       
                 Inventory.instance.content.Add(ResourcesDataBase.instance.medicine);
                 itemName =  " a Medicine bottle";
                 if(!resourcesObtained.Contains(itemName))
                 {
                     resourcesObtained.Add(itemName);
                 }
-                itemObtain.text += "With a little help from a Greek Jew who works at the infirmary, I manage to exchange five portions of food for a bottle of medicine. \n";
+                if (EventManager.instance.key3MedEvent)
+                    itemObtain.text += "With some help from another inmate i exchange portions for medicine, perhaps this can help the child...";
+                else
+                    itemObtain.text += "With a little help from a Greek Jew who works at the infirmary, I manage to exchange five portions of food for a bottle of medicine. \n";
             }
             //NEED SPOON AND SHOES
         }
+        if (EventManager.instance.key1ToothpasteEvent)
+        {
+            if (random.Next(100) > 60)
+            {
+                EventManager.instance.key1toothpasteHeld = true;
+                itemObtain.text += "Through luck I find a toothpaste tube for alberto, i should give it to him quickly";
+            }
+        }
+
         DisplayMessage(nbResources, ref resourcesObtained);
 
         ResultPanel.SetActive(true);

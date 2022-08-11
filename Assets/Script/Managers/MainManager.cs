@@ -7,9 +7,11 @@ using UnityEngine.UI;
 public class saveDetails
 { 
     public int[] details;
-    public saveDetails(int[] array)
+    public string evdeet;
+    public saveDetails(int[] array, string ed)
     {
         details = array;
+        evdeet = ed;
     }
 
 }
@@ -52,24 +54,29 @@ public class MainManager : MonoBehaviour
 
     string[] texts = { "Spring", "Summer", "Autumn", "Winter" };
 
+
+    eventDetails details;
     public string SaveDetails()
     {
+        details =  EventManager.instance.saveEvents();
+        Debug.Log(details);
         string saveSeason = JsonUtility.ToJson(season);
         string saveLastSeason = JsonUtility.ToJson(lastSeason);
         string saveMaxSeason = JsonUtility.ToJson(maxSeason);
         string saveYear = JsonUtility.ToJson(year);
 
-        int[] savedeets = new int[]{season, lastSeason, maxSeason, year };
-        saveDetails s = new saveDetails(savedeets);
+        string EventDetails = JsonUtility.ToJson(details);
 
-        //Debug.Log(savedeets);
+        int[] savedeets = new int[]{season, lastSeason, maxSeason, year};
+        saveDetails s = new saveDetails(savedeets, EventDetails);
+
         string save = JsonUtility.ToJson(s);
 
         //string save = (saveSeason + "\n" + saveLastSeason + "\n" + saveMaxSeason + "\n" + saveYear);
         //string save = (season + "\n" + lastSeason + "\n" + maxSeason + "\n" + year);
 
         string filePath = Application.persistentDataPath + "/DataSave.json";
-        Debug.Log(s);
+
         System.IO.File.WriteAllText(filePath, save);
         return null;
     }
@@ -85,6 +92,14 @@ public class MainManager : MonoBehaviour
             lastSeason = output.details[1];
             maxSeason = output.details[2];
             year = output.details[3];
+
+            //always null
+            Debug.Log(output.evdeet);
+
+            //save events
+            details = JsonUtility.FromJson<eventDetails>(output.evdeet);
+
+            EventManager.instance.loadEvents(details);
 
             seasonTxt.text = texts[season];
             yearText.text = year.ToString();
@@ -215,7 +230,6 @@ public class MainManager : MonoBehaviour
         }
 
         //UI change day
-        uiManager.DayFunction();
         kManager.DayFunction();
         mManager.ChangeRoomState(0);
         daycount++;
@@ -239,7 +253,10 @@ public class MainManager : MonoBehaviour
             year += 1;
             yearText.text = year.ToString();
             if (year == 1945)
+            {
                 Debug.Log("END OF GAME");
+                UnityEngine.SceneManagement.SceneManager.LoadScene(3);
+            }
         }
 
         if (season < 2)
@@ -254,6 +271,7 @@ public class MainManager : MonoBehaviour
     void Event()
     {
         EventManager.instance.UpdateDay();
+
         if (daycount % 4 == 0)
             mManager.boxingOpen = true;
         else
@@ -336,11 +354,22 @@ public class MainManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("WRONG HERE");
             if (isDay)
                 temp = "The dawn is upon us. The band plays as we are shoved outside. My comrades are marched to their graves. ";
             if (!isDay)
-                temp = "Another night comes. We return to our blocks, exhausted. ";
+            {
+                Debug.Log("nightime and : " + EventManager.instance.firstNight);
+                if (EventManager.instance.firstNight)
+                {
+                    temp = "Night comes. \n" +
+                        "After everyone has returned from their posts, we trickle into our blocks, a sea of grey.\n" +
+                        "Exhausted, depleted, we drag our feet in our clogs. Some of us do not even have these cheap wooden shoes and must make do with rags haphazardly tied around our feet, or else with nothing at all. ";
+                    EventManager.instance.firstNight = false;
+                    val = 10;
+                }
+                else
+                    temp = "Another night comes. We return to our blocks, exhausted. ";
+            }
         }
 
         StartCoroutine(MorningFunction());

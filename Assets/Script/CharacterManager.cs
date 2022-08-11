@@ -79,7 +79,9 @@ public class CharacterManager : MonoBehaviour
             Character character = charactersLists.TrueNewcomers[i];
             if(character.firstname == "" )
             {
-                if (character.id == 3)
+                if (character.id == 1)
+                    EventManager.instance.key1 = character;
+                else if (character.id == 3)
                     EventManager.instance.key3 = character;
                 else if(character.id == 5)
                     EventManager.instance.key5 = character;

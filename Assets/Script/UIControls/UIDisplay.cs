@@ -66,11 +66,6 @@ public class UIDisplay : MonoBehaviour
         GetComponent<ButtonController>().openResourcesPanel(id);
     }
 
-    public void DayFunction()
-    {
-
-    }
-
     public void UpdateMainUi(string characterMessage = "", bool opening = false)
     {
         scrollRect.verticalNormalizedPosition = 1f;

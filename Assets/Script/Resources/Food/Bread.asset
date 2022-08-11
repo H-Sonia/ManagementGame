@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 0
   type: food
   itemName: bread
-  itemImage: {fileID: 21300000, guid: 460daa9d38192384c89f99d4da9a36ed, type: 3}
+  itemImage: {fileID: 885243486, guid: 460daa9d38192384c89f99d4da9a36ed, type: 3}
   daysBeforeExpiration: 1
   nutritiveValue: 10
   heat: 0
